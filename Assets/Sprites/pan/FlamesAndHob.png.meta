@@ -1,0 +1,526 @@
+fileFormatVersion: 2
+guid: 0283d9ffac7cf46a1899c32622daaf94
+timeCreated: 1489236871
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: FlamesAndHobFireBall1
+    21300002: FlamesAndHob_1
+    21300004: FlamesAndHobFireBall2
+    21300006: FlamesAndHobFireBall3
+    21300008: FlamesAndHob_4
+    21300010: FlamesAndHob_5
+    21300012: FlamesAndHobFlame1
+    21300014: FlamesAndHob_7
+    21300016: FlamesAndHob_8
+    21300018: FlamesAndHob_9
+    21300020: FlamesAndHobFlame2
+    21300022: FlamesAndHob_11
+    21300024: FlamesAndHob_12
+    21300026: FlamesAndHob_13
+    21300028: FlamesAndHobFlame3
+    21300030: FlamesAndHob_15
+    21300032: FlamesAndHob_16
+    21300034: FlamesAndHobFlame4
+    21300036: FlamesAndHob_18
+    21300038: FlamesAndHob_19
+    21300040: FlamesAndHob_20
+    21300042: FlamesAndHob_21
+    21300044: FlamesAndHob_22
+    21300046: FlamesAndHob_23
+    21300048: FlamesAndHob_24
+    21300050: FlamesAndHob_25
+    21300052: FlamesAndHob_26
+    21300054: FlamesAndHob_27
+    21300056: FlamesAndHob_28
+    21300058: FlamesAndHob_29
+    21300060: FlamesAndHobBody
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 720
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FlamesAndHobFireBall1
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 6718
+        width: 2404
+        height: 1396
+      alignment: 9
+      pivot: {x: 0.03510867, y: 0.4911046}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_1
+      rect:
+        serializedVersion: 2
+        x: 2747
+        y: 7371
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobFireBall2
+      rect:
+        serializedVersion: 2
+        x: 2762
+        y: 6754
+        width: 2464
+        height: 1384
+      alignment: 9
+      pivot: {x: 0.041389268, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobFireBall3
+      rect:
+        serializedVersion: 2
+        x: 5326
+        y: 6714
+        width: 2436
+        height: 1360
+      alignment: 9
+      pivot: {x: 0.03611798, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_4
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 5630
+        width: 900
+        height: 576
+      alignment: 9
+      pivot: {x: 0.45627752, y: 0.15841845}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_5
+      rect:
+        serializedVersion: 2
+        x: 1994
+        y: 5550
+        width: 1012
+        height: 632
+      alignment: 9
+      pivot: {x: 0.51555336, y: 0.12642235}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobFlame1
+      rect:
+        serializedVersion: 2
+        x: 3394
+        y: 5602
+        width: 4424
+        height: 984
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_7
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 4927
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_8
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 4514
+        width: 1208
+        height: 928
+      alignment: 9
+      pivot: {x: 0.53257453, y: 0.05052606}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_9
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 4470
+        width: 1320
+        height: 836
+      alignment: 9
+      pivot: {x: 0.55365914, y: 0.14227091}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobFlame2
+      rect:
+        serializedVersion: 2
+        x: 3454
+        y: 4534
+        width: 4436
+        height: 980
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_11
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 3146
+        width: 1088
+        height: 992
+      alignment: 9
+      pivot: {x: 0.5072333, y: 0.08745796}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_12
+      rect:
+        serializedVersion: 2
+        x: 1790
+        y: 3282
+        width: 636
+        height: 744
+      alignment: 9
+      pivot: {x: 0.5247484, y: 0.0874578}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_13
+      rect:
+        serializedVersion: 2
+        x: 2686
+        y: 3390
+        width: 232
+        height: 228
+      alignment: 9
+      pivot: {x: 0.49999896, y: 0.12030458}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobFlame3
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 3450
+        width: 4620
+        height: 1008
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_15
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 2094
+        width: 1272
+        height: 912
+      alignment: 9
+      pivot: {x: 0.4999999, y: 0.034011304}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_16
+      rect:
+        serializedVersion: 2
+        x: 2134
+        y: 2410
+        width: 451
+        height: 508
+      alignment: 9
+      pivot: {x: 0.5, y: 0.11269541}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobFlame4
+      rect:
+        serializedVersion: 2
+        x: 3458
+        y: 2314
+        width: 4524
+        height: 1016
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_18
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1162
+        width: 364
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_19
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 1194
+        width: 380
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_20
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 1074
+        width: 356
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_21
+      rect:
+        serializedVersion: 2
+        x: 2746
+        y: 130
+        width: 5120
+        height: 2092
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_22
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 886
+        width: 127
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_23
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 1002
+        width: 380
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_24
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 370
+        width: 416
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_25
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 694
+        width: 384
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_26
+      rect:
+        serializedVersion: 2
+        x: 1918
+        y: 586
+        width: 504
+        height: 392
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_27
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 506
+        width: 336
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_28
+      rect:
+        serializedVersion: 2
+        x: 1918
+        y: 198
+        width: 316
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHob_29
+      rect:
+        serializedVersion: 2
+        x: 1434
+        y: 334
+        width: 288
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FlamesAndHobBody
+      rect:
+        serializedVersion: 2
+        x: 2735
+        y: 126
+        width: 5132
+        height: 2089
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

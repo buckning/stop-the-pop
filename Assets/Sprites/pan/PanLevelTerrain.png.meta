@@ -1,0 +1,820 @@
+fileFormatVersion: 2
+guid: fea69573b6dfe4841b94ff1c28047f3c
+timeCreated: 1491645605
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PanLevelExplosion1
+    21300002: PanLevelExplosion6
+    21300004: PanLevelTerrainSection1
+    21300006: PanLevelExplosion2
+    21300008: PanLevelTerrain_4
+    21300010: PanLevelExplosion3
+    21300012: PanLevelTerrain_6
+    21300014: PanLevelExplosion7
+    21300016: PanLevelTerrain_8
+    21300018: PanLevelTerrain_9
+    21300020: PanLevelTerrain_10
+    21300022: PanLevelExplosion4
+    21300024: PanLevelTerrain_12
+    21300026: PanLevelTerrain_13
+    21300028: PanLevelTerrain_14
+    21300030: PanLevelTerrain_15
+    21300032: PanLevelTerrain_16
+    21300034: PanLevelTerrain_17
+    21300036: PanLevelTerrain_18
+    21300038: PanLevelTerrain_19
+    21300040: PanLevelTerrain_20
+    21300042: PanLevelExplosion5
+    21300044: PanLevelExplosion8
+    21300046: PanLevelTerrain_23
+    21300048: PanLevelTerrain_24
+    21300050: PanLevelTerrain_25
+    21300052: PanLevelTerrain_26
+    21300054: PanLevelTerrain_27
+    21300056: PanLevelTerrain_28
+    21300058: PanLevelTerrain_29
+    21300060: PanLevelTerrainOilSea
+    21300062: PanLevelFireballDispenser
+    21300064: PanLevelTerrainStepLarge
+    21300066: PanLevelTerrainStepSmall
+    21300068: PanLevelTerrainWallSectionLarge
+    21300070: PanLevelTerrainWallCorner
+    21300072: PanLevelTerrainWallJoiner
+    21300074: PanLevelTerrain_0
+    21300076: PanLevelTerrainCornerTop
+    21300078: PanLevelTerrainSection2
+    21300080: PanLevelTerrainSection3
+    21300082: PanLevelTerrainPlatformLeftEdge
+    21300084: PanLevelTerrainPlatformEdge
+    21300086: PanLevelTerrainPlatformEdge1
+    21300088: PanLevelTerrain_1
+    21300090: PanLevelTerrain_2
+    21300092: PanLevelTerrain_3
+    21300094: PanLevelTerrainCeilingCorner
+    21300096: PanLevelTerrainCeiling
+    21300098: PanLevelTerrain_5
+    21300100: PanLevelTerrain_7
+    21300102: PanLevelTerrainGroundTileBlank
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PanLevelExplosion1
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 7438
+        width: 240
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion6
+      rect:
+        serializedVersion: 2
+        x: 1766
+        y: 6918
+        width: 916
+        height: 868
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainSection1
+      rect:
+        serializedVersion: 2
+        x: 3131
+        y: 7216
+        width: 2327
+        height: 542
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion2
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 7050
+        width: 340
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_4
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 6962
+        width: 236
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion3
+      rect:
+        serializedVersion: 2
+        x: 646
+        y: 6518
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_6
+      rect:
+        serializedVersion: 2
+        x: 2090
+        y: 6922
+        width: 256
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion7
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 5724
+        width: 1206
+        height: 1126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_8
+      rect:
+        serializedVersion: 2
+        x: 2178
+        y: 6694
+        width: 460
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_9
+      rect:
+        serializedVersion: 2
+        x: 2746
+        y: 6526
+        width: 316
+        height: 288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_10
+      rect:
+        serializedVersion: 2
+        x: 4098
+        y: 6314
+        width: 196
+        height: 516
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion4
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 5758
+        width: 772
+        height: 732
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_12
+      rect:
+        serializedVersion: 2
+        x: 2962
+        y: 6126
+        width: 104
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_13
+      rect:
+        serializedVersion: 2
+        x: 4410
+        y: 6366
+        width: 328
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_14
+      rect:
+        serializedVersion: 2
+        x: 4864
+        y: 6401
+        width: 312
+        height: 316
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_15
+      rect:
+        serializedVersion: 2
+        x: 1874
+        y: 5806
+        width: 260
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_16
+      rect:
+        serializedVersion: 2
+        x: 2278
+        y: 5726
+        width: 296
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_17
+      rect:
+        serializedVersion: 2
+        x: 2750
+        y: 5774
+        width: 272
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_18
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 3863
+        width: 1873
+        height: 585
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_19
+      rect:
+        serializedVersion: 2
+        x: 5613
+        y: 5508
+        width: 820
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_20
+      rect:
+        serializedVersion: 2
+        x: 5367
+        y: 3912
+        width: 2418
+        height: 586
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion5
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 4854
+        width: 852
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelExplosion8
+      rect:
+        serializedVersion: 2
+        x: 1626
+        y: 4241
+        width: 1383
+        height: 1393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_23
+      rect:
+        serializedVersion: 2
+        x: 2726
+        y: 5370
+        width: 176
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_24
+      rect:
+        serializedVersion: 2
+        x: 1630
+        y: 4926
+        width: 180
+        height: 368
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_25
+      rect:
+        serializedVersion: 2
+        x: 2930
+        y: 4770
+        width: 72
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_26
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 4394
+        width: 188
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_27
+      rect:
+        serializedVersion: 2
+        x: 2674
+        y: 4318
+        width: 220
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_28
+      rect:
+        serializedVersion: 2
+        x: 2086
+        y: 4246
+        width: 256
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_29
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 110
+        width: 7476
+        height: 3552
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainOilSea
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 166
+        width: 7438
+        height: 3526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelFireballDispenser
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 3812
+        width: 772
+        height: 976
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainStepLarge
+      rect:
+        serializedVersion: 2
+        x: 5576
+        y: 5835
+        width: 560
+        height: 822
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainStepSmall
+      rect:
+        serializedVersion: 2
+        x: 4921
+        y: 5676
+        width: 538
+        height: 696
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainWallSectionLarge
+      rect:
+        serializedVersion: 2
+        x: 7121
+        y: 5118
+        width: 537
+        height: 876
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainWallCorner
+      rect:
+        serializedVersion: 2
+        x: 7124
+        y: 6322
+        width: 538
+        height: 553
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainWallJoiner
+      rect:
+        serializedVersion: 2
+        x: 7123
+        y: 6004
+        width: 537
+        height: 314
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_0
+      rect:
+        serializedVersion: 2
+        x: 7105
+        y: 4574
+        width: 553
+        height: 539
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainCornerTop
+      rect:
+        serializedVersion: 2
+        x: 3347
+        y: 4620
+        width: 459
+        height: 241
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainSection2
+      rect:
+        serializedVersion: 2
+        x: 5495
+        y: 7216
+        width: 1282
+        height: 542
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainSection3
+      rect:
+        serializedVersion: 2
+        x: 6835
+        y: 7215
+        width: 1047
+        height: 543
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainPlatformLeftEdge
+      rect:
+        serializedVersion: 2
+        x: 3170
+        y: 3869
+        width: 314
+        height: 580
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainPlatformEdge
+      rect:
+        serializedVersion: 2
+        x: 4104
+        y: 4743
+        width: 768
+        height: 456
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainPlatformEdge1
+      rect:
+        serializedVersion: 2
+        x: 7482
+        y: 3912
+        width: 301
+        height: 585
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_1
+      rect:
+        serializedVersion: 2
+        x: 3476
+        y: 3874
+        width: 1255
+        height: 583
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_2
+      rect:
+        serializedVersion: 2
+        x: 4730
+        y: 3869
+        width: 302
+        height: 584
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_3
+      rect:
+        serializedVersion: 2
+        x: 5368
+        y: 3911
+        width: 331
+        height: 589
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainCeilingCorner
+      rect:
+        serializedVersion: 2
+        x: 5202
+        y: 4736
+        width: 460
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainCeiling
+      rect:
+        serializedVersion: 2
+        x: 5666
+        y: 4736
+        width: 264
+        height: 240
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_5
+      rect:
+        serializedVersion: 2
+        x: 3068
+        y: 7223
+        width: 4805
+        height: 557
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrain_7
+      rect:
+        serializedVersion: 2
+        x: 7122
+        y: 5118
+        width: 536
+        height: 1201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelTerrainGroundTileBlank
+      rect:
+        serializedVersion: 2
+        x: 3047
+        y: 7219
+        width: 351
+        height: 537
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

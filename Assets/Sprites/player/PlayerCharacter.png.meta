@@ -1,0 +1,568 @@
+fileFormatVersion: 2
+guid: 7a64b4fe6cffd4388ace1deea7974406
+timeCreated: 1488647226
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PlayerCharacter_0
+    21300002: PlayerCharacter_1
+    21300004: PlayerCharacterPoppedEyeRight
+    21300006: PlayerCharacterBody
+    21300008: PlayerCharacterPoppedBlinkLeft
+    21300010: PlayerCharacterPoppedBlinkRight
+    21300012: PlayerCharacterPoppedEyeLeft
+    21300014: PlayerCharacterPoppedMiddle
+    21300016: PlayerCharacterPoppedMouth
+    21300018: PlayerCharacterMouthWorried
+    21300020: PlayerCharacterPoppedLeft
+    21300022: PlayerCharacterPoppedRight
+    21300024: PlayerCharacterStressLinesLeft
+    21300026: PlayerCharacter_13
+    21300028: PlayerCharacterStressLinesRight
+    21300030: PlayerCharacter_15
+    21300032: PlayerCharacterEyeLeftPain
+    21300034: PlayerCharacterEyeRightPain
+    21300036: PlayerCharacter_18
+    21300038: PlayerCharacterPopped
+    21300040: PlayerCharacter_20
+    21300042: PlayerCharacterMouthStressed
+    21300044: PlayerCharacterMouthPain
+    21300046: PlayerCharacterLegUpper
+    21300048: PlayerCharacterPoppedBody
+    21300050: PlayerCharacter_25
+    21300052: PlayerCharacter_26
+    21300054: PlayerCharacterMouthHappy
+    21300056: PlayerCharacterLegLower
+    21300058: PlayerCharacterEyeLeft
+    21300060: PlayerCharacterEyeRight
+    21300062: PlayerCharacterEyebrowLeft
+    21300064: PlayerCharacterEyebrowRight
+    21300066: PlayerCharacterShoe
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1300
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayerCharacter_0
+      rect:
+        serializedVersion: 2
+        x: 2618
+        y: 4450
+        width: 56
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_1
+      rect:
+        serializedVersion: 2
+        x: 3274
+        y: 4446
+        width: 56
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedEyeRight
+      rect:
+        serializedVersion: 2
+        x: 4406
+        y: 4094
+        width: 408
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterBody
+      rect:
+        serializedVersion: 2
+        x: 4926
+        y: 3226
+        width: 1316
+        height: 1887
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedBlinkLeft
+      rect:
+        serializedVersion: 2
+        x: 2574
+        y: 4054
+        width: 224
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedBlinkRight
+      rect:
+        serializedVersion: 2
+        x: 3014
+        y: 4106
+        width: 336
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedEyeLeft
+      rect:
+        serializedVersion: 2
+        x: 4010
+        y: 4098
+        width: 272
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedMiddle
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 3402
+        width: 896
+        height: 692
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedMouth
+      rect:
+        serializedVersion: 2
+        x: 2678
+        y: 3610
+        width: 476
+        height: 212
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterMouthWorried
+      rect:
+        serializedVersion: 2
+        x: 3970
+        y: 3658
+        width: 456
+        height: 272
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedLeft
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 2578
+        width: 615
+        height: 724
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedRight
+      rect:
+        serializedVersion: 2
+        x: 1578
+        y: 2586
+        width: 736
+        height: 744
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterStressLinesLeft
+      rect:
+        serializedVersion: 2
+        x: 2525
+        y: 3091
+        width: 177
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_13
+      rect:
+        serializedVersion: 2
+        x: 2538
+        y: 3090
+        width: 136
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterStressLinesRight
+      rect:
+        serializedVersion: 2
+        x: 3146
+        y: 3101
+        width: 135
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_15
+      rect:
+        serializedVersion: 2
+        x: 3198
+        y: 3110
+        width: 72
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterEyeLeftPain
+      rect:
+        serializedVersion: 2
+        x: 3886
+        y: 3010
+        width: 304
+        height: 392
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterEyeRightPain
+      rect:
+        serializedVersion: 2
+        x: 4266
+        y: 3026
+        width: 240
+        height: 404
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_18
+      rect:
+        serializedVersion: 2
+        x: 1563
+        y: 2975
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPopped
+      rect:
+        serializedVersion: 2
+        x: 4570
+        y: 1306
+        width: 1724
+        height: 1772
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_20
+      rect:
+        serializedVersion: 2
+        x: 1563
+        y: 2939
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterMouthStressed
+      rect:
+        serializedVersion: 2
+        x: 2782
+        y: 2534
+        width: 492
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterMouthPain
+      rect:
+        serializedVersion: 2
+        x: 3774
+        y: 2510
+        width: 604
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterLegUpper
+      rect:
+        serializedVersion: 2
+        x: 6450
+        y: 2282
+        width: 192
+        height: 444
+      alignment: 9
+      pivot: {x: 0.50000256, y: 0.81811136}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterPoppedBody
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 1102
+        width: 1400
+        height: 1356
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_25
+      rect:
+        serializedVersion: 2
+        x: 2778
+        y: 2146
+        width: 64
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacter_26
+      rect:
+        serializedVersion: 2
+        x: 2986
+        y: 2146
+        width: 52
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterMouthHappy
+      rect:
+        serializedVersion: 2
+        x: 3614
+        y: 2126
+        width: 476
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterLegLower
+      rect:
+        serializedVersion: 2
+        x: 6466
+        y: 1786
+        width: 196
+        height: 416
+      alignment: 9
+      pivot: {x: 0.5000025, y: 0.8718585}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterEyeLeft
+      rect:
+        serializedVersion: 2
+        x: 2486
+        y: 1298
+        width: 508
+        height: 592
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterEyeRight
+      rect:
+        serializedVersion: 2
+        x: 3062
+        y: 1306
+        width: 292
+        height: 544
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterEyebrowLeft
+      rect:
+        serializedVersion: 2
+        x: 3606
+        y: 1418
+        width: 416
+        height: 404
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterEyebrowRight
+      rect:
+        serializedVersion: 2
+        x: 4118
+        y: 1546
+        width: 228
+        height: 280
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerCharacterShoe
+      rect:
+        serializedVersion: 2
+        x: 6406
+        y: 1258
+        width: 760
+        height: 448
+      alignment: 9
+      pivot: {x: 0.5134444, y: 0.85003334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

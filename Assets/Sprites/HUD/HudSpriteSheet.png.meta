@@ -1,0 +1,730 @@
+fileFormatVersion: 2
+guid: e8777e6bc87fc486dab104e7389132f2
+timeCreated: 1497207922
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: HudSpriteSheetStartButton
+    21300002: HudSpriteSheetSettingsButton
+    21300004: HudSpriteSheetCustomiseButton
+    21300006: HudSpriteSheetInformationButton
+    21300008: HudSpriteSheetBackButton
+    21300010: HudSpriteSheetVideoAdButton
+    21300012: HudSpriteSheetConfirmButton
+    21300014: HudSpriteSheetStrikethrough
+    21300016: HudSpriteSheetLockImage
+    21300018: HudSpriteSheetOptionsButton
+    21300020: HudSpriteSheetRestartButton
+    21300022: HudSpriteSheetMusicButton
+    21300024: HudSpriteSheetSfxButton
+    21300026: HudSpriteSheetCancelButton
+    21300028: HudSpriteSheetStoreButton
+    21300030: HudSpriteSheet_15
+    21300032: HudSpriteSheetLevelCompleteStar
+    21300034: HudSpriteSheetFacebookButton
+    21300036: HudSpriteSheetVideoAdTextButton
+    21300038: HudSpriteSheetThermometerGradient
+    21300040: HudSpriteSheetRateButton
+    21300042: HudSpriteSheetGenericButton
+    21300044: HudSpriteSheet_22
+    21300046: HudSpriteSheetLevelCompleteSpinner
+    21300048: HudSpriteSheetStarRight
+    21300050: HudSpriteSheetNextButton
+    21300052: HudSpriteSheet_26
+    21300054: HudSpriteSheetPreviousButton
+    21300056: HudSpriteSheetSkipButton
+    21300058: HudSpriteSheetDirectionButton
+    21300060: HudSpriteSheetActionButton
+    21300062: HudSpriteSheetRetryButton
+    21300064: HudSpriteSheetUnusedPlayButton
+    21300066: HudSpriteSheetThermometerOutline
+    21300068: HudSpriteSheet_34
+    21300070: HudSpriteSheetUnusedSpace
+    21300072: HudSpriteSheetThermometerWhiteFill
+    21300074: HudSpriteSheetThermometerRedFill
+    21300076: HudSpriteSheet_38
+    21300078: HudSpriteSheet_39
+    21300080: HudSpriteSheetStarLeft
+    21300082: HudSpriteSheetPanel
+    21300084: HudSpriteSheetShareButton
+    21300086: HudSpriteSheetTwitter
+    21300088: HudSpriteSheetLeaderboardButton
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HudSpriteSheetStartButton
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 7286
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetSettingsButton
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 7286
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetCustomiseButton
+      rect:
+        serializedVersion: 2
+        x: 1990
+        y: 7274
+        width: 836
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetInformationButton
+      rect:
+        serializedVersion: 2
+        x: 2939
+        y: 7275
+        width: 843
+        height: 847
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetBackButton
+      rect:
+        serializedVersion: 2
+        x: 3914
+        y: 7270
+        width: 840
+        height: 844
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetVideoAdButton
+      rect:
+        serializedVersion: 2
+        x: 4894
+        y: 7250
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetConfirmButton
+      rect:
+        serializedVersion: 2
+        x: 5818
+        y: 7258
+        width: 844
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetStrikethrough
+      rect:
+        serializedVersion: 2
+        x: 6770
+        y: 7390
+        width: 552
+        height: 596
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetLockImage
+      rect:
+        serializedVersion: 2
+        x: 7466
+        y: 7327
+        width: 560
+        height: 659
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetOptionsButton
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 6394
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetRestartButton
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 6394
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetMusicButton
+      rect:
+        serializedVersion: 2
+        x: 1966
+        y: 6382
+        width: 843
+        height: 844
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetSfxButton
+      rect:
+        serializedVersion: 2
+        x: 2942
+        y: 6382
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetCancelButton
+      rect:
+        serializedVersion: 2
+        x: 3870
+        y: 6382
+        width: 844
+        height: 836
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetStoreButton
+      rect:
+        serializedVersion: 2
+        x: 4878
+        y: 6330
+        width: 844
+        height: 844
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 5782
+        y: 6362
+        width: 1968
+        height: 844
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetLevelCompleteStar
+      rect:
+        serializedVersion: 2
+        x: 7806
+        y: 6762
+        width: 312
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetFacebookButton
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 5486
+        width: 872
+        height: 860
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetVideoAdTextButton
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 5418
+        width: 2988
+        height: 916
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetThermometerGradient
+      rect:
+        serializedVersion: 2
+        x: 4251
+        y: 4539
+        width: 3726
+        height: 1550
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetRateButton
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 4610
+        width: 842
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetGenericButton
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 4562
+        width: 2892
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 7962
+        y: 5291
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetLevelCompleteSpinner
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 3338
+        width: 1216
+        height: 1204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetStarRight
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 4508
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetNextButton
+      rect:
+        serializedVersion: 2
+        x: 2213
+        y: 3052
+        width: 840
+        height: 840
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 3698
+        y: 94
+        width: 4392
+        height: 4052
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetPreviousButton
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 3021
+        width: 840
+        height: 876
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetSkipButton
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 2317
+        width: 856
+        height: 863
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetDirectionButton
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 2270
+        width: 588
+        height: 628
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetActionButton
+      rect:
+        serializedVersion: 2
+        x: 1737
+        y: 2278
+        width: 704
+        height: 716
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetRetryButton
+      rect:
+        serializedVersion: 2
+        x: 2637
+        y: 2329
+        width: 540
+        height: 532
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetUnusedPlayButton
+      rect:
+        serializedVersion: 2
+        x: 3038
+        y: 2414
+        width: 592
+        height: 408
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetThermometerOutline
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1270
+        width: 3532
+        height: 900
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheet_34
+      rect:
+        serializedVersion: 2
+        x: 3046
+        y: 702
+        width: 367
+        height: 530
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetUnusedSpace
+      rect:
+        serializedVersion: 2
+        x: 3538
+        y: 714
+        width: 3
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetThermometerWhiteFill
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 826
+        width: 2691
+        height: 392
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetThermometerRedFill
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 262
+        width: 2700
+        height: 376
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheet_38
+      rect:
+        serializedVersion: 2
+        x: 2961
+        y: 51
+        width: 614
+        height: 615
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 3100
+        y: 2033
+        width: 396
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetStarLeft
+      rect:
+        serializedVersion: 2
+        x: 2120
+        y: 3877
+        width: 700
+        height: 683
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetPanel
+      rect:
+        serializedVersion: 2
+        x: 3693
+        y: 109
+        width: 4385
+        height: 4035
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetShareButton
+      rect:
+        serializedVersion: 2
+        x: 1474
+        y: 3906
+        width: 632
+        height: 629
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetTwitter
+      rect:
+        serializedVersion: 2
+        x: 2170
+        y: 3921
+        width: 612
+        height: 606
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HudSpriteSheetLeaderboardButton
+      rect:
+        serializedVersion: 2
+        x: 2852
+        y: 3910
+        width: 635
+        height: 635
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

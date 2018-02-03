@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: b9b36dc81e7f44f5ea73317d599a7379
+timeCreated: 1502748910
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PunkMohawk
+    21300002: LeprechaunHat
+    21300004: SantaHat
+    21300006: LeprechaunHat
+    21300008: PirateHat
+    21300010: ElfHat
+    21300012: VikingHat
+    21300014: ClownHair
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1150
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SantaHat
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 5473
+        width: 3197
+        height: 2590
+      alignment: 9
+      pivot: {x: 0.71321106, y: 0.6514069}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: LeprechaunHat
+      rect:
+        serializedVersion: 2
+        x: 3302
+        y: 5928
+        width: 3620
+        height: 2193
+      alignment: 9
+      pivot: {x: 0.6172379, y: 0.3705594}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: PirateHat
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 760
+        width: 2787
+        height: 1817
+      alignment: 9
+      pivot: {x: 0.63034356, y: 0.40749073}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ElfHat
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 2894
+        width: 3035
+        height: 2448
+      alignment: 9
+      pivot: {x: 0.72817296, y: 0.66476625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: VikingHat
+      rect:
+        serializedVersion: 2
+        x: 3472
+        y: 3754
+        width: 3862
+        height: 1968
+      alignment: 9
+      pivot: {x: 0.69237596, y: 0.41875884}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ClownHair
+      rect:
+        serializedVersion: 2
+        x: 3964
+        y: 879
+        width: 3827
+        height: 1695
+      alignment: 9
+      pivot: {x: 0.6131409, y: 0.77652496}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

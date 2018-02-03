@@ -1,0 +1,1016 @@
+fileFormatVersion: 2
+guid: bd3769c28b1094d9dbf97ee7c83614f3
+timeCreated: 1499034583
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Player_0
+    21300002: Player_1
+    21300004: PlayerBody
+    21300006: CapeFloat1
+    21300008: Player_4
+    21300010: PlayerPoppedPupilLeft
+    21300012: PlayerPoppedPupilRight
+    21300014: PlayerPoppedEyeRight
+    21300016: LandingDust5
+    21300018: Player_9
+    21300020: PlayerPoppedEyeBlinkLeft
+    21300022: PlayerPoppedEyeBlinkRight
+    21300024: PlayerPoppedEyeLeft
+    21300026: PlayerPoppedBodyLowerMiddle
+    21300028: PlayerPoppedMouth
+    21300030: PlayerMouthUpset
+    21300032: LandingDust4
+    21300034: PlayerPoppedLowerLeft
+    21300036: PlayerPoppedLowerRight
+    21300038: PlayerWorriedLinesLeft
+    21300040: none
+    21300042: PlayerWorriedLinesRight
+    21300044: PlayerEyeLeftPain
+    21300046: PlayerEyeRightPain
+    21300048: PlayerMouthWorried
+    21300050: PlayerMouthPain
+    21300052: PlayerPoppedFull
+    21300054: PlayerLegUpper
+    21300056: CapeFloat2
+    21300058: PlayerPoppedBodyMain
+    21300060: PlayerEyePupilLeft
+    21300062: PlayerEyePupilRight
+    21300064: PlayerMouthHappy
+    21300066: PlayerLegLower
+    21300068: Player_34
+    21300070: Player_35
+    21300072: PlayerEyeLeft
+    21300074: PlayerEyeRight
+    21300076: PlayerEyeBrowLeft
+    21300078: PlayerEyeBrowRight
+    21300080: PlayerShoe
+    21300082: LandingDust3
+    21300084: Player_42
+    21300086: Player_43
+    21300088: JumpDust3
+    21300090: PlayerShadow
+    21300092: CapeFloat3
+    21300094: Player_47
+    21300096: Player_48
+    21300098: LandingDust2
+    21300100: JumpDust2
+    21300102: CapeRun1
+    21300104: LandingDust1
+    21300106: JumpDust1
+    21300108: CapeIcon
+    21300110: CapeIdle
+    21300112: CapeRun2
+    21300114: KickEffect
+    21300116: CapeRun3
+    21300118: Snowflake
+    21300120: Magnet
+    21300122: Coin1
+    21300124: Coin2
+    21300126: Coin3
+    21300128: Coin4
+    21300130: Flash
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 730
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_0
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 7631
+        width: 280
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_1
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 7851
+        width: 532
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerBody
+      rect:
+        serializedVersion: 2
+        x: 4811
+        y: 6895
+        width: 736
+        height: 1052
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeFloat1
+      rect:
+        serializedVersion: 2
+        x: 6151
+        y: 6811
+        width: 1904
+        height: 1192
+      alignment: 9
+      pivot: {x: 0.9825642, y: 0.6041632}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_4
+      rect:
+        serializedVersion: 2
+        x: 1824
+        y: 7675
+        width: 344
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedPupilLeft
+      rect:
+        serializedVersion: 2
+        x: 3528
+        y: 7575
+        width: 32
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedPupilRight
+      rect:
+        serializedVersion: 2
+        x: 3892
+        y: 7575
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedEyeRight
+      rect:
+        serializedVersion: 2
+        x: 4523
+        y: 7379
+        width: 228
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LandingDust5
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 7251
+        width: 2198
+        height: 739
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_9
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 7347
+        width: 136
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedEyeBlinkLeft
+      rect:
+        serializedVersion: 2
+        x: 3504
+        y: 7355
+        width: 128
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedEyeBlinkRight
+      rect:
+        serializedVersion: 2
+        x: 3748
+        y: 7387
+        width: 188
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedEyeLeft
+      rect:
+        serializedVersion: 2
+        x: 4303
+        y: 7379
+        width: 152
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedBodyLowerMiddle
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 6995
+        width: 496
+        height: 384
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedMouth
+      rect:
+        serializedVersion: 2
+        x: 3564
+        y: 7111
+        width: 264
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerMouthUpset
+      rect:
+        serializedVersion: 2
+        x: 4279
+        y: 7135
+        width: 256
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LandingDust4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 6215
+        width: 2248
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedLowerLeft
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 6535
+        width: 336
+        height: 404
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedLowerRight
+      rect:
+        serializedVersion: 2
+        x: 2952
+        y: 6539
+        width: 408
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerWorriedLinesLeft
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 6819
+        width: 76
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: none
+      rect:
+        serializedVersion: 2
+        x: 3643
+        y: 6787
+        width: 4
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerWorriedLinesRight
+      rect:
+        serializedVersion: 2
+        x: 3852
+        y: 6831
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyeLeftPain
+      rect:
+        serializedVersion: 2
+        x: 4235
+        y: 6775
+        width: 168
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyeRightPain
+      rect:
+        serializedVersion: 2
+        x: 4443
+        y: 6783
+        width: 136
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerMouthWorried
+      rect:
+        serializedVersion: 2
+        x: 3620
+        y: 6511
+        width: 276
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerMouthPain
+      rect:
+        serializedVersion: 2
+        x: 4171
+        y: 6495
+        width: 340
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedFull
+      rect:
+        serializedVersion: 2
+        x: 4615
+        y: 5827
+        width: 960
+        height: 988
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerLegUpper
+      rect:
+        serializedVersion: 2
+        x: 5659
+        y: 6371
+        width: 108
+        height: 248
+      alignment: 9
+      pivot: {x: 0.5259919, y: 0.7999799}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeFloat2
+      rect:
+        serializedVersion: 2
+        x: 6143
+        y: 5499
+        width: 1912
+        height: 1140
+      alignment: 9
+      pivot: {x: 0.9870391, y: 0.5980233}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerPoppedBodyMain
+      rect:
+        serializedVersion: 2
+        x: 2616
+        y: 5715
+        width: 776
+        height: 756
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyePupilLeft
+      rect:
+        serializedVersion: 2
+        x: 3616
+        y: 6295
+        width: 36
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyePupilRight
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 6295
+        width: 28
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerMouthHappy
+      rect:
+        serializedVersion: 2
+        x: 4083
+        y: 6283
+        width: 264
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerLegLower
+      rect:
+        serializedVersion: 2
+        x: 5671
+        y: 6095
+        width: 108
+        height: 232
+      alignment: 9
+      pivot: {x: 0.47400355, y: 0.8448697}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_34
+      rect:
+        serializedVersion: 2
+        x: 5776
+        y: 6308
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_35
+      rect:
+        serializedVersion: 2
+        x: 5660
+        y: 6252
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyeLeft
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 5823
+        width: 284
+        height: 332
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyeRight
+      rect:
+        serializedVersion: 2
+        x: 3776
+        y: 5827
+        width: 164
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyeBrowLeft
+      rect:
+        serializedVersion: 2
+        x: 4079
+        y: 5891
+        width: 232
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerEyeBrowRight
+      rect:
+        serializedVersion: 2
+        x: 4363
+        y: 5963
+        width: 128
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerShoe
+      rect:
+        serializedVersion: 2
+        x: 5635
+        y: 5807
+        width: 424
+        height: 240
+      alignment: 9
+      pivot: {x: 0.50993145, y: 0.8684652}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LandingDust3
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 5187
+        width: 2248
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_42
+      rect:
+        serializedVersion: 2
+        x: 5724
+        y: 5804
+        width: 20
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_43
+      rect:
+        serializedVersion: 2
+        x: 2824
+        y: 5259
+        width: 288
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: JumpDust3
+      rect:
+        serializedVersion: 2
+        x: 2826
+        y: 4953
+        width: 758
+        height: 570
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerShadow
+      rect:
+        serializedVersion: 2
+        x: 3808
+        y: 5299
+        width: 1411
+        height: 296
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeFloat3
+      rect:
+        serializedVersion: 2
+        x: 6159
+        y: 4131
+        width: 1912
+        height: 1208
+      alignment: 9
+      pivot: {x: 0.9870391, y: 0.61306214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_47
+      rect:
+        serializedVersion: 2
+        x: 2832
+        y: 4955
+        width: 212
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player_48
+      rect:
+        serializedVersion: 2
+        x: 3404
+        y: 4971
+        width: 164
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LandingDust2
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 4327
+        width: 1876
+        height: 652
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: JumpDust2
+      rect:
+        serializedVersion: 2
+        x: 2840
+        y: 4211
+        width: 752
+        height: 596
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeRun1
+      rect:
+        serializedVersion: 2
+        x: 4043
+        y: 3592
+        width: 1580
+        height: 1191
+      alignment: 9
+      pivot: {x: 0.75146794, y: 0.8648777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LandingDust1
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 3960
+        width: 940
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: JumpDust1
+      rect:
+        serializedVersion: 2
+        x: 2984
+        y: 3524
+        width: 600
+        height: 567
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeIcon
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 2168
+        width: 1356
+        height: 1372
+      alignment: 9
+      pivot: {x: 0.7014435, y: 0.9434377}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeIdle
+      rect:
+        serializedVersion: 2
+        x: 1808
+        y: 2176
+        width: 1004
+        height: 1216
+      alignment: 9
+      pivot: {x: 0.56183374, y: 0.9084296}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeRun2
+      rect:
+        serializedVersion: 2
+        x: 3944
+        y: 2168
+        width: 1499
+        height: 1180
+      alignment: 9
+      pivot: {x: 0.7319248, y: 0.8577566}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: KickEffect
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 1404
+        width: 1544
+        height: 652
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CapeRun3
+      rect:
+        serializedVersion: 2
+        x: 3896
+        y: 712
+        width: 1503
+        height: 1224
+      alignment: 9
+      pivot: {x: 0.7230464, y: 0.8854721}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Snowflake
+      rect:
+        serializedVersion: 2
+        x: 5903
+        y: 2808
+        width: 848
+        height: 948
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Magnet
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 1404
+        width: 705
+        height: 636
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Coin1
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 532
+        width: 104
+        height: 656
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Coin2
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 528
+        width: 196
+        height: 656
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Coin3
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 520
+        width: 452
+        height: 656
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Coin4
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 532
+        width: 628
+        height: 652
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Flash
+      rect:
+        serializedVersion: 2
+        x: 2288
+        y: 432
+        width: 876
+        height: 832
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,55 @@
+.DS_Store
+Assets/Resources/SoundEffects/Collectables.meta
+Assets/Resources/SoundEffects/Collectables/
+Assets/Resources/SoundEffects/Enemies.meta
+Assets/Resources/SoundEffects/Enemies/
+Assets/Resources/SoundEffects/Environmental.meta
+Assets/Resources/SoundEffects/Environmental/
+Assets/Resources/SoundEffects/Player/player-death.wav*
+Assets/Resources/SoundEffects/UI.meta
+Assets/Resources/SoundEffects/UI/
+
+Assets/Shaders.meta
+Assets/Shaders/
+Assets/Materials/LinearGradient#12.mat
+Assets/Materials/LinearGradient#12.mat.meta
+Assets/SimpleUnlitGradient.meta
+Assets/SimpleUnlitGradient/
+Assets/Common.meta
+Assets/Common/
+Assets/GUI\ Animator\ for\ Unity\ UI.meta
+Assets/GUI\ Animator\ for\ Unity\ UI/
+Assets/ToonFX.meta
+Assets/ToonFX/
+
+commit
+docs/
+game-art/
+iOS-IconImageSet/
+Library/
+Assets/Plugins.meta
+Assets/Plugins/
+Temp/
+Music/
+
+PlayServicesResolver/
+PlayServicesResolver.meta
+GUI\ Animator/
+GUI\ Animator.meta
+GooglePlayGames/
+GooglePlayGames.meta
+tools/
+website/
+game.dat
+ReleaseNotes.txt
+appStore/
+DatabaseSetup.txt
+LicenseInfo/
+UnityAds/
+UnityAds.meta
+ProjectSettings/UnityConnectSettings.asset
+*.keystore
+*.py
+*.csproj
+*.unityproj
+*.userprefs

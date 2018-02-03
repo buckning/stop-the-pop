@@ -1,0 +1,484 @@
+fileFormatVersion: 2
+guid: 8d12c9b497c1045779b3ab66d2486e4f
+timeCreated: 1491668971
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: FryingPanAndGrill_0
+    21300002: FryingPanAndGrillPanHandle
+    21300004: FryingPanAndGrillMouth
+    21300006: FryingPanAndGrillEye
+    21300008: FryingPanAndGrill_4
+    21300010: FryingPanAndGrill_5
+    21300012: FryingPanAndGrill_6
+    21300014: FryingPanAndGrillEyebrow
+    21300016: FryingPanAndGrill_8
+    21300018: FryingPanAndGrillBody
+    21300020: FryingPanAndGrillPanBody
+    21300022: FryingPanAndGrillBackground
+    21300024: FryingPanAndGrillCandleEyeDeathLeft
+    21300026: FryingPanAndGrillCandleEyeDeathRight
+    21300028: FryingPanAndGrillCandlePupilDeathLeft
+    21300030: FryingPanAndGrillCandlePupilDeathRight
+    21300032: FryingPanAndGrillCandlePupilNormalLeft
+    21300034: FryingPanAndGrillCandlePupilNormalRight
+    21300036: FryingPanAndGrillCandleEyebrowNormalLeft
+    21300038: FryingPanAndGrillCandleEyebrowNormalRight
+    21300040: FryingPanAndGrillCandleMouthDeath
+    21300042: FryingPanAndGrillCandleMouthNormal
+    21300044: FryingPanAndGrillCandleEyebrowLeftNormal
+    21300046: FryingPanAndGrillCandleEyebrowRightNormal
+    21300048: FryingPanAndGrillCandleEyeRightNormal
+    21300050: FryingPanAndGrillCandleEyeLeftNormal
+    21300052: Blank
+    21300054: PlainWhite
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FryingPanAndGrill_0
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 6214
+        width: 7360
+        height: 1891
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillPanHandle
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 4782
+        width: 3836
+        height: 1200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillMouth
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 1794
+        width: 900
+        height: 400
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillEye
+      rect:
+        serializedVersion: 2
+        x: 1770
+        y: 1707
+        width: 784
+        height: 643
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrill_4
+      rect:
+        serializedVersion: 2
+        x: 2602
+        y: 1738
+        width: 404
+        height: 376
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrill_5
+      rect:
+        serializedVersion: 2
+        x: 3074
+        y: 1722
+        width: 584
+        height: 543
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrill_6
+      rect:
+        serializedVersion: 2
+        x: 3746
+        y: 1738
+        width: 332
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillEyebrow
+      rect:
+        serializedVersion: 2
+        x: 4250
+        y: 1674
+        width: 592
+        height: 428
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrill_8
+      rect:
+        serializedVersion: 2
+        x: 4970
+        y: 1674
+        width: 564
+        height: 400
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillBody
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 242
+        width: 4696
+        height: 1368
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillPanBody
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 6213
+        width: 7414
+        height: 1913
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillBackground
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 2473
+        width: 7652
+        height: 2208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyeDeathLeft
+      rect:
+        serializedVersion: 2
+        x: 4322
+        y: 5383
+        width: 837
+        height: 739
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyeDeathRight
+      rect:
+        serializedVersion: 2
+        x: 5189
+        y: 5507
+        width: 694
+        height: 606
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandlePupilDeathLeft
+      rect:
+        serializedVersion: 2
+        x: 4353
+        y: 5126
+        width: 98
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandlePupilDeathRight
+      rect:
+        serializedVersion: 2
+        x: 4513
+        y: 5154
+        width: 97
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandlePupilNormalLeft
+      rect:
+        serializedVersion: 2
+        x: 4692
+        y: 5020
+        width: 218
+        height: 274
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandlePupilNormalRight
+      rect:
+        serializedVersion: 2
+        x: 4950
+        y: 5107
+        width: 179
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyebrowNormalLeft
+      rect:
+        serializedVersion: 2
+        x: 5247
+        y: 4820
+        width: 721
+        height: 630
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyebrowNormalRight
+      rect:
+        serializedVersion: 2
+        x: 5980
+        y: 5553
+        width: 620
+        height: 522
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleMouthDeath
+      rect:
+        serializedVersion: 2
+        x: 6008
+        y: 5103
+        width: 763
+        height: 400
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleMouthNormal
+      rect:
+        serializedVersion: 2
+        x: 6872
+        y: 4977
+        width: 797
+        height: 589
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyebrowLeftNormal
+      rect:
+        serializedVersion: 2
+        x: 6629
+        y: 5587
+        width: 815
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyebrowRightNormal
+      rect:
+        serializedVersion: 2
+        x: 7497
+        y: 5630
+        width: 583
+        height: 458
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyeRightNormal
+      rect:
+        serializedVersion: 2
+        x: 5021
+        y: 834
+        width: 687
+        height: 647
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FryingPanAndGrillCandleEyeLeftNormal
+      rect:
+        serializedVersion: 2
+        x: 4952
+        y: 85
+        width: 838
+        height: 716
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Blank
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 2492
+        width: 7590
+        height: 978
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlainWhite
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 2536
+        width: 7479
+        height: 875
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

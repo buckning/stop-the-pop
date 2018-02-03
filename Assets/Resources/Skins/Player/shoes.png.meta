@@ -1,0 +1,314 @@
+fileFormatVersion: 2
+guid: d821c328479844cd0b17f54a8ba42be4
+timeCreated: 1502747946
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ConsLeft
+    21300002: ConsRight
+    21300004: BootsLeft
+    21300006: BootsRight
+    21300008: leprechaunShoeLeft
+    21300010: santaShoeLeft
+    21300012: pirateShoeLeft
+    21300014: elfShoeLeft
+    21300016: leprechaunShoeRight
+    21300018: santaShoeRight
+    21300020: pirateShoeRight
+    21300022: elfShoeRight
+    21300024: vikingShoeLeft
+    21300026: vikingShoeRight
+    21300028: clownShoeLeft
+    21300030: clownShoeRight
+    21300032: defaultShoe
+    21300034: shoes_0
+    21300036: shoesTutorialKick
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 2500
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: leprechaunShoeLeft
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 6914
+        width: 1598
+        height: 913
+      alignment: 9
+      pivot: {x: 0.46326858, y: 0.59803337}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: santaShoeLeft
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 6859
+        width: 1827
+        height: 1241
+      alignment: 9
+      pivot: {x: 0.5045148, y: 0.53397214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pirateShoeLeft
+      rect:
+        serializedVersion: 2
+        x: 4310
+        y: 6843
+        width: 1744
+        height: 1245
+      alignment: 9
+      pivot: {x: 0.42272556, y: 0.45343786}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: elfShoeLeft
+      rect:
+        serializedVersion: 2
+        x: 6236
+        y: 7026
+        width: 1803
+        height: 876
+      alignment: 9
+      pivot: {x: 0.3864785, y: 0.6019914}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: leprechaunShoeRight
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 5506
+        width: 1608
+        height: 916
+      alignment: 9
+      pivot: {x: 0.4632969, y: 0.6375505}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: santaShoeRight
+      rect:
+        serializedVersion: 2
+        x: 2165
+        y: 5268
+        width: 1827
+        height: 1242
+      alignment: 9
+      pivot: {x: 0.5045032, y: 0.5284785}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: pirateShoeRight
+      rect:
+        serializedVersion: 2
+        x: 4309
+        y: 5339
+        width: 1751
+        height: 1258
+      alignment: 9
+      pivot: {x: 0.43595755, y: 0.4602556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: elfShoeRight
+      rect:
+        serializedVersion: 2
+        x: 6220
+        y: 5641
+        width: 1826
+        height: 882
+      alignment: 9
+      pivot: {x: 0.38978776, y: 0.5872359}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: vikingShoeLeft
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 3313
+        width: 1685
+        height: 1256
+      alignment: 9
+      pivot: {x: 0.44278494, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: vikingShoeRight
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1758
+        width: 1681
+        height: 1244
+      alignment: 9
+      pivot: {x: 0.4439888, y: 0.48724708}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: clownShoeLeft
+      rect:
+        serializedVersion: 2
+        x: 2384
+        y: 3307
+        width: 1685
+        height: 1006
+      alignment: 9
+      pivot: {x: 0.39139742, y: 0.6440281}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: clownShoeRight
+      rect:
+        serializedVersion: 2
+        x: 2443
+        y: 1752
+        width: 1698
+        height: 1033
+      alignment: 9
+      pivot: {x: 0.37730113, y: 0.6776475}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: defaultShoe
+      rect:
+        serializedVersion: 2
+        x: 5795
+        y: 3753
+        width: 1612
+        height: 921
+      alignment: 9
+      pivot: {x: 0.4558042, y: 0.58957005}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: shoes_0
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 462
+        width: 1086
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: shoesTutorialKick
+      rect:
+        serializedVersion: 2
+        x: 4413
+        y: 0
+        width: 3779
+        height: 3779
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

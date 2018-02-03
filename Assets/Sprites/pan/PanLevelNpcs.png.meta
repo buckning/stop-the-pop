@@ -1,0 +1,1002 @@
+fileFormatVersion: 2
+guid: cac9bd86e002045c5a305a3133c03319
+timeCreated: 1488399385
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PanLevelNpcs_0
+    21300002: PanLevelNpcs_1
+    21300004: PanLevelNpcs_2
+    21300006: PanLevelNpcs_3
+    21300008: PanLevelNpcs_4
+    21300010: PanLevelNpcs_5
+    21300012: PanLevelNpcs_6
+    21300014: PanLevelNpcs_7
+    21300016: PanLevelNpcs_8
+    21300018: PanLevelNpcs_9
+    21300020: PanLevelNpcs_10
+    21300022: PanLevelNpcs_11
+    21300024: PanLevelNpcs_12
+    21300026: PanLevelNpcs_13
+    21300028: PanLevelNpcsToast
+    21300030: PanLevelNpcs_15
+    21300032: PanLevelNpcs_16
+    21300034: PanLevelNpcs_17
+    21300036: PanLevelNpcs_18
+    21300038: PanLevelNpcs_19
+    21300040: PanLevelNpcs_20
+    21300042: PanLevelNpcs_21
+    21300044: PanLevelNpcs_22
+    21300046: PanLevelNpcs_23
+    21300048: PanLevelNpcs_24
+    21300050: PanLevelNpcs_25
+    21300052: PanLevelNpcs_26
+    21300054: PanLevelNpcs_27
+    21300056: PanLevelNpcs_28
+    21300058: PanLevelNpcs_29
+    21300060: PanLevelNpcs_30
+    21300062: PanLevelNpcs_31
+    21300064: PanLevelNpcs_32
+    21300066: PanLevelNpcs_33
+    21300068: PanLevelNpcs_34
+    21300070: PanLevelNpcs_35
+    21300072: PanLevelNpcs_36
+    21300074: PanLevelNpcs_37
+    21300076: PanLevelNpcs_38
+    21300078: PanLevelNpcs_39
+    21300080: PanLevelNpcs_40
+    21300082: PanLevelNpcs_41
+    21300084: PanLevelNpcs_42
+    21300086: PanLevelNpcs_43
+    21300088: PanLevelNpcs_44
+    21300090: PanLevelNpcs_45
+    21300092: PanLevelNpcs_46
+    21300094: PanLevelNpcs_47
+    21300096: PanLevelNpcs_48
+    21300098: PanLevelNpcs_49
+    21300100: PanLevelNpcs_50
+    21300102: PanLevelNpcs_51
+    21300104: PanLevelNpcs_52
+    21300106: PanLevelNpcs_53
+    21300108: PanLevelNpcs_54
+    21300110: PanLevelNpcs_55
+    21300112: PanLevelNpcs_56
+    21300114: PanLevelNpcsPopcorn1
+    21300116: PanLevelNpcsPopcorn2
+    21300118: PanLevelNpcsPopcorn3
+    21300120: PanLevelNpcsPopcorn4
+    21300122: PanLevelNpcsToasterBack
+    21300124: PanLevelNpcs_62
+    21300126: PanLevelNpcs_63
+    21300128: PanLevelNpcsToasterFront
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 720
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PanLevelNpcs_0
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 7686
+        width: 212
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_1
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 7710
+        width: 260
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_2
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 7734
+        width: 236
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_3
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 7746
+        width: 292
+        height: 188
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_4
+      rect:
+        serializedVersion: 2
+        x: 1698
+        y: 7738
+        width: 288
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_5
+      rect:
+        serializedVersion: 2
+        x: 2022
+        y: 7750
+        width: 288
+        height: 292
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_6
+      rect:
+        serializedVersion: 2
+        x: 2394
+        y: 7766
+        width: 240
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_7
+      rect:
+        serializedVersion: 2
+        x: 2662
+        y: 7826
+        width: 280
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_8
+      rect:
+        serializedVersion: 2
+        x: 3018
+        y: 7798
+        width: 248
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_9
+      rect:
+        serializedVersion: 2
+        x: 3290
+        y: 7818
+        width: 284
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_10
+      rect:
+        serializedVersion: 2
+        x: 3710
+        y: 7778
+        width: 256
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_11
+      rect:
+        serializedVersion: 2
+        x: 4006
+        y: 7790
+        width: 316
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_12
+      rect:
+        serializedVersion: 2
+        x: 4426
+        y: 7710
+        width: 312
+        height: 328
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_13
+      rect:
+        serializedVersion: 2
+        x: 4758
+        y: 7810
+        width: 348
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsToast
+      rect:
+        serializedVersion: 2
+        x: 5922
+        y: 5934
+        width: 2151
+        height: 2156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_15
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 7470
+        width: 264
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_16
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 7570
+        width: 80
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_17
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 7578
+        width: 92
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_18
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 7218
+        width: 352
+        height: 504
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_19
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 7538
+        width: 136
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_20
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 7546
+        width: 120
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_21
+      rect:
+        serializedVersion: 2
+        x: 2018
+        y: 7330
+        width: 360
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_22
+      rect:
+        serializedVersion: 2
+        x: 2418
+        y: 7582
+        width: 116
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_23
+      rect:
+        serializedVersion: 2
+        x: 2554
+        y: 7550
+        width: 128
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_24
+      rect:
+        serializedVersion: 2
+        x: 2698
+        y: 7454
+        width: 312
+        height: 356
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_25
+      rect:
+        serializedVersion: 2
+        x: 3026
+        y: 7610
+        width: 164
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_26
+      rect:
+        serializedVersion: 2
+        x: 3198
+        y: 7610
+        width: 172
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_27
+      rect:
+        serializedVersion: 2
+        x: 3378
+        y: 7438
+        width: 320
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_28
+      rect:
+        serializedVersion: 2
+        x: 3722
+        y: 7682
+        width: 68
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_29
+      rect:
+        serializedVersion: 2
+        x: 3798
+        y: 7658
+        width: 100
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_30
+      rect:
+        serializedVersion: 2
+        x: 4039
+        y: 7414
+        width: 296
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_31
+      rect:
+        serializedVersion: 2
+        x: 4550
+        y: 7558
+        width: 100
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_32
+      rect:
+        serializedVersion: 2
+        x: 4738
+        y: 7362
+        width: 368
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_33
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 7414
+        width: 244
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_34
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 7218
+        width: 292
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_35
+      rect:
+        serializedVersion: 2
+        x: 3070
+        y: 7246
+        width: 296
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_36
+      rect:
+        serializedVersion: 2
+        x: 3714
+        y: 7274
+        width: 320
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_37
+      rect:
+        serializedVersion: 2
+        x: 4438
+        y: 7546
+        width: 96
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_38
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 7286
+        width: 76
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_39
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 7250
+        width: 204
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_40
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 7322
+        width: 80
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_41
+      rect:
+        serializedVersion: 2
+        x: 1694
+        y: 7154
+        width: 324
+        height: 372
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_42
+      rect:
+        serializedVersion: 2
+        x: 2422
+        y: 7234
+        width: 276
+        height: 300
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_43
+      rect:
+        serializedVersion: 2
+        x: 2734
+        y: 7214
+        width: 308
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_44
+      rect:
+        serializedVersion: 2
+        x: 3402
+        y: 7194
+        width: 248
+        height: 220
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_45
+      rect:
+        serializedVersion: 2
+        x: 4046
+        y: 7138
+        width: 308
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_46
+      rect:
+        serializedVersion: 2
+        x: 4402
+        y: 7178
+        width: 320
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_47
+      rect:
+        serializedVersion: 2
+        x: 4786
+        y: 7178
+        width: 224
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_48
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 6198
+        width: 728
+        height: 968
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_49
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 7034
+        width: 232
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_50
+      rect:
+        serializedVersion: 2
+        x: 2026
+        y: 7142
+        width: 264
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_51
+      rect:
+        serializedVersion: 2
+        x: 2482
+        y: 6174
+        width: 716
+        height: 996
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_52
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 5994
+        width: 676
+        height: 1032
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_53
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 5974
+        width: 788
+        height: 1011
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_54
+      rect:
+        serializedVersion: 2
+        x: 3234
+        y: 6150
+        width: 672
+        height: 936
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_55
+      rect:
+        serializedVersion: 2
+        x: 3954
+        y: 6114
+        width: 760
+        height: 948
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_56
+      rect:
+        serializedVersion: 2
+        x: 4747
+        y: 6086
+        width: 723
+        height: 972
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsPopcorn1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 4854
+        width: 908
+        height: 972
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsPopcorn2
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 4850
+        width: 900
+        height: 984
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsPopcorn3
+      rect:
+        serializedVersion: 2
+        x: 2062
+        y: 4922
+        width: 892
+        height: 920
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsPopcorn4
+      rect:
+        serializedVersion: 2
+        x: 3038
+        y: 4882
+        width: 756
+        height: 956
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsToasterBack
+      rect:
+        serializedVersion: 2
+        x: 4790
+        y: 2662
+        width: 3132
+        height: 2372
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_62
+      rect:
+        serializedVersion: 2
+        x: 3514
+        y: 3818
+        width: 444
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcs_63
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 50
+        width: 4104
+        height: 3504
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PanLevelNpcsToasterFront
+      rect:
+        serializedVersion: 2
+        x: 4746
+        y: 62
+        width: 3232
+        height: 2468
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
