@@ -17,18 +17,12 @@ public class PlayerController : MonoBehaviour {
 	public float moveSpeed = 14f;
 	float velocityXSmoothing;
 
-	public float shrinkSize = 0.3f;
-
 	public Transform leftLegPopPoint;
 	public Transform rightLegPopPoint;
 
 	string lastCollisionName = "";
 
-	float timeToWallUnstick;
-
 	bool groundedOverride = false;
-
-	public bool wallSlidingEnabled = false;
 
 	[HideInInspector]
 	public Vector2 playerInput;
@@ -58,7 +52,6 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shadow;
 	public SpriteRenderer kickEffect;
 
-
 	public const float POP_TEMPERATURE = 1.0f;
 
 	public float temperature;							//the temperature of the player
@@ -74,7 +67,6 @@ public class PlayerController : MonoBehaviour {
 	float MAX_INVINCIBILITY_TIME = 1.5f;			//the amount of time in seconds that the player will be invincible for if hit by an enemy/hazardous env
 	public GameObject leg;								//the leg that will be used to pop off when the player pops
 	private float invincibilityTimeLeft = 0f;			//the amount of time that the player will still be invicible for
-	private int score = 0;								//what score the player is
 	private Animator animator;							//our character animator, used to change between animations
 	private bool facingRight = true;					//this is used so we can know how to face our sprite
 	private Rigidbody2D rigidbody2d;					//the rigid body 2d for the player
@@ -122,8 +114,6 @@ public class PlayerController : MonoBehaviour {
 	bool lifeAlreadyLost = false;					//when the player loses a life, this is checked to see if a life has already been lost
 													//this variable prevents multiple lives being lost in one level
 	AudioSource runAudioSource;		//this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
-
-	public string skin;
 
 	bool leftLegPopped = false;
 	bool rightLegPopped = false;
@@ -515,14 +505,6 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = velocity;
 	}
 
-	public void Shrink() {
-		transform.localScale = new Vector3 (shrinkSize, shrinkSize, shrinkSize);
-	}
-
-	public void UnShrink() {
-		transform.localScale = Vector3.one;
-	}
-	
 	/***
 	 * Update our own x and y velocity. This gives us better control of jumping
 	 * and better playability since time to fall to ground after jump takes a while
@@ -964,20 +946,12 @@ public class PlayerController : MonoBehaviour {
 		runAudioSource.volume = 0.0f;
 	}
 
-	public void incScore(int s) {
-		score += s;
-	}
-
 	public bool IsGliding() {
 		return gliding;
 	}
 
 	public bool IsGrounded() {
 		return grounded;
-	}
-
-	public int getScore() {
-		return score;
 	}
 
 	public List<int> GetCollectedCoins() {
@@ -991,23 +965,6 @@ public class PlayerController : MonoBehaviour {
 		if (!lifeAlreadyLost) {
 			CurrentLevel.AddLivesLost(1);
 			lifeAlreadyLost = true;
-		}
-	}
-
-	/***
-	 * Reskin the player to give them a new look from a different sprite sheet
-	 */
-	public void Reskin(string newSkin) {
-		Sprite[] sprites = Resources.LoadAll<Sprite> ("skins/player/" + newSkin);
-
-		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
-
-		foreach (SpriteRenderer renderer in renderers) {
-			foreach (Sprite sprite in sprites) {
-				if (sprite.name == renderer.name) {
-					renderer.sprite = sprite;
-				}
-			}
 		}
 	}
 

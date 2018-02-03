@@ -60,8 +60,10 @@ In Unity, navigate to Prefabs(Mobile)/Confetti/ and select both Confetti prefabs
 
 Click on the Sparkle(Mobile) prefab, in the inspector click on the Particle System component and expand the Shape section. Change the X and Z scale settings to fit your screen.
 
+## Testing 
+
 ## Directory Structure
-Assets: Contains the all the Unity assets required for the game
-GameArt: Contains all the SVG files used to make up the graphics in the game. Note that this directory does not contain the rasterized files.
-ProjectSettings: Unity managed files.
+* Assets: Contains the all the Unity assets required for the game
+* GameArt: Contains all the SVG files used to make up the graphics in the game. Note that this directory does not contain the rasterized files.
+* ProjectSettings: Unity managed files.
 

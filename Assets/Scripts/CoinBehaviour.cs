@@ -37,7 +37,6 @@ public class CoinBehaviour : MonoBehaviour {
 			collected = true;
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 			player.IncrementCoinCount(id);
-			player.incScore(10);
 			coinAnimator.SetTrigger("PickedUp");
 
 			PlaySound (0.05f);
