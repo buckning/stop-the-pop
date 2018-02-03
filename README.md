@@ -34,12 +34,17 @@ In the menu bar, click on File -> Build Settings... -> Click on Android -> Click
 
 In the menu bar, click "Assests" -> Play Services Resolver -> Android Resolver -> Resolve
 
-### Download Linear Unlit Gradient
+### Download Linear Unlit Gradient (Optional)
 Download [Linear Unlit Gradients](https://assetstore.unity.com/packages/vfx/shaders/linear-unlit-gradients-51733) from the Asset Store. 
 Just import Shaders/LinearGradient.shader and LinearGradient#12.mat files.
+This is required for the title screen, game complete screen and some levels.
 
-### Download Toon Fx
-Download [Toon Fx](https://assetstore.unity.com/packages/vfx/particles/toon-fx-25601) from the Asset Store. Import the following files:
+### Download Toon Fx (Optional)
+Download [Toon Fx](https://assetstore.unity.com/packages/vfx/particles/toon-fx-25601) from the Asset Store. 
+
+These are optional since the game will run without them. These partical effects are used in the level compelete screen and game complete screen.
+
+Import the following files:
 ```
 Materials(Mobile)/Recolorable/Confetti2x2(Mobile).mat
 Materials(Mobile)/Recolorable/Sparkle(Mobile).mat
