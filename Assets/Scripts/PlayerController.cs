@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 
 	string lastCollisionName = "";
 
-	bool groundedOverride = false;
+	bool groundedOverride = false;	// the point of this is if the player is running and falls off a platform, we want the player to be able to jump for a split second
 
 	[HideInInspector]
 	public Vector2 playerInput;
@@ -31,15 +31,6 @@ public class PlayerController : MonoBehaviour {
 	public Transform[] groundCheck;
 	public Transform ceilingCheck;
 	public Transform attackPosition;
-
-	public Transform climbPointUpper;
-	public Transform climbPointLower;
-	public Vector3 climbPointUpperStatic;
-	bool climbing = false;
-	public bool climbingEnabled = true;
-	public float climbRadius = 1.0f;
-	public Transform climbTarget;
-	bool doubleJumping = false;
 
 	public LayerMask whatIsGround;						//defines what we consider the ground
 	public LayerMask whatIsCeilingMask;					//define what is the ceiling (used to see if the player is getting crushed)
@@ -57,7 +48,6 @@ public class PlayerController : MonoBehaviour {
 	public float temperature;							//the temperature of the player
 	public bool updateTemperature = true;				//Shall we update our temperature every update?
 	public bool jumpEnabled = true;						//Is single jump enabled?
-	public bool doubleJumpEnabled = false;				//Is double jump enabled?
 	public float regularTemperatureUpdateRate = 0.02f;	//the regular temperature update of the player
 	float temperatureUpdateRate = 0.02f;			//the rate at which the temperature increases
 	float MAX_TEMPERATURE = 100.0f;				//the maximum temperature the player can reach. If the temperature is any higher, it is game over
@@ -98,8 +88,6 @@ public class PlayerController : MonoBehaviour {
 	public bool magnetEnabled = false;
 
 	public bool playerMovementEnabled = true;
-
-	public float armourValue = 1.0f;		//the value of the armour. The smaller the value of the armour, the slower the temperature increases
 
 	List<int> collectedCoins = new List<int>();
 
@@ -170,10 +158,8 @@ public class PlayerController : MonoBehaviour {
 		if (grounded) {
 			groundedOverride = false;
 			gliding = false;
-			doubleJumping = false;
 			//if we were not grounded last frame and are grounded this frame, we have just landed
-			if (!oldGrounded 
-				&& !climbing) {	//don't want to hear and see dust this if he is climbing
+			if (!oldGrounded) {
 				
 				if (rigidbody2d.velocity.y <= 0) {
 					AudioManager.PlaySound ("landing");	//only play sound effect when actually landing instead of when the player can jump through platforms from below
@@ -182,7 +168,7 @@ public class PlayerController : MonoBehaviour {
 				dustObject.transform.localScale = transform.localScale;
 			}
 		} else {
-			//the player has just fallen off a platform
+			//the player has just fallen off a platform, we want to give the player a chance to jump for a short period after falling off the platform
 			if (oldGrounded) {
 				if(rigidbody2d.velocity.y < 0.0f) {
 					groundedOverride = true;
@@ -195,62 +181,6 @@ public class PlayerController : MonoBehaviour {
 		touchingCeiling = Physics2D.OverlapCircle (ceilingCheck.position, ceilingRadius  * transform.localScale.x, whatIsCeilingMask);
 
 		UpdateMagnetBehaviour ();
-
-		CheckForClimbing ();
-	}
-
-	public void CheckForClimbing() {
-		if (!climbingEnabled) {
-			return;
-		}
-		Collider2D climbPointUpperCollision = Physics2D.OverlapCircle (climbPointUpper.position, climbRadius * transform.localScale.x, whatIsGround);
-		Collider2D climbPointLowerCollision = Physics2D.OverlapCircle (climbPointLower.position, climbRadius * transform.localScale.x, whatIsGround);
-		if (!climbPointUpperCollision &&
-			climbPointLowerCollision && 
-			!climbing &&
-			!grounded &&
-			//and player is moving 
-			rigidbody2d.velocity.y < 0.0f) {
-
-			if (climbPointLowerCollision.gameObject.tag != "Terrain") {
-				return;
-			}
-
-			climbing = true;
-
-			this.transform.parent = climbPointLowerCollision.gameObject.transform;
-			climbPointUpperStatic = climbTarget.position;
-
-			//climbPointLower.gameObject.transform
-			rigidbody2d.isKinematic = true;
-			//input should be disabled here
-			playerMovementEnabled = false;
-			jumpEnabled = false;
-		}
-
-	}
-
-	public void UpdateClimbing() {
-		if (climbing) {
-
-			//lerp in the y axis
-			if (Mathf.Abs (transform.position.y - climbPointUpperStatic.y) > 0.2f) {
-				transform.position = new Vector3 (transform.position.x, Mathf.Lerp (transform.position.y, climbPointUpperStatic.y, Time.deltaTime * 5));
-			} else {
-				//lerp the x axis
-				if (Mathf.Abs (transform.position.x - climbPointUpperStatic.x) > 0.2f) {
-					transform.position = new Vector3 (Mathf.Lerp (transform.position.x, climbPointUpperStatic.x, Time.deltaTime * 5), transform.position.y);
-				} else {
-					playerMovementEnabled = true;
-					//the player has climbed up successfully
-					rigidbody2d.isKinematic = false;
-					climbing = false;
-					jumpEnabled = true;
-					this.transform.parent = null;
-				}
-			}
-
-		}
 	}
 
 	public void PlaySawBladeDeathAnimation() {
@@ -334,7 +264,6 @@ public class PlayerController : MonoBehaviour {
 		CheckForAttack ();
 		UpdateVelocity ();
 		CheckIfCrushed ();
-		UpdateClimbing ();
 
 		//update the way our sprite is facing.
 		if (playerInput.x > 0 && !facingRight) {
@@ -372,7 +301,7 @@ public class PlayerController : MonoBehaviour {
 	void UpdateTemperature() {
 		//update our temperature
 		if (updateTemperature && invincibilityTimeLeft <= 0.0f) {
-			temperature += Time.deltaTime * temperatureUpdateRate * armourValue;
+			temperature += Time.deltaTime * temperatureUpdateRate;
 		}
 	}
 
@@ -479,16 +408,11 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			//do a standard jump
-			if (grounded || (doubleJumpEnabled && !doubleJumping)) {
-				
+			if (grounded) {
 				velocity.y = maxJumpVelocity;
-				Vector2 spawnPos = new Vector2 (groundCheck[0].position.x, groundCheck[0].position.y);
-				spawnPos.y += 0.25f;
 				AudioManager.PlaySoundAfterTime ("jump", 0.1f);
-				GameObject dustObject = (GameObject)Instantiate (jumpDust, spawnPos, Quaternion.identity);
-				dustObject.transform.localScale = transform.localScale;
-				doubleJumping = true;
-				animator.SetTrigger("doubleJump");
+
+				SpawnJumpDust ();
 			} else {
 				gliding = true;
 			}
@@ -505,15 +429,18 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = velocity;
 	}
 
+	private void SpawnJumpDust() {
+		Vector2 spawnPos = new Vector2 (groundCheck[0].position.x, groundCheck[0].position.y);
+		spawnPos.y += 0.25f;
+		GameObject dustObject = (GameObject)Instantiate (jumpDust, spawnPos, Quaternion.identity);
+		dustObject.transform.localScale = transform.localScale;
+	}
+
 	/***
 	 * Update our own x and y velocity. This gives us better control of jumping
 	 * and better playability since time to fall to ground after jump takes a while
 	 */
 	public void UpdateVelocity() {
-		UpdateVelocityWithAcceleration ();
-	}
-
-	void UpdateVelocityWithAcceleration() {
 		Vector2 velocity = rigidbody2d.velocity;
 		if(gliding && glidingEnabled && velocity.y <= 0f) {
 			velocity.y = glideSpeed;
@@ -578,10 +505,6 @@ public class PlayerController : MonoBehaviour {
 		//player has changed directions so reset velocity
 		if (playerInput.x != oldPlayerInput.x) {
 			velocity.x = 0.0f;
-		}
-
-		if(climbing) {
-			velocity.y = 0.0f;
 		}
 
 		rigidbody2d.velocity = velocity;
@@ -850,7 +773,7 @@ public class PlayerController : MonoBehaviour {
 			inputManager.ShowDamageIndicator ();
 			AudioManager.PlaySound ("sizzle");
 			if (CurrentLevel.GetLevelDifficulty () == CurrentLevel.LevelDifficulty.EASY) {
-				incTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE * armourValue / 8);
+				incTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE / 8);
 			} else {
 				incTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE);
 			}
@@ -882,9 +805,9 @@ public class PlayerController : MonoBehaviour {
 			animator.SetTrigger("hurt");
 
 			if (CurrentLevel.GetLevelDifficulty () == CurrentLevel.LevelDifficulty.EASY) {
-				incTemperature (suggestedTemperatureIncrease * armourValue / 2);
+				incTemperature (suggestedTemperatureIncrease / 2);
 			} else {
-				incTemperature (suggestedTemperatureIncrease * armourValue);
+				incTemperature (suggestedTemperatureIncrease);
 			}
 
 			//make the player invincible for a short period of time
@@ -924,12 +847,6 @@ public class PlayerController : MonoBehaviour {
 			Gizmos.DrawSphere (check.position, groundRadius * transform.localScale.x);
 		}
 		Gizmos.DrawSphere (transform.position, magnetRadius * transform.localScale.x);
-
-
-		Gizmos.color = new Color (1f, 0f, 1f, 0.1f);
-		Gizmos.DrawSphere (climbPointUpper.position, climbRadius * transform.localScale.x);
-		Gizmos.color = new Color (0f, 1f, 1f, 0.1f);
-		Gizmos.DrawSphere (climbPointLower.position, climbRadius * transform.localScale.x);
 	}
 
 	public void IncrementCoinCount(int coinId) {

@@ -1,4 +1,9 @@
 .DS_Store
+
+UnityPackageManager/
+VersionHandlerSave.log
+obj/
+
 Assets/Resources/SoundEffects/Collectables.meta
 Assets/Resources/SoundEffects/Collectables/
 Assets/Resources/SoundEffects/Enemies.meta
