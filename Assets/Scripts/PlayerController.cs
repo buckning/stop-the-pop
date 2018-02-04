@@ -131,6 +131,8 @@ public class PlayerController : MonoBehaviour {
 		groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
 		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
 		popcornKernel.jumpListeners += Jump;
+		popcornKernel.fallEventListeners += FallOff;
+		popcornKernel.landEventListeners += Land;
 
 		gameOver = false;
 		oldPlayerInput = Vector2.zero;
@@ -162,35 +164,32 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	/***
+	 * Called back by the popcornKernel when it lands on something.
+	 */
+	private void Land() {
+		if (rigidbody2d.velocity.y <= 0) {
+			AudioManager.PlaySound ("landing");	//only play sound effect when actually landing instead of when the player can jump through platforms from below
+		}
+		GameObject dustObject = (GameObject)Instantiate (landingDust, groundCheck [0].position, Quaternion.identity);
+		dustObject.transform.localScale = transform.localScale;
+	}
+
+	/***
+	 * Called back from the popcornKernel when it falls off something.
+	 * The purpose of this is that the popcornKernel allows the player
+	 * to jump after falling off something for a short period of time.
+	 * This is purely for better user experience. The length of the
+	 * period where the player can do this is controlled by this method.
+	 */
+	private void FallOff() {
+		StartCoroutine(DisableGroundedOverride());
+	}
+
 	// Update is called at a fixed rate - this is better when interacting with physics objects (time.delta time is not needed here)
 	public void FixedUpdate () {
-		bool oldGrounded = grounded;
-
-		popcornKernel.Update ();
+		popcornKernel.Update (rigidbody2d.velocity);
 		grounded = popcornKernel.IsGrounded ();
-
-		if (grounded) {
-			groundedOverride = false;
-			gliding = false;
-			//if we were not grounded last frame and are grounded this frame, we have just landed
-			if (!oldGrounded) {
-				
-				if (rigidbody2d.velocity.y <= 0) {
-					AudioManager.PlaySound ("landing");	//only play sound effect when actually landing instead of when the player can jump through platforms from below
-				}
-				GameObject dustObject = (GameObject)Instantiate (landingDust, groundCheck [0].position, Quaternion.identity);
-				dustObject.transform.localScale = transform.localScale;
-			}
-		} else {
-			//the player has just fallen off a platform, we want to give the player a chance to jump for a short period after falling off the platform
-			if (oldGrounded) {
-				if(rigidbody2d.velocity.y < 0.0f) {
-					groundedOverride = true;
-					//kick off timer to reset the grounded override
-					StartCoroutine(DisableGroundedOverride());
-				}
-			}
-		}
 
 		touchingCeiling = Physics2D.OverlapCircle (ceilingCheck.position, ceilingRadius  * transform.localScale.x, whatIsCeilingMask);
 
@@ -213,7 +212,7 @@ public class PlayerController : MonoBehaviour {
 
 	public IEnumerator DisableGroundedOverride() {
 		yield return new WaitForSeconds(0.1f);
-		groundedOverride = false;
+		popcornKernel.DisableGroundedOverride ();
 	}
 	
 	public void setPosition(Vector2 position) {
@@ -233,7 +232,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void UpdateShadow() {
-		if (popcornKernel.getTemperature () >= 100) {
+		if (popcornKernel.IsAtMaxTemperature ()) {
 			shadow.SetActive (false);
 			return;
 		}
@@ -255,7 +254,7 @@ public class PlayerController : MonoBehaviour {
 	void Update() {
 		UpdateShadow();
 
-		if (popcornKernel.getTemperature() >= 100 || !playerMovementEnabled || gameOver) {
+		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled || gameOver) {
 			playerInput = Vector2.zero;
 			cape.SetVelocity (Vector2.zero);
 		} else {
@@ -330,7 +329,7 @@ public class PlayerController : MonoBehaviour {
 		animator.SetBool ("grounded", grounded);
 
 		//check to see if we should start our pop animation 
-		if (popcornKernel.getTemperature() >= 100 && !popped && grounded) {
+		if (popcornKernel.IsAtMaxTemperature() && !popped && grounded) {
 
 			magnetEnabled = false;
 			AddLifeLost ();
@@ -350,8 +349,7 @@ public class PlayerController : MonoBehaviour {
 			StartCoroutine(PopAnimationComplete());
 		}
 
-		//don't allow to keep gliding when the player should pop
-		if (popcornKernel.getTemperature() >= 100 && !popped && gliding) {
+		if (popcornKernel.IsAtMaxTemperature()) {
 			gliding = false;
 		}
 	}
@@ -389,10 +387,6 @@ public class PlayerController : MonoBehaviour {
 
 	private void Jump() {
 		AudioManager.PlaySoundAfterTime ("jump", 0.1f);
-		SpawnJumpDust ();
-	}
-
-	private void SpawnJumpDust() {
 		Vector2 spawnPos = new Vector2 (groundCheck[0].position.x, groundCheck[0].position.y);
 		spawnPos.y += 0.25f;
 		GameObject dustObject = (GameObject)Instantiate (jumpDust, spawnPos, Quaternion.identity);
@@ -489,10 +483,6 @@ public class PlayerController : MonoBehaviour {
 		Vector3 translation3 = new Vector3 (translation.x * (facingRight ? 1f : -1f),
 		                                   translation.y);
 		transform.Translate (translation3);
-	}
-
-	public bool IsJumping() {
-		return !grounded;
 	}
 
 	private IEnumerator PopAnimationComplete() {

@@ -64,7 +64,7 @@ public class PopcornKernelTest {
 		groundChecker.SetColliding (true);
 		testInputManager.SetJumpKeyDown (true);
 
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Vector2 velocity = popcornKernel.CheckForJump (new Vector2 (0.0f, 0.0f));
 
 		Assert.AreEqual (expectedJumpVelocity, velocity.y);
@@ -78,7 +78,7 @@ public class PopcornKernelTest {
 		testInputManager.SetJumpKeyDown (false);
 		testInputManager.SetJumpKeyUp (true);
 
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Vector2 velocity = popcornKernel.CheckForJump (new Vector2 (0.0f, GetMaxJumpVelocity(8.0f, 1.0f)));
 
 		Assert.AreEqual (expectedJumpVelocity, velocity.y);
@@ -91,7 +91,7 @@ public class PopcornKernelTest {
 		testInputManager.SetJumpKeyDown (false);
 		testInputManager.SetJumpKeyUp (true);
 
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Vector2 velocity = popcornKernel.CheckForJump (new Vector2 (0.0f, 0.001f));
 
 		Assert.AreEqual (0.001f, velocity.y);
@@ -103,7 +103,7 @@ public class PopcornKernelTest {
 
 		groundChecker.SetColliding (false);
 		testInputManager.SetJumpKeyDown (true);
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		popcornKernel.CheckForJump (new Vector2 (0.0f, 0.0f));
 
 		Assert.IsTrue (popcornKernel.isGliding());
@@ -115,7 +115,7 @@ public class PopcornKernelTest {
 
 		groundChecker.SetColliding (false);
 		testInputManager.SetJumpKeyDown (true);
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		popcornKernel.CheckForJump (new Vector2 (0.0f, 0.0f));
 
 		Assert.IsTrue (popcornKernel.isGliding());
@@ -132,7 +132,7 @@ public class PopcornKernelTest {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		groundChecker.SetColliding (true);
 		testInputManager.SetAttackKeyPressed (true);
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Assert.IsTrue(popcornKernel.IsKickTriggered ());
 	}
 
@@ -141,7 +141,7 @@ public class PopcornKernelTest {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		groundChecker.SetColliding (true);
 		testInputManager.SetAttackKeyPressed (true);
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Assert.IsTrue(popcornKernel.IsKickTriggered ());
 		Assert.IsFalse(popcornKernel.IsKickTriggered ());
 	}
@@ -151,7 +151,7 @@ public class PopcornKernelTest {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		groundChecker.SetColliding (true);
 		testInputManager.SetAttackKeyPressed (true);
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Assert.IsTrue(popcornKernel.IsKickTriggered ());
 		popcornKernel.StopKicking ();
 		Assert.IsTrue(popcornKernel.IsKickTriggered ());
@@ -162,7 +162,7 @@ public class PopcornKernelTest {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		groundChecker.SetColliding (false);
 		testInputManager.SetAttackKeyPressed (true);
-		popcornKernel.Update ();
+		popcornKernel.Update (Vector2.zero);
 		Assert.IsFalse(popcornKernel.IsKickTriggered ());
 	}
 

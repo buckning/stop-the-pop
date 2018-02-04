@@ -4,6 +4,8 @@ public class PopcornKernel {
 
 	public delegate void NotifyEvent ();
 	public event NotifyEvent jumpListeners;
+	public event NotifyEvent fallEventListeners;	// listener that gets triggered when the kernel falls off an object
+	public event NotifyEvent landEventListeners;	// listener that gets triggered when the kernel lands on an object
 
 	const float MAX_TEMPERATURE = 100.0f;
 	
@@ -23,6 +25,8 @@ public class PopcornKernel {
 	private float temperatureUpdateRate = 40f;			//the rate at which the temperature increases
 
 	private InputManager inputManager;
+
+	private bool facingRight = false;
 
 	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, float minJumpHeight, float maxJumpHeight, float timeToJumpApex) {
 		this.groundCollisionChecker = groundCollisionChecker;
@@ -47,7 +51,6 @@ public class PopcornKernel {
 		}
 
 		if (inputManager.JumpKeyDown()) {
-			//allow the player to jump for a short 
 			if (groundedOverride) {
 				grounded = true;
 			}
@@ -87,8 +90,40 @@ public class PopcornKernel {
 		kicking = false;
 	}
 
-	public void Update() {
+	public void DisableGroundedOverride() {
+		groundedOverride = false;
+	}
+
+	public void Update(Vector2 velocity) {
+		bool oldGrounded = grounded;
 		grounded = groundCollisionChecker.isColliding ();
+
+		if (grounded) {
+			groundedOverride = false;
+			gliding = false;
+			//if we were not grounded last frame and are grounded this frame, we have just landed
+			if (!oldGrounded) {
+				// TODO we have just landed, trigger landed callback
+				if (landEventListeners != null) {
+					landEventListeners ();
+				}
+			}
+		} else {
+			//the player has just fallen off a platform, we want to give the player a chance to jump for a short period after falling off the platform
+			if (oldGrounded) {
+				if(velocity.y < 0.0f) {
+					groundedOverride = true;
+
+					if (fallEventListeners != null) {
+						fallEventListeners ();
+					}
+				}
+			}
+		}
+	}
+
+	public bool IsAtMaxTemperature() {
+		return temperature >= 100;
 	}
 
 	public void SetUpdateTemperature(bool status) {
