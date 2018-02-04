@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
 		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
+		popcornKernel.jumpListeners += Jump;
 
 		gameOver = false;
 		oldPlayerInput = Vector2.zero;
@@ -163,8 +164,6 @@ public class PlayerController : MonoBehaviour {
 
 		//apply the skin customisations
 		CustomisePlayer ();
-
-		popcornKernel.jumpListeners += Jump;
 
 		//add all the collected coins from the last checkpoint to this internal list. This is just so we can show an accurate coin count when a level is restarted
 		List<int> coins = LastCheckpoint.GetCollectedCoins ();
@@ -286,7 +285,13 @@ public class PlayerController : MonoBehaviour {
 		}
 		UpdateMagnetBehaviour ();
 		CheckForJump ();
-		CheckForAttack ();
+
+		if (popcornKernel.IsKickTriggered ()) {
+			kickTriggered = true;
+			playerMovementEnabled = false;
+			StartCoroutine (EnablePlayerMovement ());
+		}
+
 		UpdateVelocity ();
 		CheckIfCrushed ();
 
@@ -392,19 +397,6 @@ public class PlayerController : MonoBehaviour {
 	public void PlayKickEffect() {
 		kickEffect.gameObject.SetActive (true);
 		kickEffect.color = new Color(1, 1, 1, 1f);
-	}
-
-	public void CheckForAttack() {
-		if (inputManager.AttackKeyPressed () && !kicking) {
-			kickTriggered = true;
-
-			if (grounded) {
-				//disable player input for a second for the kick
-				kicking = true;
-				playerMovementEnabled = false;
-				StartCoroutine (EnablePlayerMovement ());
-			}
-		}
 	}
 
 	public void PlayPainSound() {
@@ -828,7 +820,7 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator EnablePlayerMovement() {
 		yield return new WaitForSeconds(0.5f);
 		playerMovementEnabled = true;
-		kicking = false;
+		popcornKernel.StopKicking ();
 	}
 	
 	private void incTemperature(float t) {

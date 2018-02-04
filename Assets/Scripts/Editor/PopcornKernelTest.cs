@@ -17,6 +17,7 @@ public class PopcornKernelTest {
 	public void setUp() {
 		testInputManager.SetJumpKeyUp (false);
 		testInputManager.SetJumpKeyDown (false);
+		testInputManager.SetAttackKeyPressed (false);
 		groundChecker.SetColliding (false);
 	}
 
@@ -126,6 +127,45 @@ public class PopcornKernelTest {
 		Assert.IsFalse (popcornKernel.isGliding());
 	}
 
+	[Test]
+	public void PopcornKernelTestIsKickTriggeredReturnsTrueWhenAttackButtonIsPressedAndKernelIsOnTheGround() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		groundChecker.SetColliding (true);
+		testInputManager.SetAttackKeyPressed (true);
+		popcornKernel.Update ();
+		Assert.IsTrue(popcornKernel.IsKickTriggered ());
+	}
+
+	[Test]
+	public void PopcornKernelTestIsKickTriggeredReturnsFalseWhenAttackButtonIsPressedWhenTheKernelIsAlreadyKicking() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		groundChecker.SetColliding (true);
+		testInputManager.SetAttackKeyPressed (true);
+		popcornKernel.Update ();
+		Assert.IsTrue(popcornKernel.IsKickTriggered ());
+		Assert.IsFalse(popcornKernel.IsKickTriggered ());
+	}
+
+	[Test]
+	public void PopcornKernelTestIsKickTriggeredReturnsTrueWhenAttackButtonIsPressedWhenTheKernelHadFinishedKicking() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		groundChecker.SetColliding (true);
+		testInputManager.SetAttackKeyPressed (true);
+		popcornKernel.Update ();
+		Assert.IsTrue(popcornKernel.IsKickTriggered ());
+		popcornKernel.StopKicking ();
+		Assert.IsTrue(popcornKernel.IsKickTriggered ());
+	}
+
+	[Test]
+	public void PopcornKernelTestIsKickTriggeredReturnsFalseWhenAttackButtonIsPressedAndKernelIsNotOnTheGround() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		groundChecker.SetColliding (false);
+		testInputManager.SetAttackKeyPressed (true);
+		popcornKernel.Update ();
+		Assert.IsFalse(popcornKernel.IsKickTriggered ());
+	}
+
 	float GetGravity(float maxJumpHeight, float timeToJumpApex) {
 		return -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 	}
@@ -157,6 +197,11 @@ public class PopcornKernelTest {
 	class TestInputManager: InputManager {
 		private bool keyDown = false;
 		private bool keyUp = false;
+		private bool attackKeyPressed = false;
+
+		public void SetAttackKeyPressed(bool attackKeyPressed) {
+			this.attackKeyPressed = attackKeyPressed;
+		}
 
 		public void SetJumpKeyDown(bool down) {
 			this.keyDown = down;
@@ -172,6 +217,10 @@ public class PopcornKernelTest {
 
 		public bool JumpKeyUp () {
 			return this.keyUp;
+		}
+
+		public bool AttackKeyPressed() {
+			return attackKeyPressed;
 		}
 	}
 }

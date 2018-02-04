@@ -2,13 +2,14 @@
 
 public class PopcornKernel {
 
-	public delegate void Jump ();
-	public event Jump jumpListeners;
+	public delegate void NotifyEvent ();
+	public event NotifyEvent jumpListeners;
 
 	const int MAX_TEMPERATURE = 100;
 	
 	private int temperature = 0;
 	private bool grounded = false;
+	private bool kicking = false;
 	private bool groundedOverride = false;	// the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
 	private bool gliding = false;	// track the state if the player is gliding
 	private CollisionChecker groundCollisionChecker;
@@ -66,6 +67,20 @@ public class PopcornKernel {
 			gliding = false;
 		}
 		return velocity;
+	}
+
+	public bool IsKickTriggered() {
+		if (inputManager.AttackKeyPressed () && !kicking) {
+			if (grounded) {
+				kicking = true;
+				return kicking;
+			}
+		}
+		return false;
+	}
+
+	public void StopKicking() {
+		kicking = false;
 	}
 
 	public void Update() {

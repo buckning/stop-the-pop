@@ -5,4 +5,5 @@ using UnityEngine;
 public interface InputManager {
 	bool JumpKeyDown ();
 	bool JumpKeyUp ();
+	bool AttackKeyPressed();
 }
