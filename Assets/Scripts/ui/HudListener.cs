@@ -34,7 +34,6 @@ public class HudListener : MonoBehaviour, InputManager {
 	public GameObject loadingPanel;
 
 	public Button skipCutSceneButton;
-	public event Action OnSkipCutScene;
 
 	public StorePanel storePanel;
 
@@ -675,15 +674,7 @@ public class HudListener : MonoBehaviour, InputManager {
 		SnowflakeBehaviour[] snowflakes = Resources.FindObjectsOfTypeAll (typeof(SnowflakeBehaviour)) as SnowflakeBehaviour[];
 		foreach (SnowflakeBehaviour snowflake in snowflakes) {
 			snowflake.Reset ();
-			if (snowflake.gameObject.transform.parent.gameObject.name.Contains ("(activate in easy mode)")) {
-				if (CurrentLevel.GetLevelDifficulty () == CurrentLevel.LevelDifficulty.EASY) {
-					snowflake.gameObject.transform.parent.gameObject.SetActive (true);
-				} else {
-					snowflake.gameObject.transform.parent.gameObject.SetActive (false);
-				}
-			} else {
-				snowflake.gameObject.transform.parent.gameObject.SetActive (true);
-			}
+			snowflake.gameObject.transform.parent.gameObject.SetActive (true);
 		}
 
 		CapePowerup[] capes = Resources.FindObjectsOfTypeAll (typeof(CapePowerup)) as CapePowerup[];
@@ -1084,14 +1075,6 @@ public class HudListener : MonoBehaviour, InputManager {
 		NextLevel ();
 	}
 
-	public void PlayVideoToMakeLevelEasier() {
-		if (Advertisement.IsReady("rewardedVideo")) {
-			AnalyticsManager.SendAdWatchEvent (levelName, "MakeLevelEasierAd", CurrentLevel.GetLivesLost(), (int) CurrentLevel.GetLengthOfTimeInLevel());
-			var options = new ShowOptions { resultCallback = HandleMakeGameEasier };
-			Advertisement.Show("rewardedVideo", options);
-		}
-	}
-
 	public void ShowWhiteFlash() {
 		whiteFlashPanel.gameObject.SetActive (true);
 		whiteFlashPanel.gameObject.GetComponent<GAui> ().MoveOut(GSui.eGUIMove.SelfAndChildren);
@@ -1103,34 +1086,6 @@ public class HudListener : MonoBehaviour, InputManager {
 		{
 		case ShowResult.Finished:
 			SkipToNextLevel ();
-			break;
-		case ShowResult.Skipped:
-			Debug.Log("The ad was skipped before reaching the end.");
-			break;
-		case ShowResult.Failed:
-			Debug.LogError("The ad failed to be shown.");
-			break;
-		}
-	}
-
-	private void HandleMakeGameEasier(ShowResult result)
-	{
-		switch (result)
-		{
-		case ShowResult.Finished:
-			Debug.Log ("The ad was successfully shown.");
-			watchVideoAdPanel.gameObject.SetActive (false);
-			CurrentLevel.SetLevelDifficulty (CurrentLevel.LevelDifficulty.EASY);
-			CurrentLevel.ResetLivesLostSinceLastAd ();		//don't want to show a video for a while since one was just watched
-			Time.timeScale = 1.0f;
-
-			#if UNITY_IOS
-			SocialServiceManager.GetInstance ().UnlockAchievement ("taketheeasywayout");
-			#endif
-			#if UNITY_ANDROID
-			SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_take_the_easy_way_out);
-			#endif
-
 			break;
 		case ShowResult.Skipped:
 			Debug.Log("The ad was skipped before reaching the end.");

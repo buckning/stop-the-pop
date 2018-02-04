@@ -426,7 +426,6 @@ public class LevelCompletePanelBehaviour : MonoBehaviour {
 	}
 
 	IScore GetLowestScore(List<IScore> scores) {
-		IScore bestScore = null;
 		foreach (IScore score in scores) {
 			if (score.rank == 1) {
 				return score;
