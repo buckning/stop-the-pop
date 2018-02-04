@@ -81,7 +81,7 @@ public class ButterBlobBehaviour : Breakable {
 		if (otherObject.gameObject.tag == Strings.PLAYER) {
 			player = otherObject.gameObject.GetComponent<PlayerController> ();
 
-			if (player.temperature >= 1.0f) {
+			if (player.GetTemperature() >= 100.0f) {
 				return;
 			}
 

@@ -13,10 +13,10 @@ public class FryingPanBehaviour : MonoBehaviour {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 			//cache if the player should increase temperature
-			updateTemperature = player.updateTemperature;
+			updateTemperature = player.GetUpdateTemperature();
 
 			//make the player increase the temperature
-			player.updateTemperature = true;
+			player.SetUpdateTemperature(true);
 			player.SetTemperatureUpdateRate(gameObject.name, temperatureIncreaseRate);
 		}
 	}
@@ -24,7 +24,7 @@ public class FryingPanBehaviour : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.updateTemperature = updateTemperature;
+			player.SetUpdateTemperature (updateTemperature);
 			player.SetTemperatureUpdateRate("none-" + gameObject.name, player.regularTemperatureUpdateRate);
 		}
 	}

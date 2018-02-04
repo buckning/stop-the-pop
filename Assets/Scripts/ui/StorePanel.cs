@@ -68,7 +68,7 @@ public class StorePanel : MonoBehaviour {
 		StoreItem snowflake = StoreInventory.GetItemFromInventory (Strings.SNOWFLAKE);
 		if (stats.totalNumberOfCoins >= snowflake.cost) {
 
-			if (mainHud.GetPlayer ().temperature < 0.2f) {
+			if (mainHud.GetPlayer ().GetTemperature() < 20f) {
 				mainHud.infoPanel.SetText (Strings.UI_YOU_DONT_NEED_TO_COOL_DOWN_RIGHT_NOW);
 				mainHud.infoPanel.gameObject.SetActive (true);
 				return;

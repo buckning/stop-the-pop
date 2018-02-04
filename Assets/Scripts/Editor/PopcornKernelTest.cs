@@ -166,6 +166,43 @@ public class PopcornKernelTest {
 		Assert.IsFalse(popcornKernel.IsKickTriggered ());
 	}
 
+	[Test]
+	public void PopcornKernelTestDieSetsTheTemperatureTo100() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.Die ();
+		Assert.AreEqual(100, popcornKernel.getTemperature ());
+	}
+
+	[Test]
+	public void PopcornKernelTestResetTemperatureChangesTheTemperatureToZero() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.increaseTemperature (100);
+		Assert.AreEqual(100, popcornKernel.getTemperature ());
+		popcornKernel.ResetTemperature ();
+		Assert.AreEqual(0, popcornKernel.getTemperature ());
+	}
+
+	[Test]
+	public void PopcornKernelTestIncreaseTemperatureChangesTemperatureWhenItIsInAValidRange() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.increaseTemperature (50);
+		Assert.AreEqual(50, popcornKernel.getTemperature ());
+	}
+
+	[Test]
+	public void PopcornKernelTestIncreaseTemperatureOverMaxSetsTemperatureToMax() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.increaseTemperature (500);
+		Assert.AreEqual(100, popcornKernel.getTemperature ());
+	}
+
+	[Test]
+	public void PopcornKernelTestIncreaseTemperatureUnderMinSetsTemperatureToMin() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.increaseTemperature (-500);
+		Assert.AreEqual(0, popcornKernel.getTemperature ());
+	}
+
 	float GetGravity(float maxJumpHeight, float timeToJumpApex) {
 		return -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 	}
@@ -198,6 +235,11 @@ public class PopcornKernelTest {
 		private bool keyDown = false;
 		private bool keyUp = false;
 		private bool attackKeyPressed = false;
+		private float xAxisInput = 0.0f;
+
+		public void SetXAxisInput(float xAxisInput) {
+			this.xAxisInput = xAxisInput;
+		}
 
 		public void SetAttackKeyPressed(bool attackKeyPressed) {
 			this.attackKeyPressed = attackKeyPressed;
@@ -221,6 +263,10 @@ public class PopcornKernelTest {
 
 		public bool AttackKeyPressed() {
 			return attackKeyPressed;
+		}
+
+		public float getXAxis() {
+			return xAxisInput;
 		}
 	}
 }

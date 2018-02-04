@@ -11,7 +11,6 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	private PlayerController player;				//reference to the player object
 
 	public float speedOfTemperatureIncrease = 10;
-	public float speedOfTemperatureIncreaseEasy = 5;
 
 	/***
 	 * If there is a collision with the player, increase the temperature increase rate
@@ -20,19 +19,15 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			player = otherObject.gameObject.GetComponent<PlayerController> ();
 			//cache if the player should increase temperature
-			updateTemperature = player.updateTemperature;
+			updateTemperature = player.GetUpdateTemperature();
 
 			player.inputManager.ShowDamageIndicator ();
 			player.inputManager.ShakeForDuration (0.3f);
 			AudioManager.PlaySound ("sizzle");
 			
 			//make the player increase the temperature
-			player.updateTemperature = true;
-			if (CurrentLevel.GetLevelDifficulty () == CurrentLevel.LevelDifficulty.EASY) {
-				player.SetTemperatureUpdateRate (gameObject.name, 0.02f * speedOfTemperatureIncreaseEasy);
-			} else {
-				player.SetTemperatureUpdateRate (gameObject.name, 0.02f * speedOfTemperatureIncrease);
-			}
+			player.SetUpdateTemperature(true);
+			player.SetTemperatureUpdateRate (gameObject.name, speedOfTemperatureIncrease);
 			isCollidingWithPlayer = true;
 		}
 	}
@@ -43,7 +38,7 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.updateTemperature = updateTemperature;
+			player.SetUpdateTemperature (updateTemperature);
 			player.SetTemperatureUpdateRate("none", player.regularTemperatureUpdateRate);
 			isCollidingWithPlayer = false;
 		}
@@ -55,7 +50,7 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	 */
 	void OnDestroy() {
 		if (isCollidingWithPlayer) {
-			player.updateTemperature = updateTemperature;
+			player.SetUpdateTemperature (updateTemperature);
 			player.SetTemperatureUpdateRate("none", player.regularTemperatureUpdateRate);
 			isCollidingWithPlayer = false;
 		}

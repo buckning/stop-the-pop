@@ -23,7 +23,7 @@ public class SaltProjectile : MonoBehaviour {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 			player.CollisionWithEnemy(gameObject.name, damageToPlayer, false);	
-			if(player.GetTemperature() >= PlayerController.POP_TEMPERATURE) {
+			if(player.GetTemperature() >= 100) {
 				
 				#if UNITY_IOS
 				SocialServiceManager.GetInstance ().UnlockAchievement ("sodiumoverload");

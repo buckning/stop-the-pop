@@ -89,7 +89,7 @@ public class CameraFollow : MonoBehaviour {
 		Vector3 pos = (Vector3)focusPosition + Vector3.forward * -10;
 
 		float zoom = transform.position.z;
-		if (target.temperature >= 1.0f || gameOver) {
+		if (target.GetTemperature() >= 100.0f || gameOver) {
 			isLocked = true;
 			//zoom in on player
 			float playerX = Mathf.Lerp (transform.position.x, target.transform.position.x, zoomSpeed * Time.deltaTime);

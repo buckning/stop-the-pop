@@ -10,7 +10,7 @@ public class ToggleTemperatureCollider : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.updateTemperature = true;	
+			player.SetUpdateTemperature(true);
 		}
 	}
 }

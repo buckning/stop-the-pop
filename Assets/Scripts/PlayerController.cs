@@ -43,20 +43,14 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shadow;
 	public SpriteRenderer kickEffect;
 
-	public const float POP_TEMPERATURE = 1.0f;
-
-	public float temperature;							//the temperature of the player
-	public bool updateTemperature = true;				//Shall we update our temperature every update?
 	public bool jumpEnabled = true;						//Is single jump enabled?
 	public float regularTemperatureUpdateRate = 0.02f;	//the regular temperature update of the player
 	float temperatureUpdateRate = 0.02f;			//the rate at which the temperature increases
-	float MAX_TEMPERATURE = 100.0f;				//the maximum temperature the player can reach. If the temperature is any higher, it is game over
 	float SNOWFLAKE_TEMPERATURE_DECREASE = -30f;	//The amount of temperature to decrease by when collided with snowflake 
 	float ENEMY_COLLISION_TEMPERATURE_INCREASE = 50f;	//The amount of temperature that increases when colliding with an enemy. 10f recommended
 	float HAZARD_COLLISION_TEMPERATURE_INCREASE = 50f;	//The amount of temperature that increases when colliding with a hazardous environment. 10f recommended
 	float MAX_INVINCIBILITY_TIME = 1.5f;			//the amount of time in seconds that the player will be invincible for if hit by an enemy/hazardous env
 	public GameObject leg;								//the leg that will be used to pop off when the player pops
-	private float invincibilityTimeLeft = 0f;			//the amount of time that the player will still be invicible for
 	private Animator animator;							//our character animator, used to change between animations
 	private bool facingRight = true;					//this is used so we can know how to face our sprite
 	private Rigidbody2D rigidbody2d;					//the rigid body 2d for the player
@@ -91,11 +85,9 @@ public class PlayerController : MonoBehaviour {
 
 	List<int> collectedCoins = new List<int>();
 
-	bool kickTriggered = false;
 	bool touchingCeiling = false;
 	bool crushed = false;
 	bool kicking = false;
-	public bool collidingWithAreaEffector = false;
 	public float effectorSpeed = 5.0f;
 	float glidingTime = 0.0f;
 
@@ -142,7 +134,6 @@ public class PlayerController : MonoBehaviour {
 
 		gameOver = false;
 		oldPlayerInput = Vector2.zero;
-		temperatureUpdateRate = regularTemperatureUpdateRate;
 		runAudioSource = GetComponent<AudioSource> ();
 		runAudioSource.loop = true;
 		runAudioSource.clip = Resources.Load ("SoundEffects/Player/run") as AudioClip;
@@ -152,8 +143,7 @@ public class PlayerController : MonoBehaviour {
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
 
 		rigidbody2d = GetComponent<Rigidbody2D> ();
-		temperature = temperature / MAX_TEMPERATURE;
-		
+
 		//start the player in a rest animation
 		animator = GetComponent<Animator> ();
 		animator.SetFloat("speed", 0f);
@@ -243,7 +233,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void UpdateShadow() {
-		if (temperature >= 1.0f) {
+		if (popcornKernel.getTemperature () >= 100) {
 			shadow.SetActive (false);
 			return;
 		}
@@ -265,9 +255,7 @@ public class PlayerController : MonoBehaviour {
 	void Update() {
 		UpdateShadow();
 
-		kickTriggered = false;
-
-		if (temperature >= 1.0f || !playerMovementEnabled || gameOver) {
+		if (popcornKernel.getTemperature() >= 100 || !playerMovementEnabled || gameOver) {
 			playerInput = Vector2.zero;
 			cape.SetVelocity (Vector2.zero);
 		} else {
@@ -287,9 +275,10 @@ public class PlayerController : MonoBehaviour {
 		CheckForJump ();
 
 		if (popcornKernel.IsKickTriggered ()) {
-			kickTriggered = true;
 			playerMovementEnabled = false;
 			StartCoroutine (EnablePlayerMovement ());
+			animator.SetTrigger("kick");
+			AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
 		}
 
 		UpdateVelocity ();
@@ -302,13 +291,7 @@ public class PlayerController : MonoBehaviour {
 			Flip();
 		}
 
-		//update our invincibility time
-		invincibilityTimeLeft -= Time.deltaTime;
-		if (invincibilityTimeLeft < 0.0f) {
-			invincibilityTimeLeft = 0.0f;
-		}
-
-		UpdateTemperature ();
+		popcornKernel.UpdateTemperature (Time.deltaTime);
 
 		if (glidingEnabled) {
 			Vector2 velocity = new Vector2(playerInput.x, rigidbody2d.velocity.y);
@@ -316,23 +299,9 @@ public class PlayerController : MonoBehaviour {
 				velocity.y = 0.0f;
 			}
 
-			if (gliding) {
-				cape.SetGliding (true);
-
-
-			} else {
-				cape.SetGliding (false);
-
-			}
+			cape.SetGliding (gliding);
 		} 
 		UpdateAnimations ();
-	}
-
-	void UpdateTemperature() {
-		//update our temperature
-		if (updateTemperature && invincibilityTimeLeft <= 0.0f) {
-			temperature += Time.deltaTime * temperatureUpdateRate;
-		}
 	}
 
 	void CheckIfCrushed() {
@@ -360,15 +329,8 @@ public class PlayerController : MonoBehaviour {
 		animator.SetFloat ("yVelocity", rigidbody2d.velocity.y);
 		animator.SetBool ("grounded", grounded);
 
-		if (kickTriggered) {
-			animator.SetTrigger("kick");
-			AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
-			kickTriggered = false;
-		}
-
 		//check to see if we should start our pop animation 
-		if (temperature >= 1.0f && !popped && 
-		    grounded) {
+		if (popcornKernel.getTemperature() >= 100 && !popped && grounded) {
 
 			magnetEnabled = false;
 			AddLifeLost ();
@@ -389,11 +351,14 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//don't allow to keep gliding when the player should pop
-		if (temperature >= 1.0f && !popped && gliding) {
+		if (popcornKernel.getTemperature() >= 100 && !popped && gliding) {
 			gliding = false;
 		}
 	}
 
+	/***
+	 * Called by the animator
+	 */
 	public void PlayKickEffect() {
 		kickEffect.gameObject.SetActive (true);
 		kickEffect.color = new Color(1, 1, 1, 1f);
@@ -477,10 +442,6 @@ public class PlayerController : MonoBehaviour {
 		//this caps the min speed of the player
 		else if (playerInput.x < 0 && rigidbody2d.velocity.x < targetVelocityX) {
 			velocity.x = targetVelocityX;
-		}
-
-		if (collidingWithAreaEffector) {
-			velocity.x += effectorSpeed;
 		}
 
 		float accelerationRate = 2.8f;
@@ -750,32 +711,26 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	public void ResetTemperature() {
-		if (temperature < 1.0f) {
-			temperature = 0.0f;
-		}
+		popcornKernel.ResetTemperature ();
 	}
 	
 	public void CollisionWithSnowflake() {
-		incTemperature (SNOWFLAKE_TEMPERATURE_DECREASE);
+		popcornKernel.increaseTemperature (SNOWFLAKE_TEMPERATURE_DECREASE);
 	}
 	
 	public void Die() {
-		temperature = MAX_TEMPERATURE;
+		popcornKernel.Die ();
 	}
 	
 	public void CollisionWithHazardousEnvironment(string hazardousEnvName) {
 		lastCollisionName = hazardousEnvName;
-		if (invincibilityTimeLeft <= 0.0f) {
+		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
 			inputManager.ShakeForDuration (0.2f);
 			animator.SetTrigger("hurt");
 			inputManager.ShowDamageIndicator ();
 			AudioManager.PlaySound ("sizzle");
-			if (CurrentLevel.GetLevelDifficulty () == CurrentLevel.LevelDifficulty.EASY) {
-				incTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE / 8);
-			} else {
-				incTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE);
-			}
-			invincibilityTimeLeft = MAX_INVINCIBILITY_TIME;
+			popcornKernel.increaseTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE);
+			popcornKernel.MakeInvincibleForTime (MAX_INVINCIBILITY_TIME);
 		}
 	}
 	
@@ -783,11 +738,19 @@ public class PlayerController : MonoBehaviour {
 		CollisionWithEnemy (enemyName, ENEMY_COLLISION_TEMPERATURE_INCREASE);
 	}
 
+	public void SetUpdateTemperature(bool status) {
+		popcornKernel.SetUpdateTemperature (status);
+	}
+
+	public bool GetUpdateTemperature() {
+		return popcornKernel.GetUpdateTemperature ();
+	}
+
 	/***
 	 * Make the player invulnerable for an amount of time
 	 */
 	public void MakeInvincibleForTime(float invincibilityTime) {
-		invincibilityTimeLeft = invincibilityTime;
+		popcornKernel.MakeInvincibleForTime(invincibilityTime);
 	}
 
 	public void CollisionWithEnemy(string enemyName, float suggestedTemperatureIncrease) {
@@ -796,20 +759,14 @@ public class PlayerController : MonoBehaviour {
 
 	public void CollisionWithEnemy(string enemyName, float suggestedTemperatureIncrease, bool disablePlayerMovement) {
 		lastCollisionName = enemyName;
-		if (invincibilityTimeLeft <= 0.0f) {
+		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
 			inputManager.ShowDamageIndicator ();
 			inputManager.ShakeForDuration (0.2f);
 			AudioManager.PlaySound ("sizzle");
 			animator.SetTrigger("hurt");
 
-			if (CurrentLevel.GetLevelDifficulty () == CurrentLevel.LevelDifficulty.EASY) {
-				incTemperature (suggestedTemperatureIncrease / 2);
-			} else {
-				incTemperature (suggestedTemperatureIncrease);
-			}
-
-			//make the player invincible for a short period of time
-			invincibilityTimeLeft = MAX_INVINCIBILITY_TIME;
+			popcornKernel.increaseTemperature (suggestedTemperatureIncrease);
+			popcornKernel.MakeInvincibleForTime (MAX_INVINCIBILITY_TIME);
 		}
 		if (disablePlayerMovement) {
 			playerMovementEnabled = false;
@@ -822,19 +779,14 @@ public class PlayerController : MonoBehaviour {
 		playerMovementEnabled = true;
 		popcornKernel.StopKicking ();
 	}
-	
-	private void incTemperature(float t) {
-		temperature += (t / MAX_TEMPERATURE);
-		temperature = Mathf.Clamp (temperature, 0f, MAX_TEMPERATURE);
-	}
 
 	public void SetTemperatureUpdateRate(string enemyName, float tempUpdateRate) {
 		lastCollisionName = enemyName;
-		temperatureUpdateRate = tempUpdateRate;
+		popcornKernel.SetUpdateTemperatureUpdateRate (tempUpdateRate);
 	}
 
 	public float GetTemperature() {
-		return temperature;
+		return popcornKernel.getTemperature ();
 	}
 
 	void OnDrawGizmos() {

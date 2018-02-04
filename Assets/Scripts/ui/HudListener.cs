@@ -297,9 +297,9 @@ public class HudListener : MonoBehaviour, InputManager {
 			CurrentLevel.AddLengthOfTimeInLevel (Time.deltaTime);
 		}
 
-		thermometer.currentTemperature = player.temperature;
+		thermometer.currentTemperature = player.GetTemperature() / 100.0f;
 
-		if (player.temperature >= 1.0f && !gameOverTriggered) {
+		if (player.GetTemperature() >= 100.0f && !gameOverTriggered) {
 			directionalInput = Vector2.zero;
 			GameOver();
 			gameOverTriggered = true;
@@ -435,31 +435,6 @@ public class HudListener : MonoBehaviour, InputManager {
 	public void HideErrorPanel() {
 		AudioManager.PlaySound ("Click");
 		errorPanel.GetComponent<GAui> ().MoveOut ();
-	}
-
-	public void StartCutScene() {
-		playerControlPanel.gameObject.SetActive (false);
-		GetPlayer ().updateTemperature = false;
-		GetPlayer ().playerMovementEnabled = false;
-		skipCutSceneButton.gameObject.SetActive (true);
-		pauseButton.SetActive (false);
-	}
-
-	public void SkipCutScene() {
-		FinishCutScene ();
-		if(OnSkipCutScene != null) {
-			OnSkipCutScene ();	//trigger other event listeners
-		}
-	}
-
-	public void FinishCutScene() {
-		if (isMobile() && !Settings.touchInputEnabled) {
-			playerControlPanel.SetActive (true);
-		}
-		GetPlayer ().updateTemperature = true;
-		GetPlayer ().playerMovementEnabled = true;
-		pauseButton.SetActive (true);
-		skipCutSceneButton.gameObject.SetActive (false);
 	}
 
 	public void ShowDamageIndicator() {

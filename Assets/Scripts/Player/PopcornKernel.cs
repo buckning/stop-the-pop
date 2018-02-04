@@ -5,18 +5,22 @@ public class PopcornKernel {
 	public delegate void NotifyEvent ();
 	public event NotifyEvent jumpListeners;
 
-	const int MAX_TEMPERATURE = 100;
+	const float MAX_TEMPERATURE = 100.0f;
 	
-	private int temperature = 0;
+	private float temperature = 0.0f;
 	private bool grounded = false;
 	private bool kicking = false;
 	private bool groundedOverride = false;	// the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
 	private bool gliding = false;	// track the state if the player is gliding
 	private CollisionChecker groundCollisionChecker;
+	private CollisionChecker wallCollisionChecker;
 
 	private float gravity;
 	private float minJumpVelocity;
 	private float maxJumpVelocity;
+	private float invincibilityTimeLeft = 0.0f;
+	private bool updateTemperature = false;
+	private float temperatureUpdateRate = 40f;			//the rate at which the temperature increases
 
 	private InputManager inputManager;
 
@@ -87,16 +91,55 @@ public class PopcornKernel {
 		grounded = groundCollisionChecker.isColliding ();
 	}
 
-	public void increaseTemperature(int temperatureDiff) {
-		temperature += temperatureDiff;
-		if (temperature > MAX_TEMPERATURE) {
-			temperature = MAX_TEMPERATURE;
-		} else if (temperature < 0) {
-			temperature = 0;
+	public void SetUpdateTemperature(bool status) {
+		updateTemperature = status;
+	}
+
+	public bool GetUpdateTemperature() {
+		return updateTemperature;
+	}
+
+
+	public void SetUpdateTemperatureUpdateRate(float updateRate) {
+		temperatureUpdateRate = updateRate;
+	}
+
+	public void UpdateTemperature(float deltaTime) {
+		invincibilityTimeLeft -= deltaTime;
+		if (invincibilityTimeLeft < 0.0f) {
+			invincibilityTimeLeft = 0.0f;
+		}
+
+		if (updateTemperature && invincibilityTimeLeft == 0.0f) {
+			temperature += deltaTime * temperatureUpdateRate;
 		}
 	}
 
-	public int getTemperature() {
+	/***
+	 * Make the player invulnerable for an amount of time
+	 */
+	public void MakeInvincibleForTime(float invincibilityTime) {
+		invincibilityTimeLeft = invincibilityTime;
+	}
+
+	public float GetInvincibleTime() {
+		return invincibilityTimeLeft;
+	}
+
+	public void increaseTemperature(float temperatureDiff) {
+		temperature += temperatureDiff;
+		temperature = Mathf.Clamp (temperature, 0.0f, MAX_TEMPERATURE);
+	}
+
+	public void Die() {
+		temperature = MAX_TEMPERATURE;
+	}
+
+	public void ResetTemperature() {
+		temperature = 0.0f;
+	}
+
+	public float getTemperature() {
 		return temperature;
 	}
 
