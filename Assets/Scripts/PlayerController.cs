@@ -109,8 +109,36 @@ public class PlayerController : MonoBehaviour {
 	public GameObject rightLeg;
 
 	public PolygonCollider2D bodyCollider;	//this collider is just used by the saw animations
+	private PopcornKernel popcornKernel;
+
+
+	private GroundCheck groundCollisionChecker;
+
+	class GroundCheck: CollisionChecker {
+		private Transform[] groundCheck;
+		private LayerMask whatIsGround;
+		private float groundRadius;
+
+		public GroundCheck(Transform[] groundCheck, float groundRadius, LayerMask whatIsGround) {
+			this.groundCheck = groundCheck;
+			this.whatIsGround = whatIsGround;
+			this.groundRadius = groundRadius;
+		}
+
+		public bool isColliding() {
+			foreach(Transform check in groundCheck) {
+				if (Physics2D.OverlapCircle (check.position, groundRadius, whatIsGround)) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 
 	void Start () {
+		groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
+		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
+
 		gameOver = false;
 		oldPlayerInput = Vector2.zero;
 		temperatureUpdateRate = regularTemperatureUpdateRate;
@@ -136,6 +164,8 @@ public class PlayerController : MonoBehaviour {
 		//apply the skin customisations
 		CustomisePlayer ();
 
+		popcornKernel.jumpListeners += Jump;
+
 		//add all the collected coins from the last checkpoint to this internal list. This is just so we can show an accurate coin count when a level is restarted
 		List<int> coins = LastCheckpoint.GetCollectedCoins ();
 		foreach (int coinId in coins) {
@@ -147,13 +177,8 @@ public class PlayerController : MonoBehaviour {
 	public void FixedUpdate () {
 		bool oldGrounded = grounded;
 
-		grounded = false;
-
-		foreach(Transform check in groundCheck) {
-			if (Physics2D.OverlapCircle (check.position, groundRadius * transform.localScale.x, whatIsGround)) {
-				grounded = true;
-			}
-		}
+		popcornKernel.Update ();
+		grounded = popcornKernel.IsGrounded ();
 
 		if (grounded) {
 			groundedOverride = false;
@@ -396,37 +421,18 @@ public class PlayerController : MonoBehaviour {
 	 * the jump key, in which case we change the jump velocity to minVelocity
 	 */
 	public void CheckForJump() {	
-		if (!jumpEnabled || temperature >= 1.0f || !playerMovementEnabled) {
+		if (!jumpEnabled || !playerMovementEnabled) {
 			return;
 		}
-		Vector2 velocity = rigidbody2d.velocity;
-		
-		if (inputManager.JumpKeyDown()) {
-			//allow the player to jump for a short 
-			if (groundedOverride) {
-				grounded = true;
-			}
 
-			//do a standard jump
-			if (grounded) {
-				velocity.y = maxJumpVelocity;
-				AudioManager.PlaySoundAfterTime ("jump", 0.1f);
-
-				SpawnJumpDust ();
-			} else {
-				gliding = true;
-			}
-		}
-
-		//restrict the velocity of the jump if the player releases the key
-		if (inputManager.JumpKeyUp()) {
-			if(velocity.y > minJumpVelocity) {
-				velocity.y = minJumpVelocity;
-			}
-			gliding = false;
-		}
+		Vector2 velocity = popcornKernel.CheckForJump (rigidbody2d.velocity);
 		cape.SetVelocity (velocity);
 		rigidbody2d.velocity = velocity;
+	}
+
+	private void Jump() {
+		AudioManager.PlaySoundAfterTime ("jump", 0.1f);
+		SpawnJumpDust ();
 	}
 
 	private void SpawnJumpDust() {

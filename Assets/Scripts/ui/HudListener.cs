@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /***
  * This class acts like an input manager.
  */
-public class HudListener : MonoBehaviour {
+public class HudListener : MonoBehaviour, InputManager {
 
 	public float minSwipeDistY;
 

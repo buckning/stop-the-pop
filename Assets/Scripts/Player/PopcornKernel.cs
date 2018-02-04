@@ -2,6 +2,9 @@
 
 public class PopcornKernel {
 
+	public delegate void Jump ();
+	public event Jump jumpListeners;
+
 	const int MAX_TEMPERATURE = 100;
 	
 	private int temperature = 0;
@@ -22,10 +25,6 @@ public class PopcornKernel {
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
-	}
-
-	public void Update() {
-		grounded = groundCollisionChecker.isColliding ();
 	}
 
 	/***
@@ -50,6 +49,10 @@ public class PopcornKernel {
 
 			if (grounded) {
 				velocity.y = maxJumpVelocity;
+
+				if (jumpListeners != null) {
+					jumpListeners ();
+				}
 			} else {
 				gliding = true;
 			}
@@ -63,6 +66,10 @@ public class PopcornKernel {
 			gliding = false;
 		}
 		return velocity;
+	}
+
+	public void Update() {
+		grounded = groundCollisionChecker.isColliding ();
 	}
 
 	public void increaseTemperature(int temperatureDiff) {
@@ -80,5 +87,9 @@ public class PopcornKernel {
 
 	public bool isGliding() {
 		return gliding;
+	}
+
+	public bool IsGrounded() {
+		return grounded;
 	}
 }
