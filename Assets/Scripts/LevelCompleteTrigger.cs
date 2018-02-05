@@ -71,7 +71,6 @@ public class LevelCompleteTrigger : MonoBehaviour {
 			levelHud.levelComplete (nextLevelName);
 			CurrentLevel.ResetAll ();
 			LastCheckpoint.Reset ();
-			LevelDifficulty.difficulty = LevelDifficulty.NORMAL_DIFFICULTY;	//reset the difficulty of the next level to normal
 			alreadyTriggered = true;
 			Settings.numberOfLevelsCompletedThisSession++;
 		}
