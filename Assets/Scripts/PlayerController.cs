@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour {
 	float velocityXSmoothing;
 
 	public Transform leftLegPopPoint;
-	public Transform rightLegPopPoint;
 
 	string lastCollisionName = "";
 
@@ -91,9 +90,7 @@ public class PlayerController : MonoBehaviour {
 	AudioSource runAudioSource;		//this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
 	bool leftLegPopped = false;
-	bool rightLegPopped = false;
 	public GameObject leftLeg;		//used to disable the legs for the sawblade.
-	public GameObject rightLeg;
 
 	public PolygonCollider2D bodyCollider;	//this collider is just used by the saw animations
 
@@ -321,8 +318,6 @@ public class PlayerController : MonoBehaviour {
 			
 			//maybe slow down the time scale here???
 			//apply a force after one second
-
-			StartCoroutine(PopAnimationComplete());
 		}
 
 		if (popcornKernel.IsAtMaxTemperature()) {
@@ -460,11 +455,6 @@ public class PlayerController : MonoBehaviour {
 		transform.Translate (translation3);
 	}
 
-	private IEnumerator PopAnimationComplete() {
-		yield return new WaitForSeconds(3.8f);
-		animator.StartBlinking ();
-	}
-
 	/***
 	 * This sound effect gets triggered by the animator
 	 */
@@ -509,28 +499,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void PopLeftLegSprite() {
-		if (!leftLegPopped) {
-			//pop the left leg
-			GameObject poppedObject = (GameObject)Instantiate (leg, leftLegPopPoint.position, Quaternion.identity);
-			//reskin the popped off leg
-			SpriteRenderer[] legRenderers = poppedObject.GetComponentsInChildren<SpriteRenderer> ();
-			Sprite[] sprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-			if (SelectedPlayerCustomisations.selectedShoes != null) {
-				foreach (SpriteRenderer renderer in legRenderers) {
-					if (renderer.name == "shoe-skin") {
-						foreach (Sprite sprite in sprites) {
-							if (sprite.name == SelectedPlayerCustomisations.selectedShoes + "Left") {
-								renderer.sprite = sprite;
-							}
-						}
-					}
-				}
-			}
-
-			poppedObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (-200f, 100f));
-			poppedObject.GetComponent<Rigidbody2D> ().AddTorque (Random.Range (0f, -300f));
-			leftLegPopped = true;
-		}
+		animator.PopLeftLegSprite ();
 	}
 
 	/***
@@ -590,8 +559,8 @@ public class PlayerController : MonoBehaviour {
 
 		float xForce = -300f;
 		float yForce = 300f;
-		
-		PopRightLegSprite ();
+
+		animator.PopRightLegSprite ();
 		
 		//add force and torque to the rigidbody when left leg pops
 		float dir = (Random.Range (0f, 1f) < 0.5f) ? -1f : 1f;
@@ -610,29 +579,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void PopRightLegSprite() {
-		if(!rightLegPopped) {
-			//this time is dependent on the animation
-			GameObject poppedObject = (GameObject)Instantiate (leg, rightLegPopPoint.position, gameObject.transform.rotation);
-
-			//reskin the popped off leg
-			SpriteRenderer[] legRenderers = poppedObject.GetComponentsInChildren<SpriteRenderer> ();
-			Sprite[] sprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-			if (SelectedPlayerCustomisations.selectedShoes != null) {
-				foreach (SpriteRenderer renderer in legRenderers) {
-					if (renderer.name == "shoe-skin") {
-						foreach (Sprite sprite in sprites) {
-							if (sprite.name == SelectedPlayerCustomisations.selectedShoes + "Right") {
-								renderer.sprite = sprite;
-							}
-						}
-					}
-				}
-			}
-
-			poppedObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (200f, 100f));
-			poppedObject.GetComponent<Rigidbody2D> ().AddTorque (Random.Range (0f, 300f));
-			rightLegPopped = true;
-		}
+		animator.PopRightLegSprite ();
 	}
 
 	//called by the animation
@@ -803,81 +750,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void CustomisePlayer() {
-		if (PlayerCustomisation.facialHairSprites == null) {
-			PlayerCustomisation.facialHairSprites = Resources.LoadAll<Sprite> ("skins/player/facialHair");
-		} 
-		if (PlayerCustomisation.shoesSprites == null) {
-			PlayerCustomisation.shoesSprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-		}
-		if (PlayerCustomisation.hatSprites == null) {
-			PlayerCustomisation.hatSprites = Resources.LoadAll<Sprite> ("skins/player/hats");
-		}
-
-		Sprite[] sprites = PlayerCustomisation.hatSprites;
-
-		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
-
-		foreach (SpriteRenderer renderer in renderers) {
-			if (renderer.name == "Hat") {
-				foreach (Sprite sprite in sprites) {
-					if (sprite.name == SelectedPlayerCustomisations.selectedHat) {
-						renderer.sprite = sprite;
-					}
-				}
-			}
-		}
-
-		sprites = Resources.LoadAll<Sprite> ("skins/player/glasses");
-
-		foreach (SpriteRenderer renderer in renderers) {
-			if (renderer.name == "Glasses") {
-				foreach (Sprite sprite in sprites) {
-					if (sprite.name == SelectedPlayerCustomisations.selectedGlasses) {
-						renderer.sprite = sprite;
-					}
-				}
-			}
-		}
-
-		sprites = PlayerCustomisation.facialHairSprites;
-
-		if (SelectedPlayerCustomisations.selectedFacialHair != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "FacialHair") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == SelectedPlayerCustomisations.selectedFacialHair) {
-							renderer.sprite = sprite;
-						}
-					}
-				}
-			}
-		} else {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "FacialHair") {
-					renderer.sprite = null;
-				}
-			}
-		}
-
-
-		sprites = PlayerCustomisation.shoesSprites;
-
-		if (SelectedPlayerCustomisations.selectedShoes != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "shoe-skin-right") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == SelectedPlayerCustomisations.selectedShoes + "Right") {
-							renderer.sprite = sprite;
-						}
-					}
-				} else if (renderer.name == "shoe-skin-left") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == SelectedPlayerCustomisations.selectedShoes + "Left") {
-							renderer.sprite = sprite;
-						}
-					}
-				}
-			}
-		}
+		animator.CustomisePlayer ();
 	}
 }
