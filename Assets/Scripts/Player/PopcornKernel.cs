@@ -101,15 +101,14 @@ public class PopcornKernel {
 		if (grounded) {
 			groundedOverride = false;
 			gliding = false;
-			//if we were not grounded last frame and are grounded this frame, we have just landed
+			// if we were not grounded last frame and are grounded this frame, we have just landed
 			if (!oldGrounded) {
-				// TODO we have just landed, trigger landed callback
 				if (landEventListeners != null) {
 					landEventListeners ();
 				}
 			}
 		} else {
-			//the player has just fallen off a platform, we want to give the player a chance to jump for a short period after falling off the platform
+			// the player has just fallen off a platform, we want to give the player a chance to jump for a short period after falling off the platform
 			if (oldGrounded) {
 				if(velocity.y < 0.0f) {
 					groundedOverride = true;

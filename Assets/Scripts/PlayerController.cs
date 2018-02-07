@@ -65,9 +65,6 @@ public class PlayerController : MonoBehaviour {
 	bool gliding = false;								//this is set internally when the player should be gliding
 	public HudListener inputManager;					//reference to the HUD, so we can check what buttons are being pressed
 
-	[HideInInspector]
-	public bool gameOver = false;						//this is used by other objects to disable player input
-
 	public float wallSlideSpeedMax = 2f;
 
 	public bool glidingEnabled = false;					//if this is set to false, the player cannot glide regardless if the player is trying to
@@ -134,7 +131,6 @@ public class PlayerController : MonoBehaviour {
 		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += Land;
 
-		gameOver = false;
 		oldPlayerInput = Vector2.zero;
 		runAudioSource = GetComponent<AudioSource> ();
 		runAudioSource.loop = true;
@@ -222,14 +218,6 @@ public class PlayerController : MonoBehaviour {
 	public void SetVelocity(Vector2 velocity) {
 		rigidbody2d.velocity = velocity;
 	}
-	
-	public void AddForce(Vector2 force) {
-		rigidbody2d.AddForce(force);
-	}
-	
-	public void AddForce(Vector2 force, ForceMode2D forceMode) {
-		rigidbody2d.AddForce(force, forceMode);
-	}
 
 	void UpdateShadow() {
 		if (popcornKernel.IsAtMaxTemperature ()) {
@@ -254,7 +242,7 @@ public class PlayerController : MonoBehaviour {
 	void Update() {
 		UpdateShadow();
 
-		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled || gameOver) {
+		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
 			cape.SetVelocity (Vector2.zero);
 		} else {

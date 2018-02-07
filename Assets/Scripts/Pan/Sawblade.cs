@@ -21,7 +21,7 @@ public class Sawblade : MonoBehaviour {
 				spawnedParticles.transform.position = otherObject.contacts [0].point;
 				camera.gameOver = true;	//this is used to start zooming in on the player
 				player.inputManager.GameOver(false);	//don't show the retry button for this death animation
-				player.gameOver = true;
+				player.playerMovementEnabled = false;
 
 				float shakeDuration = .2f;
 				if (stationary) {
