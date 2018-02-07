@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour {
 	public GameObject landingDust;
 	public GameObject jumpDust;
 	public GameObject shadow;
-	public SpriteRenderer kickEffect;
 
 	public bool jumpEnabled = true;						//Is single jump enabled?
 	public float regularTemperatureUpdateRate = 0.02f;	//the regular temperature update of the player
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour {
 	float HAZARD_COLLISION_TEMPERATURE_INCREASE = 50f;	//The amount of temperature that increases when colliding with a hazardous environment. 10f recommended
 	float MAX_INVINCIBILITY_TIME = 1.5f;			//the amount of time in seconds that the player will be invincible for if hit by an enemy/hazardous env
 	public GameObject leg;								//the leg that will be used to pop off when the player pops
-	private Animator animator;							//our character animator, used to change between animations
 	private bool facingRight = true;					//this is used so we can know how to face our sprite
 	private Rigidbody2D rigidbody2d;					//the rigid body 2d for the player
 	private bool grounded = false;						//defines if the player is on the ground (used for jumps)
@@ -98,6 +96,9 @@ public class PlayerController : MonoBehaviour {
 	public GameObject rightLeg;
 
 	public PolygonCollider2D bodyCollider;	//this collider is just used by the saw animations
+
+	public PopcornKernelAnimator animator;
+
 	private PopcornKernel popcornKernel;
 
 
@@ -141,10 +142,6 @@ public class PlayerController : MonoBehaviour {
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
 
 		rigidbody2d = GetComponent<Rigidbody2D> ();
-
-		//start the player in a rest animation
-		animator = GetComponent<Animator> ();
-		animator.SetFloat("speed", 0f);
 
 		if (glidingEnabled) {
 			cape.gameObject.SetActive (true);
@@ -193,11 +190,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void PlaySawBladeDeathAnimation() {
-		animator.SetTrigger ("SawbladeDeathAnimationStatic");
+		animator.PlaySawBladeDeathAnimation ();
 	}
 
 	public void PlayMovingSawBladeDeathAnimation() {
-		animator.SetTrigger ("SawbladeDeathAnimationMoving");
+		animator.PlayMovingSawBladeDeathAnimation ();
 	}
 
 	public void EnableBodyCollider() {
@@ -249,22 +246,13 @@ public class PlayerController : MonoBehaviour {
 			playerInput = new Vector2 (inputManager.getXAxis(), inputManager.getYAxis());
 		}
 
-		if (kickEffect.gameObject.activeInHierarchy) {
-			float alpha = kickEffect.color.a - Time.deltaTime * 4;
-			if (alpha < 0.0f) {
-				alpha = 0.0f;
-				kickEffect.color = new Color (1, 1, 1, 0.0f);
-				kickEffect.gameObject.SetActive (false);
-			}
-			kickEffect.color = new Color (1, 1, 1, alpha);
-		}
 		UpdateMagnetBehaviour ();
 		CheckForJump ();
 
 		if (popcornKernel.IsKickTriggered ()) {
 			playerMovementEnabled = false;
 			StartCoroutine (EnablePlayerMovement ());
-			animator.SetTrigger("kick");
+			animator.Kick();
 			AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
 		}
 
@@ -312,9 +300,9 @@ public class PlayerController : MonoBehaviour {
 		float animationSpeed = 0.0f;
 		animationSpeed = (rigidbody2d.velocity.x != 0.0f) ? Mathf.Abs (playerInput.x) : 0.0f;
 		//set our animations
-		animator.SetFloat ("speed", animationSpeed);
-		animator.SetFloat ("yVelocity", rigidbody2d.velocity.y);
-		animator.SetBool ("grounded", grounded);
+		animator.SetVelocityX (animationSpeed);
+		animator.SetVelocityY (rigidbody2d.velocity.y);
+		animator.SetGrounded (grounded);
 
 		//check to see if we should start our pop animation 
 		if (popcornKernel.IsAtMaxTemperature() && !popped && grounded) {
@@ -324,7 +312,7 @@ public class PlayerController : MonoBehaviour {
 
 			//start the popping animation
 			//start the animator
-			animator.SetTrigger("Popping");
+			animator.StartPopping();
 			popped = true;
 
 			AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);
@@ -346,8 +334,7 @@ public class PlayerController : MonoBehaviour {
 	 * Called by the animator
 	 */
 	public void PlayKickEffect() {
-		kickEffect.gameObject.SetActive (true);
-		kickEffect.color = new Color(1, 1, 1, 1f);
+		animator.PlayKickEffect ();
 	}
 
 	public void PlayPainSound() {
@@ -475,7 +462,7 @@ public class PlayerController : MonoBehaviour {
 
 	private IEnumerator PopAnimationComplete() {
 		yield return new WaitForSeconds(3.8f);
-		animator.SetBool("blinking", true);
+		animator.StartBlinking ();
 	}
 
 	/***
@@ -704,7 +691,6 @@ public class PlayerController : MonoBehaviour {
 		lastCollisionName = hazardousEnvName;
 		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
 			inputManager.ShakeForDuration (0.2f);
-			animator.SetTrigger("hurt");
 			inputManager.ShowDamageIndicator ();
 			AudioManager.PlaySound ("sizzle");
 			popcornKernel.increaseTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE);
@@ -741,7 +727,6 @@ public class PlayerController : MonoBehaviour {
 			inputManager.ShowDamageIndicator ();
 			inputManager.ShakeForDuration (0.2f);
 			AudioManager.PlaySound ("sizzle");
-			animator.SetTrigger("hurt");
 
 			popcornKernel.increaseTemperature (suggestedTemperatureIncrease);
 			popcornKernel.MakeInvincibleForTime (MAX_INVINCIBILITY_TIME);
