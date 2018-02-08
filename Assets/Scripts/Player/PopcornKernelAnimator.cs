@@ -131,68 +131,25 @@ public class PopcornKernelAnimator : MonoBehaviour {
 			PlayerCustomisation.hatSprites = Resources.LoadAll<Sprite> ("skins/player/hats");
 		}
 
-		Sprite[] sprites = PlayerCustomisation.hatSprites;
-
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 
-		foreach (SpriteRenderer renderer in renderers) {
-			if (renderer.name == "Hat") {
-				foreach (Sprite sprite in sprites) {
-					if (sprite.name == SelectedPlayerCustomisations.selectedHat) {
-						renderer.sprite = sprite;
-					}
-				}
-			}
-		}
-
-		sprites = Resources.LoadAll<Sprite> ("skins/player/glasses");
-
-		foreach (SpriteRenderer renderer in renderers) {
-			if (renderer.name == "Glasses") {
-				foreach (Sprite sprite in sprites) {
-					if (sprite.name == SelectedPlayerCustomisations.selectedGlasses) {
-						renderer.sprite = sprite;
-					}
-				}
-			}
-		}
+		Sprite[] sprites = PlayerCustomisation.hatSprites;
+		reskinSprites (renderers, sprites, "Hat", SelectedPlayerCustomisations.selectedHat);
 
 		sprites = PlayerCustomisation.facialHairSprites;
-
-		if (SelectedPlayerCustomisations.selectedFacialHair != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "FacialHair") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == SelectedPlayerCustomisations.selectedFacialHair) {
-							renderer.sprite = sprite;
-						}
-					}
-				}
-			}
-		} else {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "FacialHair") {
-					renderer.sprite = null;
-				}
-			}
-		}
-
+		reskinSprites (renderers, sprites, "FacialHair", SelectedPlayerCustomisations.selectedFacialHair);
 
 		sprites = PlayerCustomisation.shoesSprites;
+		reskinSprites (renderers, sprites, "shoe-skin-right", SelectedPlayerCustomisations.selectedShoes + "Right");
+		reskinSprites (renderers, sprites, "shoe-skin-left", SelectedPlayerCustomisations.selectedShoes + "Left");
+	}
 
-		if (SelectedPlayerCustomisations.selectedShoes != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "shoe-skin-right") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == SelectedPlayerCustomisations.selectedShoes + "Right") {
-							renderer.sprite = sprite;
-						}
-					}
-				} else if (renderer.name == "shoe-skin-left") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == SelectedPlayerCustomisations.selectedShoes + "Left") {
-							renderer.sprite = sprite;
-						}
+	private void reskinSprites(SpriteRenderer[] renderers, Sprite[] sprites, string rendererName, string spriteName) {
+		foreach (SpriteRenderer renderer in renderers) {
+			if (renderer.name == rendererName) {
+				foreach (Sprite sprite in sprites) {
+					if (sprite.name == spriteName) {
+						renderer.sprite = sprite;
 					}
 				}
 			}
