@@ -8,29 +8,24 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public SpriteRenderer kickEffect;
 	private Animator animator;
 
-	bool leftLegPopped = false;
-	bool rightLegPopped = false;
 	public GameObject leftLeg;		//used to disable the legs for the sawblade.
 	public GameObject rightLeg;
 	public GameObject leg;								//the leg that will be used to pop off when the player pops
-
+	public GameObject shadow;
+	public GameObject jumpDust;
+	public GameObject landingDust;
+	public LayerMask shadowMask;						//the layer that shadows can be displayed on
 	public Transform leftLegPopPoint;
 	public Transform rightLegPopPoint;
+	public Transform groundPosition;
 
 	void Start () {
 		animator = GetComponent<Animator> ();
 	}
 
 	void Update() {
-		if (kickEffect.gameObject.activeInHierarchy) {
-			float alpha = kickEffect.color.a - Time.deltaTime * 4;
-			if (alpha < 0.0f) {
-				alpha = 0.0f;
-				kickEffect.color = new Color (1, 1, 1, 0.0f);
-				kickEffect.gameObject.SetActive (false);
-			}
-			kickEffect.color = new Color (1, 1, 1, alpha);
-		}
+		UpdateShadow ();
+		UpdateKickEffect ();
 	}
 	
 	public void SetVelocityX(float speed) {
@@ -72,22 +67,51 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public void PlayKickEffect() {
 		kickEffect.gameObject.SetActive (true);
 		kickEffect.color = new Color(1, 1, 1, 1f);
+
+		AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
 	}
 
-	public void PopRightLegSprite() {
-		if(!rightLegPopped) {
-			PopLegSprite (rightLegPopPoint.position, 300f, 200f, 
-				SelectedPlayerCustomisations.selectedShoes + "Right");
-			rightLegPopped = true;
-		}
+	/***
+	 * This is called by an event in the players PlayerPopping animation
+	 */
+	public void PopMiddleSection() {
+		string soundToPlay = "pop10";
+		AudioManager.PlaySound(soundToPlay);
 	}
 
-	public void PopLeftLegSprite() {
-		if (!leftLegPopped) {
-			PopLegSprite (leftLegPopPoint.position, -300f, -200f, 
-				SelectedPlayerCustomisations.selectedShoes + "Left");
-			leftLegPopped = true;
-		}
+	/***
+	 * This is called by an event in the players PlayerPopping animation
+	 */
+	public void PopRightLeg() {
+		AudioManager.PlaySound("pop3");
+		PopLegSprite (rightLegPopPoint.position, 300f, 200f, 
+			SelectedPlayerCustomisations.selectedShoes + "Right");
+	}
+
+	/***
+	 * This is called by an event in the players PlayerPopping animation
+	 */
+	public void PopLeftLeg() {
+		AudioManager.PlaySound("pop8");
+
+		PopLegSprite (leftLegPopPoint.position, -300f, -200f, 
+			SelectedPlayerCustomisations.selectedShoes + "Left");
+
+		AudioManager.PlaySound ("player-death");
+	}
+
+	/***
+	 * This is called by an event in the players PlayerPopping animation
+	 */
+	public void PopBody() {
+		AudioManager.PlaySound("pop8");
+	}
+
+	/***
+	 * This sound effect gets triggered by the animator
+	 */
+	public void PlayBlinkSoundEffect() {
+		AudioManager.PlaySound ("blink");
 	}
 
 	/***
@@ -112,12 +136,57 @@ public class PopcornKernelAnimator : MonoBehaviour {
 
 		poppedObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (forceX, 100f));
 		poppedObject.GetComponent<Rigidbody2D> ().AddTorque (Random.Range (0f, maxTorque));
-		leftLegPopped = true;
 	}
 
 	private IEnumerator PopAnimationComplete() {
 		yield return new WaitForSeconds(3.8f);
 		StartBlinking ();
+	}
+
+	void UpdateKickEffect() {
+		if (kickEffect.gameObject.activeInHierarchy) {
+			float alpha = kickEffect.color.a - Time.deltaTime * 4;
+			if (alpha < 0.0f) {
+				alpha = 0.0f;
+				kickEffect.color = new Color (1, 1, 1, 0.0f);
+				kickEffect.gameObject.SetActive (false);
+			}
+			kickEffect.color = new Color (1, 1, 1, alpha);
+		}
+	}
+
+	public void Jump() {
+		AudioManager.PlaySoundAfterTime ("jump", 0.1f);
+		Vector2 spawnPos = new Vector2 (groundPosition.position.x, groundPosition.position.y);
+		spawnPos.y += 0.25f;
+		GameObject dustObject = (GameObject)Instantiate (jumpDust, spawnPos, Quaternion.identity);
+		dustObject.transform.localScale = transform.localScale;
+	}
+
+	public void Land() {
+		AudioManager.PlaySound ("landing");	//only play sound effect when actually landing instead of when the player can jump through platforms from below
+		GameObject dustObject = (GameObject)Instantiate (landingDust, groundPosition.position, Quaternion.identity);
+		dustObject.transform.localScale = transform.localScale;
+	}
+
+	void UpdateShadow() {
+//		if (popcornKernel.IsAtMaxTemperature ()) {
+//			shadow.SetActive (false);
+//			return;
+//		}
+
+		RaycastHit2D hit = Physics2D.Raycast (groundPosition.position, Vector2.up * -1, 20, shadowMask);
+		shadow.transform.position = hit.point;
+		if (hit.distance > 10f) {
+			shadow.SetActive (false);
+		} else {
+			shadow.SetActive (true);
+			float xScale = (1 - hit.distance/7.5f);
+			if (xScale < 0.3f) {
+				xScale = 0.3f;
+			}
+			shadow.transform.localScale = new Vector2 (xScale, 1);
+		}
 	}
 
 	public void CustomisePlayer() {

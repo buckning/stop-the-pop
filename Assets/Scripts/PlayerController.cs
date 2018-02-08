@@ -15,9 +15,6 @@ public class PlayerController : MonoBehaviour {
 	float minJumpVelocity;
 
 	public float moveSpeed = 14f;
-	float velocityXSmoothing;
-
-	public Transform leftLegPopPoint;
 
 	string lastCollisionName = "";
 
@@ -35,11 +32,6 @@ public class PlayerController : MonoBehaviour {
 	public LayerMask whatIsCeilingMask;					//define what is the ceiling (used to see if the player is getting crushed)
 	public LayerMask breakableMask;						//breakable layer mask
 	public LayerMask collectableMask;
-	public LayerMask shadowMask;						//the layer that shadows can be displayed on
-
-	public GameObject landingDust;
-	public GameObject jumpDust;
-	public GameObject shadow;
 
 	public bool jumpEnabled = true;						//Is single jump enabled?
 	public float regularTemperatureUpdateRate = 0.02f;	//the regular temperature update of the player
@@ -48,7 +40,6 @@ public class PlayerController : MonoBehaviour {
 	float ENEMY_COLLISION_TEMPERATURE_INCREASE = 50f;	//The amount of temperature that increases when colliding with an enemy. 10f recommended
 	float HAZARD_COLLISION_TEMPERATURE_INCREASE = 50f;	//The amount of temperature that increases when colliding with a hazardous environment. 10f recommended
 	float MAX_INVINCIBILITY_TIME = 1.5f;			//the amount of time in seconds that the player will be invincible for if hit by an enemy/hazardous env
-	public GameObject leg;								//the leg that will be used to pop off when the player pops
 	private bool facingRight = true;					//this is used so we can know how to face our sprite
 	private Rigidbody2D rigidbody2d;					//the rigid body 2d for the player
 	private bool grounded = false;						//defines if the player is on the ground (used for jumps)
@@ -61,8 +52,6 @@ public class PlayerController : MonoBehaviour {
 	private bool popped = false;						//used to see if the player popping animation has been triggered
 	bool gliding = false;								//this is set internally when the player should be gliding
 	public HudListener inputManager;					//reference to the HUD, so we can check what buttons are being pressed
-
-	public float wallSlideSpeedMax = 2f;
 
 	public bool glidingEnabled = false;					//if this is set to false, the player cannot glide regardless if the player is trying to
 	public const float defaultGlideSpeed = -2f;
@@ -82,22 +71,17 @@ public class PlayerController : MonoBehaviour {
 	bool touchingCeiling = false;
 	bool crushed = false;
 	bool kicking = false;
-	public float effectorSpeed = 5.0f;
 	float glidingTime = 0.0f;
 
 	bool lifeAlreadyLost = false;					//when the player loses a life, this is checked to see if a life has already been lost
 													//this variable prevents multiple lives being lost in one level
 	AudioSource runAudioSource;		//this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
-	bool leftLegPopped = false;
-	public GameObject leftLeg;		//used to disable the legs for the sawblade.
-
 	public PolygonCollider2D bodyCollider;	//this collider is just used by the saw animations
 
 	public PopcornKernelAnimator animator;
 
 	private PopcornKernel popcornKernel;
-
 
 	private GroundCheck groundCollisionChecker;
 
@@ -145,7 +129,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//apply the skin customisations
-		CustomisePlayer ();
+		animator.CustomisePlayer ();
 
 		//add all the collected coins from the last checkpoint to this internal list. This is just so we can show an accurate coin count when a level is restarted
 		List<int> coins = LastCheckpoint.GetCollectedCoins ();
@@ -158,11 +142,7 @@ public class PlayerController : MonoBehaviour {
 	 * Called back by the popcornKernel when it lands on something.
 	 */
 	private void Land() {
-		if (rigidbody2d.velocity.y <= 0) {
-			AudioManager.PlaySound ("landing");	//only play sound effect when actually landing instead of when the player can jump through platforms from below
-		}
-		GameObject dustObject = (GameObject)Instantiate (landingDust, groundCheck [0].position, Quaternion.identity);
-		dustObject.transform.localScale = transform.localScale;
+		animator.Land ();
 	}
 
 	/***
@@ -213,29 +193,7 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = velocity;
 	}
 
-	void UpdateShadow() {
-		if (popcornKernel.IsAtMaxTemperature ()) {
-			shadow.SetActive (false);
-			return;
-		}
-
-		RaycastHit2D hit = Physics2D.Raycast (groundCheck[0].position, Vector2.up * -1, 20, shadowMask);
-		shadow.transform.position = hit.point;
-		if (hit.distance > 10f) {
-			shadow.SetActive (false);
-		} else {
-			shadow.SetActive (true);
-			float xScale = (1 - hit.distance/7.5f);
-			if (xScale < 0.3f) {
-				xScale = 0.3f;
-			}
-			shadow.transform.localScale = new Vector2 (xScale, 1);
-		}
-	}
-
 	void Update() {
-		UpdateShadow();
-
 		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
 			cape.SetVelocity (Vector2.zero);
@@ -356,11 +314,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Jump() {
-		AudioManager.PlaySoundAfterTime ("jump", 0.1f);
-		Vector2 spawnPos = new Vector2 (groundCheck[0].position.x, groundCheck[0].position.y);
-		spawnPos.y += 0.25f;
-		GameObject dustObject = (GameObject)Instantiate (jumpDust, spawnPos, Quaternion.identity);
-		dustObject.transform.localScale = transform.localScale;
+		animator.Jump ();
 	}
 
 	/***
@@ -456,25 +410,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	/***
-	 * This sound effect gets triggered by the animator
-	 */
-	public void PlayBlinkSoundEffect() {
-		AudioManager.PlaySound ("blink");
-	}
-
-	/***
 	 * This is called by an event in the players PlayerPopping animation
 	 */
 	public void PopLeftLeg() {
-		shadow.SetActive (false);
 		inputManager.ShakeForDuration (0.2f);
 		string soundToPlay = "pop8";
 		AudioManager.PlaySound(soundToPlay);
 		//		float yOffset = -1.7f;
 		float xForce = 300f;
 		float yForce = 300f;
-
-		PopLeftLegSprite ();
 
 		//add force and torque to the rigidbody when left leg pops
 		float dir = (Random.Range (0f, 1f) < 0.5f) ? -1f : 1f;
@@ -498,88 +442,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void PopLeftLegSprite() {
-		animator.PopLeftLegSprite ();
-	}
-
-	/***
-	 * This is called by an event in the players PlayerPopping animation
-	 */
-	public void PopMiddleSection() {
-		inputManager.ShakeForDuration (0.2f);
-		string soundToPlay = "pop10";
-		AudioManager.PlaySound(soundToPlay);
-	}
-
-	/***
-	 * This is called by an event in the players PlayerPopping animation
-	 */
-	public void PopBody() {
-		inputManager.ShakeForDuration (0.2f);
-		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
-		foreach(SpriteRenderer sprite in renderers) {
-			if (sprite.name == "Glasses") {
-				PopItemOff(sprite, new Vector2 (-20f, 250f), 80f);
-			}
-				
-			if (sprite.name == "left-eyebrow-skin") {
-				PopItemOff(sprite, new Vector2 (-100f, 200f), 300f);
-			}
-
-			if (sprite.name == "right-eyebrow-skin") {
-				PopItemOff(sprite, new Vector2 (200f, 200f), -150f);
-			}
-		}
-		string soundToPlay = "pop8";
-		AudioManager.PlaySound(soundToPlay);
-
-		#if UNITY_IOS
-		SocialServiceManager.GetInstance ().UnlockAchievement ("mmmmpopcorn");
-		#endif
-		#if UNITY_ANDROID
-		SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_mmmm_popcorn);
-		#endif
-	}
-
 	private void PopItemOff(SpriteRenderer sprite, Vector2 popForce, float angularForce) {
 		sprite.transform.parent = null;
 		sprite.sortingLayerName = "Foreground";
 		Rigidbody2D rigidbody = sprite.gameObject.AddComponent<Rigidbody2D> ();
 		rigidbody.AddForce (popForce);
 		rigidbody.AddTorque (angularForce);
-	}
-
-	/***
-	 * This is called by an event in the players PlayerPopping animation
-	 */
-	public void PopRightLeg() {
-		string soundToPlay = "pop3";
-		inputManager.ShakeForDuration (0.2f);
-		AudioManager.PlaySound(soundToPlay);
-
-		float xForce = -300f;
-		float yForce = 300f;
-
-		animator.PopRightLegSprite ();
-		
-		//add force and torque to the rigidbody when left leg pops
-		float dir = (Random.Range (0f, 1f) < 0.5f) ? -1f : 1f;
-		xForce = xForce * dir;
-		rigidbody2d.freezeRotation = false;
-		rigidbody2d.AddForce (new Vector2 (xForce, yForce));
-		rigidbody2d.AddTorque (Random.Range (0f, -100f));
-
-		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
-		foreach (SpriteRenderer sprite in renderers) {
-			if (sprite.name == "FacialHair") {
-				float popDir = IsFacingRight () ? 1f : -1f;
-				PopItemOff (sprite, new Vector2 (100f * popDir, 250f), -60f);
-			}
-		}
-	}
-
-	public void PopRightLegSprite() {
-		animator.PopRightLegSprite ();
 	}
 
 	//called by the animation
@@ -747,9 +615,5 @@ public class PlayerController : MonoBehaviour {
 
 	public void DisableCollider() {
 		GetComponent<BoxCollider2D> ().enabled = false;
-	}
-
-	public void CustomisePlayer() {
-		animator.CustomisePlayer ();
 	}
 }

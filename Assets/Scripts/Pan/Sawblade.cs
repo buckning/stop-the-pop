@@ -26,8 +26,8 @@ public class Sawblade : MonoBehaviour {
 				float shakeDuration = .2f;
 				if (stationary) {
 					shakeDuration = 1.5f;
-					player.PopLeftLegSprite ();
-					player.PopRightLegSprite ();
+//					player.PopLeftLegSprite ();
+//					player.PopRightLegSprite ();
 					player.DisableCollider ();
 					player.EnableBodyCollider ();
 					player.PlaySawBladeDeathAnimation ();
