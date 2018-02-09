@@ -140,6 +140,10 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		AudioManager.PlaySound ("blink");
 	}
 
+	public void PlayTitleScreenAnimation() {
+		animator.SetTrigger("titleScreen");
+	}
+
 	/***
 	 * Pop off a players leg and reskin the shoe it with the current skin
 	 */
@@ -211,28 +215,9 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		}
 	}
 
-	public void CustomisePlayer() {
-		if (PlayerCustomisation.facialHairSprites == null) {
-			PlayerCustomisation.facialHairSprites = Resources.LoadAll<Sprite> ("skins/player/facialHair");
-		} 
-		if (PlayerCustomisation.shoesSprites == null) {
-			PlayerCustomisation.shoesSprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-		}
-		if (PlayerCustomisation.hatSprites == null) {
-			PlayerCustomisation.hatSprites = Resources.LoadAll<Sprite> ("skins/player/hats");
-		}
-
-		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
-
-		Sprite[] sprites = PlayerCustomisation.hatSprites;
-		reskinSprites (renderers, sprites, "Hat", SelectedPlayerCustomisations.selectedHat);
-
-		sprites = PlayerCustomisation.facialHairSprites;
-		reskinSprites (renderers, sprites, "FacialHair", SelectedPlayerCustomisations.selectedFacialHair);
-
-		sprites = PlayerCustomisation.shoesSprites;
-		reskinSprites (renderers, sprites, "shoe-skin-right", SelectedPlayerCustomisations.selectedShoes + "Right");
-		reskinSprites (renderers, sprites, "shoe-skin-left", SelectedPlayerCustomisations.selectedShoes + "Left");
+	public void CustomisePlayer(string spriteSheet) {
+		Sprite[] vikingSprites = Resources.LoadAll<Sprite> (spriteSheet);
+		ReskinKernel (vikingSprites, vikingSprites, vikingSprites);
 	}
 
 	/***
@@ -245,13 +230,29 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		}
 	}
 
-	private void reskinSprites(SpriteRenderer[] renderers, Sprite[] sprites, string rendererName, string spriteName) {
+	/***
+	 * Reskins the player with the required hat, facial hair and shoes.
+	 */
+	public void ReskinKernel(Sprite[] selectedHatSprites, Sprite[] selectedFacialHairSprites, Sprite[] selectedShoesSprites) {
+		Reskin (selectedHatSprites, "Hat");
+		Reskin (selectedFacialHairSprites, "FacialHair");
+		Reskin (selectedShoesSprites, "Shoe");
+	}
+
+	private void Reskin(Sprite[] spriteSheet, string rendererNameToReskin) {
+		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
+
 		foreach (SpriteRenderer renderer in renderers) {
-			if (renderer.name == rendererName) {
-				foreach (Sprite sprite in sprites) {
-					if (sprite.name == spriteName) {
+			if (renderer.name == rendererNameToReskin) {
+				bool spriteWasSet = false;
+				foreach (Sprite sprite in spriteSheet) {
+					if (sprite.name == rendererNameToReskin) {
 						renderer.sprite = sprite;
+						spriteWasSet = true;
 					}
+				}
+				if (!spriteWasSet) {
+					renderer.sprite = null;
 				}
 			}
 		}

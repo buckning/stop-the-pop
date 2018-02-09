@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//apply the skin customisations
-		animator.CustomisePlayer ();
+		animator.CustomisePlayer ("");
 
 		//add all the collected coins from the last checkpoint to this internal list. This is just so we can show an accurate coin count when a level is restarted
 		List<int> coins = LastCheckpoint.GetCollectedCoins ();
