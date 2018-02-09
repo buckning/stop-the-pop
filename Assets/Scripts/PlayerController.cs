@@ -409,39 +409,6 @@ public class PlayerController : MonoBehaviour {
 		transform.Translate (translation3);
 	}
 
-	/***
-	 * This is called by an event in the players PlayerPopping animation
-	 */
-	public void PopLeftLeg() {
-		inputManager.ShakeForDuration (0.2f);
-		string soundToPlay = "pop8";
-		AudioManager.PlaySound(soundToPlay);
-		//		float yOffset = -1.7f;
-		float xForce = 300f;
-		float yForce = 300f;
-
-		//add force and torque to the rigidbody when left leg pops
-		float dir = (Random.Range (0f, 1f) < 0.5f) ? -1f : 1f;
-		xForce = xForce * dir;
-		rigidbody2d.freezeRotation = false;
-		rigidbody2d.AddForce (new Vector2 (xForce, yForce));
-		rigidbody2d.AddTorque (Random.Range (0f, 100f));
-
-		AudioManager.PlaySound ("player-death");
-
-		if(glidingEnabled) {
-			cape.PopOff ();
-		}
-
-		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
-		foreach (SpriteRenderer sprite in renderers) {
-			if (sprite.name == "Hat") {
-				float popDir = IsFacingRight () ? 1f : -1f;
-				PopItemOff (sprite, new Vector2 (100f * popDir, 250f), 40f);
-			}
-		}
-	}
-
 	private void PopItemOff(SpriteRenderer sprite, Vector2 popForce, float angularForce) {
 		sprite.transform.parent = null;
 		sprite.sortingLayerName = "Foreground";

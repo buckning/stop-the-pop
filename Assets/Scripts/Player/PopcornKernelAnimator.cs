@@ -14,6 +14,7 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public GameObject shadow;
 	public GameObject jumpDust;
 	public GameObject landingDust;
+	public Cape cape;
 	public LayerMask shadowMask;						//the layer that shadows can be displayed on
 	public Transform leftLegPopPoint;
 	public Transform rightLegPopPoint;
@@ -26,6 +27,14 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	void Update() {
 		UpdateShadow ();
 		UpdateKickEffect ();
+	}
+
+	public void EnableCape(bool enable) {
+		cape.gameObject.SetActive (enable);
+	}
+
+	public void SetGliding(bool gliding) {
+		cape.SetGliding (gliding);
 	}
 	
 	public void SetVelocityX(float speed) {
@@ -177,6 +186,7 @@ public class PopcornKernelAnimator : MonoBehaviour {
 
 		RaycastHit2D hit = Physics2D.Raycast (groundPosition.position, Vector2.up * -1, 20, shadowMask);
 		shadow.transform.position = hit.point;
+
 		if (hit.distance > 10f) {
 			shadow.SetActive (false);
 		} else {
