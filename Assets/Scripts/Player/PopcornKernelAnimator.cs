@@ -20,13 +20,30 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public Transform rightLegPopPoint;
 	public Transform groundPosition;
 
+	public delegate void NotifyEvent ();
+	public event NotifyEvent finishedPoppingListeners;
+
+	private AudioSource runAudioSource;		// this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
+
 	void Start () {
 		animator = GetComponent<Animator> ();
+
+		runAudioSource = GetComponent<AudioSource> ();
+		runAudioSource.loop = true;
+		runAudioSource.clip = Resources.Load ("SoundEffects/Player/run") as AudioClip;
+		runAudioSource.Stop ();
 	}
 
 	void Update() {
 		UpdateShadow ();
 		UpdateKickEffect ();
+
+		// need to see if GetFloat is heavy on performance, if so, cache instead
+		if (!runAudioSource.isPlaying && animator.GetFloat ("speed") != 0.0f) {
+			runAudioSource.Play ();
+		} else if (animator.GetFloat ("speed") == 0.0f) {
+			runAudioSource.Stop ();
+		}
 	}
 
 	public void EnableCape(bool enable) {
@@ -179,11 +196,6 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	}
 
 	void UpdateShadow() {
-//		if (popcornKernel.IsAtMaxTemperature ()) {
-//			shadow.SetActive (false);
-//			return;
-//		}
-
 		RaycastHit2D hit = Physics2D.Raycast (groundPosition.position, Vector2.up * -1, 20, shadowMask);
 		shadow.transform.position = hit.point;
 
@@ -221,6 +233,16 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		sprites = PlayerCustomisation.shoesSprites;
 		reskinSprites (renderers, sprites, "shoe-skin-right", SelectedPlayerCustomisations.selectedShoes + "Right");
 		reskinSprites (renderers, sprites, "shoe-skin-left", SelectedPlayerCustomisations.selectedShoes + "Left");
+	}
+
+	/***
+	 * Called back by the animator. This signals that the kernel has finished popping and notifies any listeners
+	 * that this event took place. 
+	 */
+	public void FinishedPopping() {
+		if (finishedPoppingListeners != null) {
+			finishedPoppingListeners ();
+		}
 	}
 
 	private void reskinSprites(SpriteRenderer[] renderers, Sprite[] sprites, string rendererName, string spriteName) {

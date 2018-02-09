@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour {
 
 	bool lifeAlreadyLost = false;					//when the player loses a life, this is checked to see if a life has already been lost
 													//this variable prevents multiple lives being lost in one level
-	AudioSource runAudioSource;		//this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
 	public PolygonCollider2D bodyCollider;	//this collider is just used by the saw animations
 
@@ -114,10 +113,6 @@ public class PlayerController : MonoBehaviour {
 		popcornKernel.landEventListeners += Land;
 
 		oldPlayerInput = Vector2.zero;
-		runAudioSource = GetComponent<AudioSource> ();
-		runAudioSource.loop = true;
-		runAudioSource.clip = Resources.Load ("SoundEffects/Player/run") as AudioClip;
-		runAudioSource.Stop ();
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
@@ -284,17 +279,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	/***
-	 * Called by the animator
-	 */
-	public void PlayKickEffect() {
-		animator.PlayKickEffect ();
-	}
-
-	public void PlayPainSound() {
-		AudioManager.PlaySound ("popping");
-	}
-
-	/***
 	 * Check if we need to do any actions with regards to jumping.
 	 * We modify the y-velocity of the rigidbody. 
 	 * This is a variable sized jump. 
@@ -367,16 +351,6 @@ public class PlayerController : MonoBehaviour {
 
 		if (wallCollider.isCollidingWithWall ()) {
 			velocity.x = 0.0f;
-		}
-
-		if (Settings.sfxEnabled) {
-			if (velocity.x == 0.0f || playerInput.x == 0.0f|| !grounded) {
-				runAudioSource.Stop ();
-			} else {
-				if (!runAudioSource.isPlaying && playerInput.x != 0.0f) {
-					runAudioSource.Play ();
-				}
-			}
 		}
 
 		//player has changed directions so reset velocity
@@ -465,10 +439,6 @@ public class PlayerController : MonoBehaviour {
 		popcornKernel.increaseTemperature (SNOWFLAKE_TEMPERATURE_DECREASE);
 	}
 	
-	public void Die() {
-		popcornKernel.Die ();
-	}
-	
 	public void CollisionWithHazardousEnvironment(string hazardousEnvName) {
 		lastCollisionName = hazardousEnvName;
 		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
@@ -554,8 +524,6 @@ public class PlayerController : MonoBehaviour {
 		if (!Settings.sfxEnabled) {
 			return;
 		}
-		runAudioSource.Stop ();
-		runAudioSource.volume = 0.0f;
 	}
 
 	public bool IsGliding() {
