@@ -25,6 +25,8 @@ public class PopcornKernelAnimator : MonoBehaviour {
 
 	private AudioSource runAudioSource;		// this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
+	private Sprite[] currentSprites;
+
 	void Start () {
 		animator = GetComponent<Animator> ();
 
@@ -110,8 +112,14 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	 */
 	public void PopRightLeg() {
 		AudioManager.PlaySound("pop3");
-		PopLegSprite (rightLegPopPoint.position, 300f, 200f, 
-			SelectedPlayerCustomisations.selectedShoes + "Right");
+		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
+		float popDir = IsFacingRight () ? 1f : -1f;
+		PopItemOff (renderers, "FacialHair", new Vector2 (100f * popDir, 250f), -60f);
+		PopLegSprite (rightLegPopPoint.position, 300f, 200f);
+	}
+
+	private bool IsFacingRight() {
+		return transform.eulerAngles.y == 0;
 	}
 
 	/***
@@ -119,9 +127,11 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	 */
 	public void PopLeftLeg() {
 		AudioManager.PlaySound("pop8");
+		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 
-		PopLegSprite (leftLegPopPoint.position, -300f, -200f, 
-			SelectedPlayerCustomisations.selectedShoes + "Left");
+		float popDir = IsFacingRight () ? 1f : -1f;
+		PopItemOff (renderers, "Hat", new Vector2 (100f * popDir, 250f), 40f);
+		PopLegSprite (leftLegPopPoint.position, -300f, -200f);
 
 		AudioManager.PlaySound ("player-death");
 	}
@@ -147,23 +157,13 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	/***
 	 * Pop off a players leg and reskin the shoe it with the current skin
 	 */
-	private void PopLegSprite(Vector2 position, float maxTorque, float forceX, string spriteName) {
+	private void PopLegSprite(Vector2 position, float maxTorque, float forceX) {
 		GameObject poppedObject = (GameObject)Instantiate (leg, position, Quaternion.identity);
-		//reskin the popped leg
-		SpriteRenderer[] legRenderers = poppedObject.GetComponentsInChildren<SpriteRenderer> ();
-		Sprite[] sprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-		if (SelectedPlayerCustomisations.selectedShoes != null) {
-			foreach (SpriteRenderer renderer in legRenderers) {
-				if (renderer.name == "shoe-skin") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == spriteName) {
-							renderer.sprite = sprite;
-						}
-					}
-				}
-			}
+		if(currentSprites != null) {
+			//reskin the popped leg
+			SpriteRenderer[] legRenderers = poppedObject.GetComponentsInChildren<SpriteRenderer> ();
+			Reskin (legRenderers, currentSprites, "Shoe");
 		}
-
 		poppedObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (forceX, 100f));
 		poppedObject.GetComponent<Rigidbody2D> ().AddTorque (Random.Range (0f, maxTorque));
 	}
@@ -216,8 +216,8 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	}
 
 	public void CustomisePlayer(string spriteSheet) {
-		Sprite[] vikingSprites = Resources.LoadAll<Sprite> (spriteSheet);
-		ReskinKernel (vikingSprites, vikingSprites, vikingSprites);
+		currentSprites = Resources.LoadAll<Sprite> (spriteSheet);
+		ReskinKernel (currentSprites, currentSprites, currentSprites);
 	}
 
 	/***
@@ -227,6 +227,18 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public void FinishedPopping() {
 		if (finishedPoppingListeners != null) {
 			finishedPoppingListeners ();
+		}
+	}
+
+	private void PopItemOff(SpriteRenderer[] renderers, string spriteName, Vector2 popForce, float angularForce) {
+		foreach(SpriteRenderer sprite in renderers) {
+			if (sprite.name == spriteName) {
+				sprite.transform.parent = null;
+				sprite.sortingLayerName = "Foreground";
+				Rigidbody2D rigidbody = sprite.gameObject.AddComponent<Rigidbody2D> ();
+				rigidbody.AddForce (popForce);
+				rigidbody.AddTorque (angularForce);
+			}
 		}
 	}
 
@@ -241,7 +253,10 @@ public class PopcornKernelAnimator : MonoBehaviour {
 
 	private void Reskin(Sprite[] spriteSheet, string rendererNameToReskin) {
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
+		Reskin (renderers, spriteSheet, rendererNameToReskin);
+	}
 
+	private void Reskin(SpriteRenderer[] renderers, Sprite[] spriteSheet, string rendererNameToReskin) {
 		foreach (SpriteRenderer renderer in renderers) {
 			if (renderer.name == rendererNameToReskin) {
 				bool spriteWasSet = false;

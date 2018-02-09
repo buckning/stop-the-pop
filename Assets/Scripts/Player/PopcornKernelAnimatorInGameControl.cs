@@ -6,21 +6,22 @@ using UnityEditor;
 [CustomEditor(typeof(PopcornKernelAnimator))]
 public class PopcornKernelAnimatorInGameControl : Editor {
 	int selectedOption = 0;
+
+	private string selectedSkin = "Skins/Player/normal";
+
 	public override void OnInspectorGUI() {
 		DrawDefaultInspector();
 
 		PopcornKernelAnimator kernel = (PopcornKernelAnimator)target;
 
-		GUILayout.BeginHorizontal ();
-
 		string[] skinOptions = new string[] {"normal", "viking", "pirate", "santa", "elf"};
 		selectedOption = EditorGUILayout.Popup("Costume", selectedOption, skinOptions);
-		string selectedSkin = "Skins/Player/" + skinOptions[selectedOption];
+		string newSkin = "Skins/Player/" + skinOptions[selectedOption];
 
-		if (GUILayout.Button ("Reskin")) {
+		if (newSkin != selectedSkin) {
+			selectedSkin = newSkin;
 			kernel.CustomisePlayer (selectedSkin);
 		}
-		GUILayout.EndHorizontal ();
 
 		if (GUILayout.Button ("Kick")) {
 			kernel.Kick ();
