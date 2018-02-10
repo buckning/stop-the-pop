@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rigidbody2d;					//the rigid body 2d for the player
 	private bool grounded = false;						//defines if the player is on the ground (used for jumps)
 	private float groundRadius = 0.3f;					//defines the size of the collider used to check if we are on the ground
-	private float ceilingRadius = 0.1f;					//defines the size of the collider used to check if we are on the ground
 	private float attackRadius = 0.8f;					//defines the size of the collider used to check if there is an object to attack
 	float magnetRadius = 6.0f;
 	float magnetAttractForce = 20f;
@@ -113,14 +112,34 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	class CeilingCollisionCheck: CollisionChecker {
+		private PlayerWallTrigger wallCheck;
+		private float ceilingRadius = 0.1f;					//defines the size of the collider used to check if we are on the ground
+		private LayerMask whatIsCeilingMask;
+		private Transform ceilingCheck;
+
+		public CeilingCollisionCheck(Transform ceilingCheck, LayerMask whatIsCeilingMask) {
+			this.wallCheck = wallCheck;
+			this.whatIsCeilingMask = whatIsCeilingMask;
+			this.ceilingCheck = ceilingCheck;
+		}
+
+		public bool isColliding() {
+			return Physics2D.OverlapCircle (this.ceilingCheck.position, this.ceilingRadius, this.whatIsCeilingMask);
+		}
+	}
+
 	void Start () {
 		GroundCheck groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
 		WallCollisionCheck wallCollisionChecker = new WallCollisionCheck (wallCollider);
-		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
+		CeilingCollisionCheck ceilingCollisionCheck = new CeilingCollisionCheck (ceilingCheck, whatIsCeilingMask);
+
+		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
 		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
 		popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
+		popcornKernel.crushEventListeners += Crush;
 		popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 		popcornKernelAnimator.popEventListeners += ShakeScreen;
 
@@ -152,8 +171,6 @@ public class PlayerController : MonoBehaviour {
 	public void FixedUpdate () {
 		popcornKernel.FixedUpdate (rigidbody2d.velocity);
 		grounded = popcornKernel.IsGrounded ();
-
-		touchingCeiling = Physics2D.OverlapCircle (ceilingCheck.position, ceilingRadius  * transform.localScale.x, whatIsCeilingMask);
 
 		UpdateMagnetBehaviour ();
 	}
@@ -194,14 +211,8 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = popcornKernel.GetVelocity ();
 		UpdateMagnetBehaviour ();
 
-		CheckIfCrushed ();
+		CheckForPlayerFlip ();
 
-		//update the way our sprite is facing.
-		if (playerInput.x > 0 && !facingRight) {
-			Flip ();
-		} else if (playerInput.x < 0 && facingRight) {
-			Flip();
-		}
 
 		if (glidingEnabled) {
 			Vector2 velocity = new Vector2(playerInput.x, rigidbody2d.velocity.y);
@@ -214,14 +225,24 @@ public class PlayerController : MonoBehaviour {
 		UpdateAnimations ();
 	}
 
-	void CheckIfCrushed() {
-		//only want to trigger this code once so crushed variable was introduced
-		if (touchingCeiling && grounded && !crushed) {
-			//we are crushed, restart the level
-			AddLifeLost();
-			inputManager.RetryLevel();
-			crushed = true;	
+	private void CheckForPlayerFlip() {
+		if (popcornKernel.IsAtMaxTemperature ()) {
+			return;
 		}
+
+		if (inputManager.getXAxis() > 0 && !facingRight) {
+			Flip ();
+		} else if (inputManager.getXAxis() < 0 && facingRight) {
+			Flip();
+		}
+	}
+
+	/***
+	 * Called back when the PopcornKernel is crushed
+	 */
+	void Crush() {
+		AddLifeLost();
+		inputManager.RetryLevel();
 	}
 
 	/***

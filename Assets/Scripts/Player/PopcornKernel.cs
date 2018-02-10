@@ -7,6 +7,7 @@ public class PopcornKernel {
 	public event NotifyEvent fallEventListeners;	// listener that gets triggered when the kernel falls off an object
 	public event NotifyEvent landEventListeners;	// listener that gets triggered when the kernel lands on an object
 	public event NotifyEvent kickEventListeners;	// listener that gets triggered when the kernel triggers a kick
+	public event NotifyEvent crushEventListeners;	// listener that gets triggered when the kernel triggers a kick
 
 	const float MAX_TEMPERATURE = 100.0f;
 	
@@ -15,11 +16,13 @@ public class PopcornKernel {
 	private float accelerationRate = 2.8f;
 	private float accelerationRateAirbourne = 2.8f;
 	private bool grounded = false;
+	private bool crushed = false;
 	private bool kicking = false;
 	private bool groundedOverride = false;	// the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
 	private bool gliding = false;	// track the state if the player is gliding
 	private CollisionChecker groundCollisionChecker;
 	private CollisionChecker wallCollisionChecker;
+	private CollisionChecker ceilingCollisionChecker;
 
 	private float gravity;
 	private float minJumpVelocity;
@@ -34,9 +37,13 @@ public class PopcornKernel {
 
 	private Vector2 velocity;
 
-	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, CollisionChecker wallCollisionChecker, float minJumpHeight, float maxJumpHeight, float timeToJumpApex) {
+	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, 
+				CollisionChecker wallCollisionChecker, CollisionChecker ceilingCollisionChecker, 
+				float minJumpHeight, float maxJumpHeight, float timeToJumpApex) {
+
 		this.groundCollisionChecker = groundCollisionChecker;
 		this.wallCollisionChecker = wallCollisionChecker;
+		this.ceilingCollisionChecker = ceilingCollisionChecker;
 		this.inputManager = inputManager;
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -52,6 +59,7 @@ public class PopcornKernel {
 		CheckForJump ();
 		UpdateVelocity (deltaTime);
 		UpdateTemperature(deltaTime);
+		CheckIfCrushed ();
 	}
 
 	public Vector2 GetVelocity() {
@@ -109,6 +117,14 @@ public class PopcornKernel {
 			gliding = false;
 		}
 		return velocity;
+	}
+
+	private void CheckIfCrushed() {
+		if (ceilingCollisionChecker.isColliding() && grounded 
+			&& !crushed && crushEventListeners != null) {
+			crushEventListeners ();
+			crushed = true;	
+		}
 	}
 
 	private bool IsKickTriggered() {

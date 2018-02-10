@@ -216,7 +216,7 @@ public class PopcornKernelTest {
 	}
 
 	PopcornKernel NewTestPopcornKernel() {
-		return new PopcornKernel (testInputManager, groundChecker, null, 0.4f, 8.0f, 1.0f);
+		return new PopcornKernel (testInputManager, groundChecker, null, null, 0.4f, 8.0f, 1.0f);
 	}
 
 	class TestCollisionChecker: CollisionChecker {
