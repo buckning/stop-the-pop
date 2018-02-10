@@ -19,7 +19,7 @@ public class MagnetPowerup : MonoBehaviour {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			collected = true;
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.magnetEnabled = true;
+			player.EnableMagnet (true);
 			AudioManager.PlaySound ("magnet-new");
 			animator.SetTrigger ("Pickup");
 			player.inputManager.ShowWhiteFlash ();

@@ -132,13 +132,13 @@ public class StorePanel : MonoBehaviour {
 		StoreItem magnet = StoreInventory.GetItemFromInventory (Strings.MAGNET);
 
 		if (stats.totalNumberOfCoins >= magnet.cost) {
-			if (mainHud.GetPlayer ().magnetEnabled) {
+			if (mainHud.GetPlayer ().IsMagnetEnabled ()) {
 				mainHud.infoPanel.SetText (Strings.UI_YOU_ALREADY_PURCHASED_THIS_ITEM);
 				mainHud.infoPanel.gameObject.SetActive (true);
 				return;
 			}
 
-			mainHud.GetPlayer ().magnetEnabled = true;
+			mainHud.GetPlayer ().EnableMagnet(true);
 			stats.totalNumberOfCoins -= magnet.cost;
 			textFieldAnimator.AddToNumber (-magnet.cost);
 			stats.SaveToDisk ();

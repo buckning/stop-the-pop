@@ -44,8 +44,6 @@ public class PlayerController : MonoBehaviour {
 	private bool grounded = false;						//defines if the player is on the ground (used for jumps)
 	private float groundRadius = 0.3f;					//defines the size of the collider used to check if we are on the ground
 	private float attackRadius = 0.8f;					//defines the size of the collider used to check if there is an object to attack
-	float magnetRadius = 6.0f;
-	float magnetAttractForce = 20f;
 
 	bool gliding = false;								//this is set internally when the player should be gliding
 	public HudListener inputManager;					//reference to the HUD, so we can check what buttons are being pressed
@@ -59,12 +57,11 @@ public class PlayerController : MonoBehaviour {
 
 	public Cape cape;
 
-	public bool magnetEnabled = false;
-
 	public bool playerMovementEnabled = true;
 
 	List<int> collectedCoins = new List<int>();
 
+	public Magnet magnet;
 	bool touchingCeiling = false;
 	bool crushed = false;
 	float glidingTime = 0.0f;
@@ -179,8 +176,6 @@ public class PlayerController : MonoBehaviour {
 	public void FixedUpdate () {
 		popcornKernel.FixedUpdate (rigidbody2d.velocity);
 		grounded = popcornKernel.IsGrounded ();
-
-		UpdateMagnetBehaviour ();
 	}
 
 	public void PlaySawBladeDeathAnimation() {
@@ -217,7 +212,6 @@ public class PlayerController : MonoBehaviour {
 		} 
 		popcornKernel.Update (rigidbody2d.velocity, Time.deltaTime);
 		rigidbody2d.velocity = popcornKernel.GetVelocity ();
-		UpdateMagnetBehaviour ();
 
 		CheckForPlayerFlip ();
 
@@ -264,24 +258,20 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void EnableMagnet(bool enable) {
+		magnet.gameObject.SetActive (enable);
+	}
+
+	public bool IsMagnetEnabled() {
+		return magnet.gameObject.activeInHierarchy;
+	}
+
 	void Pop() {
-		magnetEnabled = false;
+		magnet.gameObject.SetActive (false);
 		AddLifeLost ();
 		popcornKernelAnimator.StartPopping();
 		AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);
 		lastCollisionName = "";
-	}
-
-	void UpdateMagnetBehaviour() {
-		if (magnetEnabled) {
-			Collider2D[] collidingObjects  = Physics2D.OverlapCircleAll (transform.position, magnetRadius  * transform.localScale.x, collectableMask);
-			foreach(Collider2D collider in collidingObjects) {
-				if (collider.gameObject.name.StartsWith("Coin")) {
-					collider.gameObject.transform.position = Vector3.MoveTowards (collider.gameObject.transform.position, transform.position, Time.deltaTime * magnetAttractForce);
-				}
-
-			}
-		}
 	}
 
 	public void Translate(Vector2 translation) {
@@ -413,7 +403,6 @@ public class PlayerController : MonoBehaviour {
 		foreach (Transform check in groundCheck) {
 			Gizmos.DrawSphere (check.position, groundRadius * transform.localScale.x);
 		}
-		Gizmos.DrawSphere (transform.position, magnetRadius * transform.localScale.x);
 	}
 
 	public void IncrementCoinCount(int coinId) {
