@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Pop() {
-		magnet.gameObject.SetActive (false);
+		EnableMagnet (false);
 		AddLifeLost ();
 		popcornKernelAnimator.StartPopping();
 		AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);

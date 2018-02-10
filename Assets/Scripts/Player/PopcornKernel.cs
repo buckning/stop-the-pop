@@ -221,8 +221,15 @@ public class PopcornKernel {
 	}
 
 	public void increaseTemperature(float temperatureDiff) {
+		float oldTemperature = temperature;
+
 		temperature += temperatureDiff;
 		temperature = Mathf.Clamp (temperature, 0.0f, MAX_TEMPERATURE);
+
+		if (temperature == MAX_TEMPERATURE && oldTemperature != MAX_TEMPERATURE
+			&& popEventListeners != null) {
+			popEventListeners ();
+		}
 	}
 
 	public void Die() {
