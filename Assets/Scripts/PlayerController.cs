@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour {
 	float magnetRadius = 6.0f;
 	float magnetAttractForce = 20f;
 
-	private bool popped = false;						//used to see if the player popping animation has been triggered
 	bool gliding = false;								//this is set internally when the player should be gliding
 	public HudListener inputManager;					//reference to the HUD, so we can check what buttons are being pressed
 
@@ -140,6 +139,7 @@ public class PlayerController : MonoBehaviour {
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
 		popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 		popcornKernel.crushEventListeners += Crush;
+		popcornKernel.popEventListeners += Pop;
 		popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 		popcornKernelAnimator.popEventListeners += ShakeScreen;
 
@@ -165,6 +165,14 @@ public class PlayerController : MonoBehaviour {
 	 */
 	private void FallOff() {
 		StartCoroutine(DisableGroundedOverride());
+	}
+
+	/***
+	 * Called back when the PopcornKernel is crushed
+	 */
+	void Crush() {
+		AddLifeLost();
+		inputManager.RetryLevel();
 	}
 
 	// Update is called at a fixed rate - this is better when interacting with physics objects (time.delta time is not needed here)
@@ -213,7 +221,6 @@ public class PlayerController : MonoBehaviour {
 
 		CheckForPlayerFlip ();
 
-
 		if (glidingEnabled) {
 			Vector2 velocity = new Vector2(playerInput.x, rigidbody2d.velocity.y);
 			if (grounded) {
@@ -238,14 +245,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	/***
-	 * Called back when the PopcornKernel is crushed
-	 */
-	void Crush() {
-		AddLifeLost();
-		inputManager.RetryLevel();
-	}
-
-	/***
 	 * Should only be used by animator
 	 */
 	public void RetryLevelAfterPopAnimation() {
@@ -260,27 +259,17 @@ public class PlayerController : MonoBehaviour {
 		popcornKernelAnimator.SetVelocityY (rigidbody2d.velocity.y);
 		popcornKernelAnimator.SetGrounded (grounded);
 
-		//check to see if we should start our pop animation 
-		if (popcornKernel.IsAtMaxTemperature() && !popped && grounded) {
-			magnetEnabled = false;
-			AddLifeLost ();
-
-			//start the popping animation
-			//start the animator
-			popcornKernelAnimator.StartPopping();
-			popped = true;
-
-			AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);
-
-			lastCollisionName = "";
-			
-			//maybe slow down the time scale here???
-			//apply a force after one second
-		}
-
 		if (popcornKernel.IsAtMaxTemperature()) {
 			gliding = false;
 		}
+	}
+
+	void Pop() {
+		magnetEnabled = false;
+		AddLifeLost ();
+		popcornKernelAnimator.StartPopping();
+		AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);
+		lastCollisionName = "";
 	}
 
 	void UpdateMagnetBehaviour() {

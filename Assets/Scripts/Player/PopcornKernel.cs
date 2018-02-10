@@ -7,7 +7,8 @@ public class PopcornKernel {
 	public event NotifyEvent fallEventListeners;	// listener that gets triggered when the kernel falls off an object
 	public event NotifyEvent landEventListeners;	// listener that gets triggered when the kernel lands on an object
 	public event NotifyEvent kickEventListeners;	// listener that gets triggered when the kernel triggers a kick
-	public event NotifyEvent crushEventListeners;	// listener that gets triggered when the kernel triggers a kick
+	public event NotifyEvent crushEventListeners;	// listener that gets triggered when the kernel gets crushed
+	public event NotifyEvent popEventListeners;		// Listener that gets triggered when the kernel pops
 
 	const float MAX_TEMPERATURE = 100.0f;
 	
@@ -195,8 +196,16 @@ public class PopcornKernel {
 			invincibilityTimeLeft = 0.0f;
 		}
 
+		float oldTemperature = temperature;
+
 		if (updateTemperature && invincibilityTimeLeft == 0.0f) {
 			temperature += deltaTime * temperatureUpdateRate;
+			temperature = Mathf.Clamp (temperature, 0.0f, MAX_TEMPERATURE);
+		}
+
+		if (temperature == MAX_TEMPERATURE && oldTemperature != MAX_TEMPERATURE
+				&& popEventListeners != null) {
+			popEventListeners ();
 		}
 	}
 
