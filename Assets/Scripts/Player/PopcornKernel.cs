@@ -6,6 +6,7 @@ public class PopcornKernel {
 	public event NotifyEvent jumpListeners;
 	public event NotifyEvent fallEventListeners;	// listener that gets triggered when the kernel falls off an object
 	public event NotifyEvent landEventListeners;	// listener that gets triggered when the kernel lands on an object
+	public event NotifyEvent kickEventListeners;	// listener that gets triggered when the kernel triggers a kick
 
 	const float MAX_TEMPERATURE = 100.0f;
 	
@@ -34,6 +35,12 @@ public class PopcornKernel {
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
+	}
+
+	public void Update(float deltaTime) {
+		if (IsKickTriggered () && kickEventListeners != null) {
+			kickEventListeners ();
+		}
 	}
 
 	/***
@@ -76,7 +83,7 @@ public class PopcornKernel {
 		return velocity;
 	}
 
-	public bool IsKickTriggered() {
+	private bool IsKickTriggered() {
 		if (inputManager.AttackKeyPressed () && !kicking) {
 			if (grounded) {
 				kicking = true;
@@ -94,7 +101,7 @@ public class PopcornKernel {
 		groundedOverride = false;
 	}
 
-	public void Update(Vector2 velocity) {
+	public void FixedUpdate(Vector2 velocity) {
 		bool oldGrounded = grounded;
 		grounded = groundCollisionChecker.isColliding ();
 

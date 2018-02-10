@@ -22,6 +22,8 @@ public class PopcornKernelAnimator : MonoBehaviour {
 
 	public delegate void NotifyEvent ();
 	public event NotifyEvent finishedPoppingListeners;
+	public event NotifyEvent popEventListeners;
+	public event NotifyEvent kickListeners;
 
 	private AudioSource runAudioSource;		// this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
@@ -68,10 +70,6 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		animator.SetBool ("grounded", grounded);
 	}
 
-	public void Kick() {
-		animator.SetTrigger("kick");
-	}
-
 	public void StartPopping() {
 		animator.SetTrigger("Popping");
 		StartCoroutine(PopAnimationComplete());
@@ -90,27 +88,56 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	}
 
 	/***
-	 * Called by the animator
+	 * Called by external class to trigger a kick
+	 */
+	public void Kick() {
+		animator.SetTrigger("kick");
+	}
+
+	public void KickAnimationAttackReady() {
+		if (kickListeners != null) {
+			kickListeners ();
+		}
+	}
+
+	/***
+	 * Called by the animator when the leg has finished pulling back and getting ready to kick
 	 */
 	public void PlayKickEffect() {
 		kickEffect.gameObject.SetActive (true);
 		kickEffect.color = new Color(1, 1, 1, 1f);
-
 		AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
+	}
+
+	private void UpdateKickEffect() {
+		if (kickEffect.gameObject.activeInHierarchy) {
+			float alpha = kickEffect.color.a - Time.deltaTime * 4;
+			if (alpha < 0.0f) {
+				alpha = 0.0f;
+				kickEffect.color = new Color (1, 1, 1, 0.0f);
+				kickEffect.gameObject.SetActive (false);
+			}
+			kickEffect.color = new Color (1, 1, 1, alpha);
+		}
 	}
 
 	/***
 	 * This is called by an event in the players PlayerPopping animation
 	 */
 	public void PopMiddleSection() {
-		string soundToPlay = "pop10";
-		AudioManager.PlaySound(soundToPlay);
+		if (popEventListeners != null) {
+			popEventListeners ();
+		}
+		AudioManager.PlaySound("pop10");
 	}
 
 	/***
 	 * This is called by an event in the players PlayerPopping animation
 	 */
 	public void PopRightLeg() {
+		if (popEventListeners != null) {
+			popEventListeners ();
+		}
 		AudioManager.PlaySound("pop3");
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 		float popDir = IsFacingRight () ? 1f : -1f;
@@ -126,6 +153,9 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	 * This is called by an event in the players PlayerPopping animation
 	 */
 	public void PopLeftLeg() {
+		if (popEventListeners != null) {
+			popEventListeners ();
+		}
 		AudioManager.PlaySound("pop8");
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 
@@ -140,6 +170,9 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	 * This is called by an event in the players PlayerPopping animation
 	 */
 	public void PopBody() {
+		if (popEventListeners != null) {
+			popEventListeners ();
+		}
 		AudioManager.PlaySound("pop8");
 	}
 
@@ -173,18 +206,6 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		StartBlinking ();
 	}
 
-	void UpdateKickEffect() {
-		if (kickEffect.gameObject.activeInHierarchy) {
-			float alpha = kickEffect.color.a - Time.deltaTime * 4;
-			if (alpha < 0.0f) {
-				alpha = 0.0f;
-				kickEffect.color = new Color (1, 1, 1, 0.0f);
-				kickEffect.gameObject.SetActive (false);
-			}
-			kickEffect.color = new Color (1, 1, 1, alpha);
-		}
-	}
-
 	public void Jump() {
 		AudioManager.PlaySoundAfterTime ("jump", 0.1f);
 		Vector2 spawnPos = new Vector2 (groundPosition.position.x, groundPosition.position.y);
@@ -215,11 +236,6 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		}
 	}
 
-	public void CustomisePlayer(string spriteSheet) {
-		currentSprites = Resources.LoadAll<Sprite> (spriteSheet);
-		ReskinKernel (currentSprites, currentSprites, currentSprites);
-	}
-
 	/***
 	 * Called back by the animator. This signals that the kernel has finished popping and notifies any listeners
 	 * that this event took place. 
@@ -240,6 +256,11 @@ public class PopcornKernelAnimator : MonoBehaviour {
 				rigidbody.AddTorque (angularForce);
 			}
 		}
+	}
+
+	public void CustomisePlayer(string spriteSheet) {
+		currentSprites = Resources.LoadAll<Sprite> (spriteSheet);
+		ReskinKernel (currentSprites, currentSprites, currentSprites);
 	}
 
 	/***

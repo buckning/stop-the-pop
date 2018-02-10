@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour {
 
 	bool touchingCeiling = false;
 	bool crushed = false;
-	bool kicking = false;
 	float glidingTime = 0.0f;
 
 	bool lifeAlreadyLost = false;					//when the player loses a life, this is checked to see if a life has already been lost
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 
 	public PolygonCollider2D bodyCollider;	//this collider is just used by the saw animations
 
-	public PopcornKernelAnimator animator;
+	public PopcornKernelAnimator popcornKernelAnimator;
 
 	private PopcornKernel popcornKernel;
 
@@ -108,9 +107,12 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
 		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
-		popcornKernel.jumpListeners += Jump;
+		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 		popcornKernel.fallEventListeners += FallOff;
-		popcornKernel.landEventListeners += Land;
+		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
+		popcornKernel.kickEventListeners += tempKickListener;
+		popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
+		popcornKernelAnimator.popEventListeners += ShakeScreen;
 
 		oldPlayerInput = Vector2.zero;
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
@@ -119,25 +121,11 @@ public class PlayerController : MonoBehaviour {
 
 		rigidbody2d = GetComponent<Rigidbody2D> ();
 
-		if (glidingEnabled) {
-			cape.gameObject.SetActive (true);
-		}
-
-		//apply the skin customisations
-		animator.CustomisePlayer ("");
-
 		//add all the collected coins from the last checkpoint to this internal list. This is just so we can show an accurate coin count when a level is restarted
 		List<int> coins = LastCheckpoint.GetCollectedCoins ();
 		foreach (int coinId in coins) {
 			collectedCoins.Add (coinId);
 		}
-	}
-
-	/***
-	 * Called back by the popcornKernel when it lands on something.
-	 */
-	private void Land() {
-		animator.Land ();
 	}
 
 	/***
@@ -153,7 +141,7 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called at a fixed rate - this is better when interacting with physics objects (time.delta time is not needed here)
 	public void FixedUpdate () {
-		popcornKernel.Update (rigidbody2d.velocity);
+		popcornKernel.FixedUpdate (rigidbody2d.velocity);
 		grounded = popcornKernel.IsGrounded ();
 
 		touchingCeiling = Physics2D.OverlapCircle (ceilingCheck.position, ceilingRadius  * transform.localScale.x, whatIsCeilingMask);
@@ -162,11 +150,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void PlaySawBladeDeathAnimation() {
-		animator.PlaySawBladeDeathAnimation ();
+		popcornKernelAnimator.PlaySawBladeDeathAnimation ();
 	}
 
 	public void PlayMovingSawBladeDeathAnimation() {
-		animator.PlayMovingSawBladeDeathAnimation ();
+		popcornKernelAnimator.PlayMovingSawBladeDeathAnimation ();
 	}
 
 	public void EnableBodyCollider() {
@@ -188,23 +176,21 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = velocity;
 	}
 
+	void tempKickListener() {
+		playerMovementEnabled = false;
+		StartCoroutine (EnablePlayerMovement ());
+		popcornKernelAnimator.Kick();
+		AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
+	}
+
 	void Update() {
+		playerInput = new Vector2 (inputManager.getXAxis(), inputManager.getYAxis());
 		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
-			cape.SetVelocity (Vector2.zero);
-		} else {
-			playerInput = new Vector2 (inputManager.getXAxis(), inputManager.getYAxis());
-		}
-
+		} 
+		popcornKernel.Update (Time.deltaTime);
 		UpdateMagnetBehaviour ();
 		CheckForJump ();
-
-		if (popcornKernel.IsKickTriggered ()) {
-			playerMovementEnabled = false;
-			StartCoroutine (EnablePlayerMovement ());
-			animator.Kick();
-			AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
-		}
 
 		UpdateVelocity ();
 		CheckIfCrushed ();
@@ -250,19 +236,18 @@ public class PlayerController : MonoBehaviour {
 		float animationSpeed = 0.0f;
 		animationSpeed = (rigidbody2d.velocity.x != 0.0f) ? Mathf.Abs (playerInput.x) : 0.0f;
 		//set our animations
-		animator.SetVelocityX (animationSpeed);
-		animator.SetVelocityY (rigidbody2d.velocity.y);
-		animator.SetGrounded (grounded);
+		popcornKernelAnimator.SetVelocityX (animationSpeed);
+		popcornKernelAnimator.SetVelocityY (rigidbody2d.velocity.y);
+		popcornKernelAnimator.SetGrounded (grounded);
 
 		//check to see if we should start our pop animation 
 		if (popcornKernel.IsAtMaxTemperature() && !popped && grounded) {
-
 			magnetEnabled = false;
 			AddLifeLost ();
 
 			//start the popping animation
 			//start the animator
-			animator.StartPopping();
+			popcornKernelAnimator.StartPopping();
 			popped = true;
 
 			AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);
@@ -293,12 +278,8 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		Vector2 velocity = popcornKernel.CheckForJump (rigidbody2d.velocity);
-		cape.SetVelocity (velocity);
+//		cape.SetVelocity (velocity);
 		rigidbody2d.velocity = velocity;
-	}
-
-	private void Jump() {
-		animator.Jump ();
 	}
 
 	/***
@@ -383,14 +364,6 @@ public class PlayerController : MonoBehaviour {
 		transform.Translate (translation3);
 	}
 
-	private void PopItemOff(SpriteRenderer sprite, Vector2 popForce, float angularForce) {
-		sprite.transform.parent = null;
-		sprite.sortingLayerName = "Foreground";
-		Rigidbody2D rigidbody = sprite.gameObject.AddComponent<Rigidbody2D> ();
-		rigidbody.AddForce (popForce);
-		rigidbody.AddTorque (angularForce);
-	}
-
 	//called by the animation
 	public void Attack() {
 		//do a physics detect for breakable layer
@@ -420,6 +393,10 @@ public class PlayerController : MonoBehaviour {
 
 	public bool IsFacingRight() {
 		return facingRight;
+	}
+
+	private void ShakeScreen() {
+		inputManager.ShakeForDuration (0.2f);
 	}
 
 	/***
@@ -492,7 +469,6 @@ public class PlayerController : MonoBehaviour {
 	IEnumerator EnablePlayerMovement() {
 		yield return new WaitForSeconds(0.5f);
 		playerMovementEnabled = true;
-		popcornKernel.StopKicking ();
 	}
 
 	public void SetTemperatureUpdateRate(string enemyName, float tempUpdateRate) {
