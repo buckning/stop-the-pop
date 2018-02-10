@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour {
 
 	[HideInInspector]
 	public Vector2 playerInput;
-	Vector2 oldPlayerInput;
 
 	public Transform[] groundCheck;
 	public Transform ceilingCheck;
@@ -125,7 +124,6 @@ public class PlayerController : MonoBehaviour {
 		popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 		popcornKernelAnimator.popEventListeners += ShakeScreen;
 
-		oldPlayerInput = Vector2.zero;
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
@@ -192,7 +190,8 @@ public class PlayerController : MonoBehaviour {
 		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
 		} 
-		rigidbody2d.velocity = popcornKernel.Update (rigidbody2d.velocity, Time.deltaTime);
+		popcornKernel.Update (rigidbody2d.velocity, Time.deltaTime);
+		rigidbody2d.velocity = popcornKernel.GetVelocity ();
 		UpdateMagnetBehaviour ();
 
 		CheckIfCrushed ();
@@ -203,8 +202,6 @@ public class PlayerController : MonoBehaviour {
 		} else if (playerInput.x < 0 && facingRight) {
 			Flip();
 		}
-
-		popcornKernel.UpdateTemperature (Time.deltaTime);
 
 		if (glidingEnabled) {
 			Vector2 velocity = new Vector2(playerInput.x, rigidbody2d.velocity.y);
@@ -263,25 +260,6 @@ public class PlayerController : MonoBehaviour {
 		if (popcornKernel.IsAtMaxTemperature()) {
 			gliding = false;
 		}
-	}
-
-	/***
-	 * Check if we need to do any actions with regards to jumping.
-	 * We modify the y-velocity of the rigidbody. 
-	 * This is a variable sized jump. 
-	 * We have a minJumpVelocity and a maxVelocity.
-	 * When we initiate the jump we apply the max velocity. 
-	 * We stay using this max velocity unless the player releases
-	 * the jump key, in which case we change the jump velocity to minVelocity
-	 */
-	public void CheckForJump() {	
-		if (!jumpEnabled || !playerMovementEnabled) {
-			return;
-		}
-
-		Vector2 velocity = popcornKernel.CheckForJump (rigidbody2d.velocity);
-//		cape.SetVelocity (velocity);
-		rigidbody2d.velocity = velocity;
 	}
 
 	void UpdateMagnetBehaviour() {
@@ -432,12 +410,6 @@ public class PlayerController : MonoBehaviour {
 		collectedCoins.Add (coinId);
 		inputManager.StartCoinCollectedAnimation ();
 		inputManager.coinCountText.text = collectedCoins.Count.ToString ();
-	}
-
-	public void LevelComplete() {
-		if (!Settings.sfxEnabled) {
-			return;
-		}
 	}
 
 	public bool IsGliding() {

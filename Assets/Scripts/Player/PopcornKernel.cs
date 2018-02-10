@@ -32,6 +32,8 @@ public class PopcornKernel {
 
 	private bool facingRight = false;
 
+	private Vector2 velocity;
+
 	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, CollisionChecker wallCollisionChecker, float minJumpHeight, float maxJumpHeight, float timeToJumpApex) {
 		this.groundCollisionChecker = groundCollisionChecker;
 		this.wallCollisionChecker = wallCollisionChecker;
@@ -39,19 +41,24 @@ public class PopcornKernel {
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
+		velocity = Vector2.zero;
 	}
 
-	public Vector2 Update(Vector2 velocity, float deltaTime) {
+	public void Update(Vector2 currentVelocity, float deltaTime) {
 		if (IsKickTriggered () && kickEventListeners != null) {
 			kickEventListeners ();
 		}
-		velocity = CheckForJump (velocity);
-		velocity = UpdateVelocity (velocity, deltaTime);
-
-		return velocity;
+		this.velocity = currentVelocity;
+		CheckForJump ();
+		UpdateVelocity (deltaTime);
+		UpdateTemperature(deltaTime);
 	}
 
-	public Vector2 UpdateVelocity(Vector2 velocity, float deltaTime) {
+	public Vector2 GetVelocity() {
+		return this.velocity;
+	}
+
+	public void UpdateVelocity(float deltaTime) {
 		float xInput = inputManager.getXAxis();
 
 		velocity.y += gravity * deltaTime;
@@ -62,8 +69,6 @@ public class PopcornKernel {
 		if (kicking || xInput == 0.0f || wallCollisionChecker.isColliding ()) {
 			velocity.x = 0.0f;
 		}
-
-		return velocity;
 	}
 
 	/***
@@ -75,7 +80,7 @@ public class PopcornKernel {
 	 * We stay using this max velocity unless the player releases
 	 * the jump key, in which case we change the jump velocity to minVelocity
 	 */
-	public Vector2 CheckForJump(Vector2 velocity) {	
+	public Vector2 CheckForJump() {	
 		if (temperature >= MAX_TEMPERATURE) {
 			return velocity;
 		}

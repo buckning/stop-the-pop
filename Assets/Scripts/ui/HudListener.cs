@@ -870,7 +870,6 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	public void levelComplete(string nextLevel) {
 		this.nextLevel = nextLevel;
-		player.LevelComplete ();
 		Pause ();
 		pauseMenu.SetActive(false);
 		thermometer.gameObject.SetActive (false);
