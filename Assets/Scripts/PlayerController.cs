@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
-		popcornKernel.kickEventListeners += tempKickListener;
+		popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 		popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 		popcornKernelAnimator.popEventListeners += ShakeScreen;
 
@@ -176,21 +176,13 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = velocity;
 	}
 
-	void tempKickListener() {
-		playerMovementEnabled = false;
-		StartCoroutine (EnablePlayerMovement ());
-		popcornKernelAnimator.Kick();
-		AudioManager.PlaySound ("jump", 1.3f + Random.Range(-0.2f, 0.2f));	//use the same sfx for both jump and kick. 
-	}
-
 	void Update() {
 		playerInput = new Vector2 (inputManager.getXAxis(), inputManager.getYAxis());
 		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
 		} 
-		popcornKernel.Update (Time.deltaTime);
+		rigidbody2d.velocity = popcornKernel.Update (rigidbody2d.velocity, Time.deltaTime);
 		UpdateMagnetBehaviour ();
-		CheckForJump ();
 
 		UpdateVelocity ();
 		CheckIfCrushed ();
@@ -288,25 +280,6 @@ public class PlayerController : MonoBehaviour {
 	 */
 	public void UpdateVelocity() {
 		Vector2 velocity = rigidbody2d.velocity;
-		if(gliding && glidingEnabled && velocity.y <= 0f) {
-			velocity.y = glideSpeed;
-			glidingTime += Time.deltaTime;
-
-			if (glidingTime >= 10.0f) {
-				
-				#if UNITY_IOS
-				SocialServiceManager.GetInstance ().UnlockAchievement ("lookatmemaimflying");
-				#endif
-				#if UNITY_ANDROID
-				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_look_at_me_ma_im_flying);
-				#endif
-
-				glidingTime = 0.0f;
-			}
-		} else {
-			glidingTime = 0.0f;
-			velocity.y += gravity * Time.deltaTime;
-		}
 
 		if (!playerMovementEnabled) {
 			playerInput.x = 0.0f;

@@ -37,10 +37,59 @@ public class PopcornKernel {
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
 	}
 
-	public void Update(float deltaTime) {
+	public Vector2 Update(Vector2 velocity, float deltaTime) {
 		if (IsKickTriggered () && kickEventListeners != null) {
 			kickEventListeners ();
 		}
+		velocity = CheckForJump (velocity);
+		velocity = UpdateVelocity (velocity, deltaTime);
+
+		return velocity;
+	}
+
+	/***
+	 * Update our own x and y velocity. This gives us better control of jumping
+	 * and better playability since time to fall to ground after jump takes a while
+	 */
+	public Vector2 UpdateVelocity(Vector2 velocity, float deltaTime) {
+		velocity.y += gravity * deltaTime;
+		return velocity;
+//		if (!playerMovementEnabled) {
+//			playerInput.x = 0.0f;
+//		}
+//
+//		float targetVelocityX = playerInput.x * moveSpeed;
+//
+//		if (playerInput.x == 0.0f) {
+//			velocity.x = 0.0f;
+//		}
+//
+//		//this caps the max speed of the player
+//		if (rigidbody2d.velocity.x > 0 && rigidbody2d.velocity.x > targetVelocityX) {
+//			velocity.x = targetVelocityX;
+//		}
+//		//this caps the min speed of the player
+//		else if (playerInput.x < 0 && rigidbody2d.velocity.x < targetVelocityX) {
+//			velocity.x = targetVelocityX;
+//		}
+//
+//		float accelerationRate = 2.8f;
+//		float accelerationRateAirbourne = 2.8f;
+//
+//		if (wallCollider.isCollidingWithWall ()) {
+//			velocity.x = 0.0f;
+//		}
+//
+//		//player has changed directions so reset velocity
+//		if (playerInput.x != oldPlayerInput.x) {
+//			velocity.x = 0.0f;
+//		}
+//
+//		rigidbody2d.velocity = velocity;
+//		Vector2 force = new Vector2 (targetVelocityX * (grounded ? accelerationRate : accelerationRateAirbourne), 0f);
+//		rigidbody2d.AddForce(force);
+//
+//		oldPlayerInput = playerInput;
 	}
 
 	/***
