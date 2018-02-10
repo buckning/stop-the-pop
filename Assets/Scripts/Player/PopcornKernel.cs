@@ -11,6 +11,9 @@ public class PopcornKernel {
 	const float MAX_TEMPERATURE = 100.0f;
 	
 	private float temperature = 0.0f;
+	private float moveSpeed = 14f;
+	private float accelerationRate = 2.8f;
+	private float accelerationRateAirbourne = 2.8f;
 	private bool grounded = false;
 	private bool kicking = false;
 	private bool groundedOverride = false;	// the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
@@ -29,8 +32,9 @@ public class PopcornKernel {
 
 	private bool facingRight = false;
 
-	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, float minJumpHeight, float maxJumpHeight, float timeToJumpApex) {
+	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, CollisionChecker wallCollisionChecker, float minJumpHeight, float maxJumpHeight, float timeToJumpApex) {
 		this.groundCollisionChecker = groundCollisionChecker;
+		this.wallCollisionChecker = wallCollisionChecker;
 		this.inputManager = inputManager;
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -47,49 +51,19 @@ public class PopcornKernel {
 		return velocity;
 	}
 
-	/***
-	 * Update our own x and y velocity. This gives us better control of jumping
-	 * and better playability since time to fall to ground after jump takes a while
-	 */
 	public Vector2 UpdateVelocity(Vector2 velocity, float deltaTime) {
+		float xInput = inputManager.getXAxis();
+
 		velocity.y += gravity * deltaTime;
+
+		velocity.x = xInput * moveSpeed;
+		velocity.x = Mathf.Clamp (velocity.x, -moveSpeed, moveSpeed); 
+
+		if (kicking || xInput == 0.0f || wallCollisionChecker.isColliding ()) {
+			velocity.x = 0.0f;
+		}
+
 		return velocity;
-//		if (!playerMovementEnabled) {
-//			playerInput.x = 0.0f;
-//		}
-//
-//		float targetVelocityX = playerInput.x * moveSpeed;
-//
-//		if (playerInput.x == 0.0f) {
-//			velocity.x = 0.0f;
-//		}
-//
-//		//this caps the max speed of the player
-//		if (rigidbody2d.velocity.x > 0 && rigidbody2d.velocity.x > targetVelocityX) {
-//			velocity.x = targetVelocityX;
-//		}
-//		//this caps the min speed of the player
-//		else if (playerInput.x < 0 && rigidbody2d.velocity.x < targetVelocityX) {
-//			velocity.x = targetVelocityX;
-//		}
-//
-//		float accelerationRate = 2.8f;
-//		float accelerationRateAirbourne = 2.8f;
-//
-//		if (wallCollider.isCollidingWithWall ()) {
-//			velocity.x = 0.0f;
-//		}
-//
-//		//player has changed directions so reset velocity
-//		if (playerInput.x != oldPlayerInput.x) {
-//			velocity.x = 0.0f;
-//		}
-//
-//		rigidbody2d.velocity = velocity;
-//		Vector2 force = new Vector2 (targetVelocityX * (grounded ? accelerationRate : accelerationRateAirbourne), 0f);
-//		rigidbody2d.AddForce(force);
-//
-//		oldPlayerInput = playerInput;
 	}
 
 	/***

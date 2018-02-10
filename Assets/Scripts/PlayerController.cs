@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour {
 
 	private PopcornKernel popcornKernel;
 
-	private GroundCheck groundCollisionChecker;
-
 	class GroundCheck: CollisionChecker {
 		private Transform[] groundCheck;
 		private LayerMask whatIsGround;
@@ -104,9 +102,22 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	class WallCollisionCheck: CollisionChecker {
+		private PlayerWallTrigger wallCheck;
+
+		public WallCollisionCheck(PlayerWallTrigger wallCheck) {
+			this.wallCheck = wallCheck;
+		}
+
+		public bool isColliding() {
+			return wallCheck.isCollidingWithWall ();
+		}
+	}
+
 	void Start () {
-		groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
-		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
+		GroundCheck groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
+		WallCollisionCheck wallCollisionChecker = new WallCollisionCheck (wallCollider);
+		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, minJumpHeight, maxJumpHeight, timeToJumpApex);
 		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
@@ -184,7 +195,6 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.velocity = popcornKernel.Update (rigidbody2d.velocity, Time.deltaTime);
 		UpdateMagnetBehaviour ();
 
-		UpdateVelocity ();
 		CheckIfCrushed ();
 
 		//update the way our sprite is facing.
@@ -272,51 +282,6 @@ public class PlayerController : MonoBehaviour {
 		Vector2 velocity = popcornKernel.CheckForJump (rigidbody2d.velocity);
 //		cape.SetVelocity (velocity);
 		rigidbody2d.velocity = velocity;
-	}
-
-	/***
-	 * Update our own x and y velocity. This gives us better control of jumping
-	 * and better playability since time to fall to ground after jump takes a while
-	 */
-	public void UpdateVelocity() {
-		Vector2 velocity = rigidbody2d.velocity;
-
-		if (!playerMovementEnabled) {
-			playerInput.x = 0.0f;
-		}
-
-		float targetVelocityX = playerInput.x * moveSpeed;
-
-		if (playerInput.x == 0.0f) {
-			velocity.x = 0.0f;
-		}
-
-		//this caps the max speed of the player
-		if (rigidbody2d.velocity.x > 0 && rigidbody2d.velocity.x > targetVelocityX) {
-			velocity.x = targetVelocityX;
-		}
-		//this caps the min speed of the player
-		else if (playerInput.x < 0 && rigidbody2d.velocity.x < targetVelocityX) {
-			velocity.x = targetVelocityX;
-		}
-
-		float accelerationRate = 2.8f;
-		float accelerationRateAirbourne = 2.8f;
-
-		if (wallCollider.isCollidingWithWall ()) {
-			velocity.x = 0.0f;
-		}
-
-		//player has changed directions so reset velocity
-		if (playerInput.x != oldPlayerInput.x) {
-			velocity.x = 0.0f;
-		}
-
-		rigidbody2d.velocity = velocity;
-		Vector2 force = new Vector2 (targetVelocityX * (grounded ? accelerationRate : accelerationRateAirbourne), 0f);
-		rigidbody2d.AddForce(force);
-
-		oldPlayerInput = playerInput;
 	}
 
 	void UpdateMagnetBehaviour() {
