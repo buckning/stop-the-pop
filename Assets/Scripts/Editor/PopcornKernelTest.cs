@@ -7,10 +7,16 @@ using System.Collections;
 public class PopcornKernelTest {
 	TestInputManager testInputManager;
 	TestCollisionChecker groundChecker;
+	TestCollisionChecker ceilingChecker;
+	TestCollisionChecker wallChecker;
+	TestEventReceiver testEventReceiver;
 
 	public PopcornKernelTest() {
 		testInputManager = new TestInputManager ();
 		groundChecker = new TestCollisionChecker ();
+		ceilingChecker = new TestCollisionChecker ();
+		wallChecker = new TestCollisionChecker ();
+		testEventReceiver = new TestEventReceiver ();
 	}
 
 	[SetUp]
@@ -19,6 +25,51 @@ public class PopcornKernelTest {
 		testInputManager.SetJumpKeyDown (false);
 		testInputManager.SetAttackKeyPressed (false);
 		groundChecker.SetColliding (false);
+		ceilingChecker.SetColliding (false);
+		wallChecker.SetColliding (false);
+		testEventReceiver.Reset ();
+	}
+
+	[Test]
+	public void PopcornKernelTestCollidingWithGroundAndCeilingTriggersCrushEvent() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.crushEventListeners += testEventReceiver.CrushEvent;
+		Assert.IsFalse (testEventReceiver.CrushEventReceived ());
+
+		groundChecker.SetColliding (true);
+		ceilingChecker.SetColliding (true);
+
+		popcornKernel.FixedUpdate (Vector2.zero);
+		popcornKernel.Update (Vector2.zero, 0.1f);
+		Assert.IsTrue (testEventReceiver.CrushEventReceived ());
+	}
+
+	[Test]
+	public void PopcornKernelTestNotCollidingWithCeilingDoesTriggerCrushEvent() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.crushEventListeners += testEventReceiver.CrushEvent;
+		Assert.IsFalse (testEventReceiver.CrushEventReceived ());
+
+		groundChecker.SetColliding (true);
+		ceilingChecker.SetColliding (false);
+
+		popcornKernel.FixedUpdate (Vector2.zero);
+		popcornKernel.Update (Vector2.zero, 0.1f);
+		Assert.IsFalse (testEventReceiver.CrushEventReceived ());
+	}
+
+	[Test]
+	public void PopcornKernelTestCollidingWithCeilingDoesTriggerCrushEventWhenNotCollidingWithGround() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		popcornKernel.crushEventListeners += testEventReceiver.CrushEvent;
+		Assert.IsFalse (testEventReceiver.CrushEventReceived ());
+
+		groundChecker.SetColliding (false);
+		ceilingChecker.SetColliding (true);
+
+		popcornKernel.FixedUpdate (Vector2.zero);
+		popcornKernel.Update (Vector2.zero, 0.1f);
+		Assert.IsFalse (testEventReceiver.CrushEventReceived ());
 	}
 
 	[Test]
@@ -216,7 +267,7 @@ public class PopcornKernelTest {
 	}
 
 	PopcornKernel NewTestPopcornKernel() {
-		return new PopcornKernel (testInputManager, groundChecker, null, null, 0.4f, 8.0f, 1.0f);
+		return new PopcornKernel (testInputManager, groundChecker, wallChecker, ceilingChecker, 0.4f, 8.0f, 1.0f);
 	}
 
 	class TestCollisionChecker: CollisionChecker {
@@ -267,6 +318,23 @@ public class PopcornKernelTest {
 
 		public float getXAxis() {
 			return xAxisInput;
+		}
+	}
+
+	class TestEventReceiver {
+		bool crushEventReceived = false;
+
+		public void CrushEvent() {
+			crushEventReceived = true;
+		}
+
+		public bool CrushEventReceived() {
+			return crushEventReceived;
+		}
+
+
+		public void Reset() {
+			crushEventReceived = false;
 		}
 	}
 }
