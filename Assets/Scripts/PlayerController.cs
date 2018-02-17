@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour {
 		popcornKernelAnimator.popLeftLegEventListeners += PopLeftLeg;
 		popcornKernelAnimator.popRightLegEventListeners += PopRightLeg;
 		popcornKernelAnimator.popCompleteListeners += DisableCollider;
+		popcornKernelAnimator.finishedPoppingListeners += RetryLevelAfterPopAnimation;
 
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
