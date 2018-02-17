@@ -2,15 +2,16 @@
 using System.Collections;
 
 public class TitleScreenPlayerAnimation : MonoBehaviour {
-	Animator animator;
+	private Animator animator;
+	private PopcornKernelAnimator kernel;
 
 	private Color DISABLED_COLOUR = new Color (0.25f, 0.25f, 0.25f, 1.0f);
 	private Color ENABLED_COLOUR = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 
 	void Start () {
+		kernel = GetComponent<PopcornKernelAnimator> ();
 		animator = GetComponent<Animator> ();
 		animator.SetTrigger("titleScreen");
-
 	}
 
 	public void CustomisePlayer() {
@@ -19,115 +20,35 @@ public class TitleScreenPlayerAnimation : MonoBehaviour {
 			SelectedPlayerCustomisations.selectedShoes);
 	}
 
-
 	public void CustomisePlayer(string hat, string facialHair, string shoes) {
-		Sprite[] sprites = Resources.LoadAll<Sprite> ("skins/player/hats");
+		kernel.CustomisePlayer (hat, facialHair, shoes);
+		GreyOutDisabledSprites (hat, facialHair, shoes);
+	}
 
-		if(hat != null && hat.Trim().Length == 0) {
-			hat = null;
-		}
-		if (facialHair != null && facialHair.Trim ().Length == 0) {
-			facialHair = null;
-		}
-		if (shoes != null && shoes.Trim ().Length == 0) {
-			shoes = null;
-		}
-
+	private void GreyOutDisabledSprites(string hat, string facialHair, string shoes) {
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 
-		if (hat != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "Hat") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == hat) {
-							renderer.sprite = sprite;
-
-							if (Store.GetStoreItem (hat).locked) {
-								renderer.color = DISABLED_COLOUR;
-							} else {
-								renderer.color = ENABLED_COLOUR;
-							}
-						}
-					}
-				}
-			}
-		} else {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "Hat") {
-					renderer.sprite = null;
-				}
+		foreach (SpriteRenderer renderer in renderers) {
+			if (renderer.name == "Hat") {
+				EnableOrDisableSprite (hat, renderer);
+			} else if (renderer.name == "FacialHair") {
+				EnableOrDisableSprite (facialHair, renderer);
+			} else if (renderer.name == "Shoe") {
+				EnableOrDisableSprite (shoes, renderer);
 			}
 		}
+	}
 
-		sprites = Resources.LoadAll<Sprite> ("skins/player/facialHair");
-
-		if (facialHair != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "FacialHair") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == facialHair) {
-							renderer.sprite = sprite;
-
-							if (Store.GetStoreItem (facialHair).locked) {
-								renderer.color = DISABLED_COLOUR;
-							} else {
-								renderer.color = ENABLED_COLOUR;
-							}
-						}
-					}
-				}
-			}
-		} else {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "FacialHair") {
-					renderer.sprite = null;
-				}
-			}
+	private void EnableOrDisableSprite(string name, SpriteRenderer renderer) {
+		StoreItem storeItem = Store.GetStoreItem (name);
+		if (storeItem == null) {
+			return;
 		}
 
-		sprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-
-		if (shoes != null) {
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name == "shoe-skin-right") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == shoes + "Right") {
-							renderer.sprite = sprite;
-
-							if (Store.GetStoreItem (shoes).locked) {
-								renderer.color = DISABLED_COLOUR;
-							} else {
-								renderer.color = ENABLED_COLOUR;
-							}
-						}
-					}
-				} else if (renderer.name == "shoe-skin-left") {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == shoes + "Left") {
-							renderer.sprite = sprite;
-
-							if (Store.GetStoreItem (shoes).locked) {
-								renderer.color = DISABLED_COLOUR;
-							} else {
-								renderer.color = ENABLED_COLOUR;
-							}
-						}
-					}
-				}
-			}
-		} 
-		else {
-			sprites = Resources.LoadAll<Sprite> ("skins/player/shoes");
-			foreach (SpriteRenderer renderer in renderers) {
-				if (renderer.name.StartsWith("shoe-skin")) {
-					foreach (Sprite sprite in sprites) {
-						if (sprite.name == "defaultShoe") {
-							renderer.sprite = sprite;
-							renderer.color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
-						}
-					}
-				}
-			}
+		if (Store.GetStoreItem (name).locked) {
+			renderer.color = DISABLED_COLOUR;
+		} else {
+			renderer.color = ENABLED_COLOUR;
 		}
 	}
 }

@@ -55,28 +55,22 @@ public class Strings : MonoBehaviour {
 	public const string MAGNET = "Magnet";
 	public const string SHIELD = "Shield";
 
-	public const string LEPRECHAUN_HAT = "LeprechaunHat";
-	public const string SANTA_HAT = "SantaHat";
-	public const string VIKING_HAT = "VikingHat";
-	public const string ELF_HAT = "ElfHat";
-	public const string PIRATE_HAT = "PirateHat";
-	public const string CLOWN_HAIR = "ClownHair";
+	public const string LEPRECHAUN_HAT = "Leprechaun";
+	public const string SANTA_HAT = "Santa";
+	public const string VIKING_HAT = "Viking";
+	public const string ELF_HAT = "Elf";
+	public const string PIRATE_HAT = "Pirate";
 
-	public const string STAR_GLASSES = "StarGlasses";
-	public const string AVIATOR_GLASSES = "AviatorGlasses";
+	public const string LEPRECHAUN_BEARD = "Leprechaun";
+	public const string SANTA_BEARD = "Santa";
+	public const string PIRATE_BEARD = "Pirate";
+	public const string VIKING_BEARD = "Viking";
 
-	public const string LEPRECHAUN_BEARD = "LeprechaunBeard";
-	public const string SANTA_BEARD = "SantaBeard";
-	public const string PIRATE_BEARD = "PirateBeard";
-	public const string VIKING_BEARD = "VikingBeard";
-	public const string CLOWN_NOSE = "ClownNose";
-
-	public const string LEPRECHAUN_SHOE = "leprechaunShoe";
-	public const string SANTA_SHOE = "santaShoe";
-	public const string ELF_SHOE = "elfShoe";
-	public const string PIRATE_SHOE = "pirateShoe";
-	public const string VIKING_SHOE = "vikingShoe";
-	public const string CLOWN_SHOE = "clownShoe";
+	public const string LEPRECHAUN_SHOE = "Leprechaun";
+	public const string SANTA_SHOE = "Santa";
+	public const string ELF_SHOE = "Elf";
+	public const string PIRATE_SHOE = "Pirate";
+	public const string VIKING_SHOE = "Viking";
 
 	public const string INSUFFICIENT_FUNDS_PURCHASE = "Insufficient funds!\nYou need more coins to purchase this item";
 	public const string ITEM_ALREADY_PURCHASED = "You already have this item. You don't need to purchase it again.";

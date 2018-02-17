@@ -14,13 +14,13 @@ public class PopcornKernelAnimatorInGameControl : Editor {
 
 		PopcornKernelAnimator kernel = (PopcornKernelAnimator)target;
 
-		string[] skinOptions = new string[] {"normal", "viking", "pirate", "santa", "elf"};
+		string[] skinOptions = new string[] {"normal", "leprechaun", "viking", "pirate", "santa", "elf"};
 		selectedOption = EditorGUILayout.Popup("Costume", selectedOption, skinOptions);
-		string newSkin = "Skins/Player/" + skinOptions[selectedOption];
+		string newSkin = skinOptions[selectedOption];
 
 		if (newSkin != selectedSkin) {
 			selectedSkin = newSkin;
-			kernel.CustomisePlayer (selectedSkin);
+			kernel.CustomisePlayer (selectedSkin, selectedSkin, selectedSkin);
 		}
 
 		if (GUILayout.Button ("Kick")) {

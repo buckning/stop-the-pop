@@ -30,7 +30,7 @@ public class PopcornKernelAnimator : MonoBehaviour {
 
 	private AudioSource runAudioSource;		// this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
-	private Sprite[] currentSprites;
+	private Sprite[] shoesSprites;			// this is cached so we can reskin the shoes when they pop off
 
 	void Start () {
 		animator = GetComponent<Animator> ();
@@ -205,10 +205,10 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	 */
 	private void PopLegSprite(Vector2 position, float maxTorque, float forceX) {
 		GameObject poppedObject = (GameObject)Instantiate (leg, position, Quaternion.identity);
-		if(currentSprites != null) {
+		if(shoesSprites != null) {
 			//reskin the popped leg
 			SpriteRenderer[] legRenderers = poppedObject.GetComponentsInChildren<SpriteRenderer> ();
-			Reskin (legRenderers, currentSprites, "Shoe");
+			Reskin (legRenderers, shoesSprites, "Shoe");
 		}
 		poppedObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (forceX, 100f));
 		poppedObject.GetComponent<Rigidbody2D> ().AddTorque (Random.Range (0f, maxTorque));
@@ -271,9 +271,12 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		}
 	}
 
-	public void CustomisePlayer(string spriteSheet) {
-		currentSprites = Resources.LoadAll<Sprite> (spriteSheet);
-		ReskinKernel (currentSprites, currentSprites, currentSprites);
+	public void CustomisePlayer(string hatSpriteSheet, string facialHairSpriteSheet, string shoeSpriteSheet) {
+		string pathToSprites = "Skins/Player/";
+		shoesSprites = Resources.LoadAll<Sprite> (pathToSprites + shoeSpriteSheet);
+		Sprite[] facialHairSprites = Resources.LoadAll<Sprite> (pathToSprites + facialHairSpriteSheet);
+		Sprite[] hatSprites = Resources.LoadAll<Sprite> (pathToSprites + hatSpriteSheet);
+		ReskinKernel (hatSprites, facialHairSprites, shoesSprites);
 	}
 
 	/***
