@@ -99,28 +99,32 @@ public class PopcornKernelTest {
 		Assert.AreEqual (0, popcornKernel.getTemperature ());
 	}
 
-//	[Test]
-//	public void PopcornKernelTestCheckForJumpDoesNotHaveAnyEffectWhenKernelIsAtMaxTemperature() {
-//		PopcornKernel popcornKernel = NewTestPopcornKernel ();
-//		popcornKernel.increaseTemperature (100);
-//		Vector2 jumpVelocity = popcornKernel.CheckForJump (new Vector2 (0.0f, 0.0f));
-//		Assert.AreEqual (0.0f, jumpVelocity.y);
-//		Assert.AreEqual (0.0f, jumpVelocity.x);
-//	}
-//
-//	[Test]
-//	public void PopcornKernelTestCheckForJumpSetsTheVelocityAsMaxJumpVelocityWhenPlayerPressesJumpButton() {
-//		PopcornKernel popcornKernel = NewTestPopcornKernel ();
-//		float expectedJumpVelocity = GetMaxJumpVelocity (8.0f, 1.0f);
-//		groundChecker.SetColliding (true);
-//		testInputManager.SetJumpKeyDown (true);
-//
-//		popcornKernel.FixedUpdate (Vector2.zero);
-//		Vector2 velocity = popcornKernel.CheckForJump (new Vector2 (0.0f, 0.0f));
-//
-//		Assert.AreEqual (expectedJumpVelocity, velocity.y);
-//	}
-//
+	[Test]
+	public void PopcornKernelTestCheckForJumpDoesNotHaveAnyEffectWhenKernelIsAtMaxTemperature() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		groundChecker.SetColliding (true);
+		popcornKernel.increaseTemperature (100);
+		popcornKernel.Update (Vector2.zero, 0.1f);
+		Vector2 jumpVelocity = popcornKernel.GetVelocity ();
+		Assert.Less (jumpVelocity.y, 0.0f);
+		Assert.AreEqual (jumpVelocity.x, 0.0f);
+	}
+
+	[Test]
+	public void PopcornKernelTestCheckForJumpSetsTheVelocityAsMaxJumpVelocityWhenPlayerPressesJumpButton() {
+		PopcornKernel popcornKernel = NewTestPopcornKernel ();
+		float expectedJumpVelocity = GetMaxJumpVelocity (8.0f, 1.0f);
+		groundChecker.SetColliding (true);
+		testInputManager.SetJumpKeyDown (true);
+
+		popcornKernel.FixedUpdate (Vector2.zero);
+		popcornKernel.Update (Vector2.zero, 0.1f);
+		Vector2 velocity = popcornKernel.GetVelocity ();
+
+		Assert.Less (velocity.y, expectedJumpVelocity);
+		Assert.Greater (velocity.y, 0.0f);
+	}
+
 //	[Test]
 //	public void PopcornKernelTestCheckForJumpSetsTheVelocityAsMinJumpVelocityWhenPlayerReleasesJumpButton() {
 //		PopcornKernel popcornKernel = NewTestPopcornKernel ();
@@ -128,13 +132,15 @@ public class PopcornKernelTest {
 //
 //		testInputManager.SetJumpKeyDown (false);
 //		testInputManager.SetJumpKeyUp (true);
+//		groundChecker.SetColliding (true);
 //
 //		popcornKernel.FixedUpdate (Vector2.zero);
-//		Vector2 velocity = popcornKernel.CheckForJump (new Vector2 (0.0f, GetMaxJumpVelocity(8.0f, 1.0f)));
-//
-//		Assert.AreEqual (expectedJumpVelocity, velocity.y);
+//		popcornKernel.Update (Vector2.zero, 0.1f);
+//		Vector2 velocity = popcornKernel.GetVelocity ();
+//		Assert.Less (velocity.y, expectedJumpVelocity);
+//		Assert.Greater (velocity.y, 0.0f);
 //	}
-//
+
 //	[Test]
 //	public void PopcornKernelTestCheckForJumpSetsTheJumpVelocityAsCurrentYVelocityWhenItIsLessThanMinJumpVelocity() {
 //		PopcornKernel popcornKernel = NewTestPopcornKernel ();
@@ -331,7 +337,6 @@ public class PopcornKernelTest {
 		public bool CrushEventReceived() {
 			return crushEventReceived;
 		}
-
 
 		public void Reset() {
 			crushEventReceived = false;

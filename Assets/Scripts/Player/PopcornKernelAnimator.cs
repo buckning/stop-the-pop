@@ -23,7 +23,10 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public delegate void NotifyEvent ();
 	public event NotifyEvent finishedPoppingListeners;
 	public event NotifyEvent popEventListeners;
+	public event NotifyEvent popLeftLegEventListeners;
+	public event NotifyEvent popRightLegEventListeners;
 	public event NotifyEvent kickListeners;
+	public event NotifyEvent popCompleteListeners;
 
 	private AudioSource runAudioSource;		// this audio source is used exclusively for the run sound effect. All other real time sounds need to be played through audio manger
 
@@ -138,6 +141,10 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		if (popEventListeners != null) {
 			popEventListeners ();
 		}
+		if (popRightLegEventListeners != null) {
+			popRightLegEventListeners ();
+		}
+
 		AudioManager.PlaySound("pop3");
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 		float popDir = IsFacingRight () ? 1f : -1f;
@@ -156,6 +163,9 @@ public class PopcornKernelAnimator : MonoBehaviour {
 		if (popEventListeners != null) {
 			popEventListeners ();
 		}
+		if (popLeftLegEventListeners != null) {
+			popLeftLegEventListeners ();
+		}
 		AudioManager.PlaySound("pop8");
 		SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer> ();
 
@@ -172,6 +182,9 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	public void PopBody() {
 		if (popEventListeners != null) {
 			popEventListeners ();
+		}
+		if (popCompleteListeners != null) {
+			popCompleteListeners ();
 		}
 		AudioManager.PlaySound("pop8");
 	}

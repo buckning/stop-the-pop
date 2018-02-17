@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 /***
- * Script adapted from https://unity3d.com/learn/tutorials/modules/beginner/2d/2d-controllers
+ * Script adapted from https://unity3d.com/learn/tutorials/modules/beginner/2d/2d-controllers.
+ * This is the "glue" between the PopcornKernelAnimator and the PopcornKernel classes.
  */
 public class PlayerController : MonoBehaviour {
 
@@ -89,6 +90,9 @@ public class PlayerController : MonoBehaviour {
 		popcornKernel.popEventListeners += Pop;
 		popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 		popcornKernelAnimator.popEventListeners += ShakeScreen;
+		popcornKernelAnimator.popLeftLegEventListeners += PopLeftLeg;
+		popcornKernelAnimator.popRightLegEventListeners += PopRightLeg;
+		popcornKernelAnimator.popCompleteListeners += DisableCollider;
 
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -101,6 +105,23 @@ public class PlayerController : MonoBehaviour {
 		foreach (int coinId in coins) {
 			collectedCoins.Add (coinId);
 		}
+	}
+
+	private void PopLeftLeg() {
+		PopLeg (new Vector2 (300f, 300f), 100f);
+	}
+
+	private void PopRightLeg() {
+		PopLeg (new Vector2 (-300f, 300f), -100f);
+	}
+
+	private void PopLeg(Vector2 force, float maxTorque) {
+		float dir = (Random.Range (0f, 1f) < 0.5f) ? -1f : 1f;
+		force.x = force.x * dir;
+		rigidbody2d.freezeRotation = false;
+		rigidbody2d.AddForce (force);
+		rigidbody2d.AddTorque (Random.Range (0f, maxTorque));
+
 	}
 
 	/***

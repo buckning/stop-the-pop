@@ -67,3 +67,5 @@ Click on the Sparkle(Mobile) prefab, in the inspector click on the Particle Syst
 * GameArt: Contains all the SVG files used to make up the graphics in the game. Note that this directory does not contain the rasterized files.
 * ProjectSettings: Unity managed files.
 
+## Running unit tests
+/Applications/Unity/Unity.app/Contents/MacOS/Unity -runTests -projectPath ~/stop-the-pop -testResults ~/stop-the-pop/results.xml

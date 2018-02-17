@@ -89,9 +89,9 @@ public class PopcornKernel {
 	 * We stay using this max velocity unless the player releases
 	 * the jump key, in which case we change the jump velocity to minVelocity
 	 */
-	public Vector2 CheckForJump() {	
+	public void CheckForJump() {
 		if (temperature >= MAX_TEMPERATURE) {
-			return velocity;
+			return;
 		}
 
 		if (inputManager.JumpKeyDown()) {
@@ -117,7 +117,6 @@ public class PopcornKernel {
 			}
 			gliding = false;
 		}
-		return velocity;
 	}
 
 	private void CheckIfCrushed() {
