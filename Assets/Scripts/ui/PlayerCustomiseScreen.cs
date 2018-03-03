@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using UnityEngine.Advertisements;
 
 public class PlayerCustomiseScreen : MonoBehaviour {
-	public PlayerCustomiseBuyButton hatButton;
-	public PlayerCustomiseBuyButton facialHairButton;
-	public PlayerCustomiseBuyButton shoesButton;
+	public PlayerCustomiseBuyButton hatButton;			// the hat button, we need to update a reference of this to update the text on the button
+	public PlayerCustomiseBuyButton facialHairButton;	// the facial hair button, we need to update a reference of this to update the text on the button
+	public PlayerCustomiseBuyButton shoesButton;		// the shoes button, we need to update a reference of this to update the text on the button
 
 	public Button selectButton;
 
-	public Text customisationScreenCoinCountText;
 	public PopcornKernelAnimator player;
 
 	public event Event backButtonListeners;
@@ -21,9 +20,9 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 	private int playerCustomisationFacialHairIndex = 0;
 	private int playerCustomisationShoesIndex = 0;
 
-	private TextFieldNumberAnimator coinCountTextFieldAnimator;
+	public TextFieldNumberAnimator coinCountTextFieldAnimator;
 
-	float lastSoundPlay = 0.0f;
+	private float lastSoundPlay = 0.0f;
 
 	private Color DISABLED_COLOUR = new Color (0.25f, 0.25f, 0.25f, 1.0f);
 	private Color ENABLED_COLOUR = new Color (1.0f, 1.0f, 1.0f, 1.0f);
@@ -35,7 +34,6 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 	void Start() {
 		Store.LoadStore ();
 		int totalNumberOfCoins = Store.GetWalletBalance ();
-		coinCountTextFieldAnimator = customisationScreenCoinCountText.GetComponent<TextFieldNumberAnimator> ();
 		coinCountTextFieldAnimator.initialNumber = totalNumberOfCoins;
 		coinCountTextFieldAnimator.currentNumber = totalNumberOfCoins;
 		coinCountTextFieldAnimator.desiredNumber = totalNumberOfCoins;

@@ -18,7 +18,7 @@ public class Store {
 
 	public static bool CanAfford(StoreItem item) {
 		int balance = GetWalletBalance ();
-		if (item.cost < balance) {
+		if (item.cost <= balance) {
 			return true;
 		}
 		return false;
