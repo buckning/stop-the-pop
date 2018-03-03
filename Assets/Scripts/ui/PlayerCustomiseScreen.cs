@@ -9,33 +9,44 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 	public PlayerCustomiseBuyButton facialHairButton;
 	public PlayerCustomiseBuyButton shoesButton;
 
-	public GAui[] customisationPanels;
-
 	public Button selectButton;
 
 	public Text customisationScreenCoinCountText;
-	public TitleScreenPlayerAnimation playerAvatar;
-
-	public TitleScreenListener titleScreen;
+	public PopcornKernelAnimator player;
 
 	private int playerCustomisationHatIndex = 0;
 	private int playerCustomisationFacialHairIndex = 0;
 	private int playerCustomisationShoesIndex = 0;
 
-	private TextFieldNumberAnimator textFieldAnimator;
+	private TextFieldNumberAnimator coinCountTextFieldAnimator;
 
 	float lastSoundPlay = 0.0f;
 
-	void Start() {
-		playerAvatar.CustomisePlayer();
-		textFieldAnimator = customisationScreenCoinCountText.GetComponent<TextFieldNumberAnimator> ();
-		textFieldAnimator.initialNumber = GameStats.GetInstance ().totalNumberOfCoins;
-		textFieldAnimator.currentNumber = GameStats.GetInstance ().totalNumberOfCoins;
-		textFieldAnimator.desiredNumber = GameStats.GetInstance ().totalNumberOfCoins;
-		textFieldAnimator.SetNumber (GameStats.GetInstance ().totalNumberOfCoins);
+	private Color DISABLED_COLOUR = new Color (0.25f, 0.25f, 0.25f, 1.0f);
+	private Color ENABLED_COLOUR = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 
-		textFieldAnimator.valueDecrementedListeners = PlayCoinSound;
-		textFieldAnimator.valueIncrementedListeners = PlayCoinSound;
+	private List<PlayerCustomisation> facialHairInventory;
+	private List<PlayerCustomisation> hatInventory;
+	private List<PlayerCustomisation> shoesInventory;
+
+	void Start() {
+		Store.LoadStore ();
+		int totalNumberOfCoins = Store.GetWalletBalance ();
+		coinCountTextFieldAnimator = customisationScreenCoinCountText.GetComponent<TextFieldNumberAnimator> ();
+		coinCountTextFieldAnimator.initialNumber = totalNumberOfCoins;
+		coinCountTextFieldAnimator.currentNumber = totalNumberOfCoins;
+		coinCountTextFieldAnimator.desiredNumber = totalNumberOfCoins;
+		coinCountTextFieldAnimator.SetNumber (totalNumberOfCoins);
+
+		coinCountTextFieldAnimator.valueDecrementedListeners = PlayCoinSound;
+		coinCountTextFieldAnimator.valueIncrementedListeners = PlayCoinSound;
+
+		Store.LoadStore ();
+
+		facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
+		hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
+		shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
+		RefreshPlayerCustomisationScreen ();
 	}
 
 	void Update() {
@@ -46,24 +57,20 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 
 	void PlayCoinSound(float value) {
 		if ((Time.unscaledTime - lastSoundPlay) > 0.05f) {
-			AudioManager.PlaySound ("coin-new");
+			// TODO play sound here
 			lastSoundPlay = Time.unscaledTime;
 		}
 	}
 
 	public void BackButtonPressed() {
-		AudioManager.PlaySound ("Click", 0.9f);
-		Component[] buttons = gameObject.transform.GetComponentsInChildren(typeof(GAui), true);
-
-		foreach(GAui button in buttons) {
-			button.MoveOut (GSui.eGUIMove.SelfAndChildren);
-		}
-		playerAvatar.CustomisePlayer (SelectedPlayerCustomisations.selectedHat,
+		player.CustomisePlayer (SelectedPlayerCustomisations.selectedHat,
 			SelectedPlayerCustomisations.selectedFacialHair,
 			SelectedPlayerCustomisations.selectedShoes
 		);
 
-		titleScreen.EnableTitleScreen ();
+		gameObject.SetActive (false);
+
+		// TODO - call back listeners here
 	}
 
 	public void SetActive(bool active) {
@@ -73,200 +80,31 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 		playerCustomisationFacialHairIndex = 0;
 		playerCustomisationShoesIndex = 0;
 
-		Component[] buttons = gameObject.transform.GetComponentsInChildren(typeof(GAui), true);
-
-		foreach(GAui button in buttons) {
-			button.gameObject.SetActive (true);
-			button.MoveIn (GSui.eGUIMove.SelfAndChildren);
-		}
-		RefreshPlayerCustomisationScreen ();
-
-		ReskinPlayer ();
-	}
-
-	/****************
-	 * 
-	 * Player Hat actions
-	 * 
-	 * ********************/
-
-	public void PlayerHatCustomisationPrevButtonPressed() {
-		AudioManager.PlaySound ("Click", 0.9f);
-		playerCustomisationHatIndex--;
-		RefreshPlayerCustomisationScreen ();
-	}
-
-	public void PlayerHatCustomisationNextButtonPressed() {
-		AudioManager.PlaySound ("Click");
-		playerCustomisationHatIndex++;
 		RefreshPlayerCustomisationScreen ();
 	}
 
 	public void PurchaseEquipOrUnequipHat() {
-		AudioManager.PlaySound ("Click");
-		List<PlayerCustomisation> hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
-		PlayerCustomisation itemBeingPurchased = hatInventory [playerCustomisationHatIndex];
-
-		if (itemBeingPurchased.locked) {
-			if (Store.Purchase (itemBeingPurchased)) {
-				textFieldAnimator.AddToNumber (itemBeingPurchased.cost * -1);
-				AnalyticsManager.SendPlayerCustomisationPurchasedEvent (itemBeingPurchased.name, itemBeingPurchased.cost, GameStats.GetInstance ().totalNumberOfCoins);
-			}
-		} 
-
-		RefreshPlayerCustomisationScreen ();
-	}
-
-	/****************
-	 * 
-	 * Player Facial Hair actions
-	 * 
-	 * ********************/
-	public void PlayerFacialHairCustomisationPrevButtonPressed() {
-		AudioManager.PlaySound ("Click", 0.9f);
-		playerCustomisationFacialHairIndex--;
-		RefreshPlayerCustomisationScreen ();
-	}
-
-	public void PlayerFacialHairCustomisationNextButtonPressed() {
-		AudioManager.PlaySound ("Click");
-		playerCustomisationFacialHairIndex++;
-		RefreshPlayerCustomisationScreen ();
+		PurchaseItem (hatInventory [playerCustomisationHatIndex]);
 	}
 
 	public void PurchaseEquipOrUnequipFacialHair() {
-		AudioManager.PlaySound ("Click");
-		List<PlayerCustomisation> facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
-		PlayerCustomisation itemBeingPurchased = facialHairInventory [playerCustomisationFacialHairIndex];
-
-		if (itemBeingPurchased.locked) {
-			if (Store.Purchase (itemBeingPurchased)) {
-				textFieldAnimator.AddToNumber (itemBeingPurchased.cost * -1);
-				AnalyticsManager.SendPlayerCustomisationPurchasedEvent (itemBeingPurchased.name, itemBeingPurchased.cost, GameStats.GetInstance ().totalNumberOfCoins);
-			}
-		}
-
-		RefreshPlayerCustomisationScreen ();
-	}
-
-
-	/****************
-	 * 
-	 * Player shoes actions
-	 * 
-	 * ********************/
-	public void PlayerShoesCustomisationPrevButtonPressed() {
-		AudioManager.PlaySound ("Click", 0.9f);
-		playerCustomisationShoesIndex--;
-		RefreshPlayerCustomisationScreen ();
-	}
-
-	public void PlayerShoesCustomisationNextButtonPressed() {
-		AudioManager.PlaySound ("Click");
-		playerCustomisationShoesIndex++;
-		RefreshPlayerCustomisationScreen ();
+		PurchaseItem (facialHairInventory [playerCustomisationFacialHairIndex]);
 	}
 
 	public void PurchaseEquipOrUnequipShoes() {
-		AudioManager.PlaySound ("Click");
-		List<PlayerCustomisation> shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
-		PlayerCustomisation itemBeingPurchased = shoesInventory [playerCustomisationShoesIndex];
-
-		if (itemBeingPurchased.locked) {
-			if (Store.Purchase (itemBeingPurchased)) {
-				textFieldAnimator.AddToNumber (itemBeingPurchased.cost * -1);
-				AnalyticsManager.SendPlayerCustomisationPurchasedEvent (itemBeingPurchased.name, itemBeingPurchased.cost, GameStats.GetInstance ().totalNumberOfCoins);
-			}
-		} 
-
-		RefreshPlayerCustomisationScreen ();
+		PurchaseItem (shoesInventory [playerCustomisationShoesIndex]);
 	}
-
-	public void RefreshPlayerCustomisationScreen() {
-		List<PlayerCustomisation> hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
-
-		if (playerCustomisationHatIndex < 0) {
-			playerCustomisationHatIndex = hatInventory.Count - 1;
-		}
-		if (playerCustomisationHatIndex >= hatInventory.Count) {
-			playerCustomisationHatIndex = 0;
-		}
-
-
-		UpdateHighlightedItem (playerCustomisationHatIndex, hatButton, PlayerCustomisationType.HAT_OR_HAIR);
-		PlayerCustomisation highlightedHat = hatInventory [playerCustomisationHatIndex];
-
-		//Refresh the facial hair
-		List<PlayerCustomisation> facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
-		if (playerCustomisationFacialHairIndex < 0) {
-			playerCustomisationFacialHairIndex = facialHairInventory.Count - 1;
-		}
-		if (playerCustomisationFacialHairIndex >= facialHairInventory.Count) {
-			playerCustomisationFacialHairIndex = 0;
-		}
-			
-		PlayerCustomisation highlightedFacialHair = facialHairInventory [playerCustomisationFacialHairIndex];
-
-		UpdateHighlightedItem (playerCustomisationFacialHairIndex, facialHairButton, PlayerCustomisationType.FACIAL_HAIR);
-
-		List<PlayerCustomisation> shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
-		if (playerCustomisationShoesIndex < 0) {
-			playerCustomisationShoesIndex = shoesInventory.Count - 1;
-		}
-		if (playerCustomisationShoesIndex >= shoesInventory.Count) {
-			playerCustomisationShoesIndex = 0;
-		}
-
-		PlayerCustomisation highlightedShoes = shoesInventory [playerCustomisationShoesIndex];
-
-		UpdateHighlightedItem (playerCustomisationShoesIndex, shoesButton, PlayerCustomisationType.SHOES);
-
-		playerAvatar.CustomisePlayer (hatInventory [playerCustomisationHatIndex].name,
-			facialHairInventory [playerCustomisationFacialHairIndex].name,
-			shoesInventory [playerCustomisationShoesIndex].name
-		);
-
-		if (!highlightedHat.locked && !highlightedFacialHair.locked && !highlightedShoes.locked) {
-			selectButton.interactable = true;
-		} else {
-			selectButton.interactable = false;
-		}
-	}
-
 
 	/***
-	 * Update a purchase button in the store based on the highlighted item in the store.
-	 * 
+	 * This is called back by the Select button
 	 */
-	void UpdateHighlightedItem(int index, PlayerCustomiseBuyButton playerCustomiseBuyButton, PlayerCustomisationType playerCustomisationType) {
-		List<PlayerCustomisation> inventory = Store.GetPlayerCustomisationItemsOfType (playerCustomisationType);
-
-		PlayerCustomisation highlightedItem = inventory [index];
-		if (highlightedItem.locked) {
-			playerCustomiseBuyButton.EnableCoinImage (true);
-			playerCustomiseBuyButton.GetComponentInChildren<Text> ().text = "" + highlightedItem.cost;
-			if (highlightedItem.cost > GameStats.GetInstance ().totalNumberOfCoins) {
-				playerCustomiseBuyButton.SetInteractable(false);
-			} else {
-				playerCustomiseBuyButton.SetInteractable(true);
-			}
-		} else {
-			playerCustomiseBuyButton.SetInteractable (false);
-			playerCustomiseBuyButton.EnableCoinImage (false);
-			playerCustomiseBuyButton.SetText (Strings.UI_PURCHASED);
-		}
-	}
-
 	public void SelectHighlightedPlayerCustomisation() {
-		List<PlayerCustomisation> hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
 		PlayerCustomisation highlightedHat = hatInventory [playerCustomisationHatIndex];
 		SelectedPlayerCustomisations.selectedHat = highlightedHat.name;
 
-		List<PlayerCustomisation> facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
 		PlayerCustomisation highlightedFacialHair = facialHairInventory [playerCustomisationFacialHairIndex];
 		SelectedPlayerCustomisations.selectedFacialHair = highlightedFacialHair.name;
 
-		List<PlayerCustomisation> shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
 		PlayerCustomisation highlightedShoes = shoesInventory [playerCustomisationShoesIndex];
 		SelectedPlayerCustomisations.selectedShoes = highlightedShoes.name;
 
@@ -279,13 +117,53 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 		BackButtonPressed ();
 	}
 
+	public void PlayerHatCustomisationPrevButtonPressed() {
+		playerCustomisationHatIndex = GetRolledOverIndex(playerCustomisationHatIndex - 1, 
+			hatInventory.Count);
+
+		RefreshPlayerCustomisationScreen ();
+	}
+
+	public void PlayerHatCustomisationNextButtonPressed() {
+		playerCustomisationHatIndex = GetRolledOverIndex(playerCustomisationHatIndex + 1, 
+			hatInventory.Count);
+
+		RefreshPlayerCustomisationScreen ();
+	}
+
+	public void PlayerFacialHairCustomisationPrevButtonPressed() {
+		playerCustomisationFacialHairIndex = GetRolledOverIndex(playerCustomisationFacialHairIndex - 1, 
+			facialHairInventory.Count);
+
+		RefreshPlayerCustomisationScreen ();
+	}
+
+	public void PlayerFacialHairCustomisationNextButtonPressed() {
+		playerCustomisationFacialHairIndex = GetRolledOverIndex(playerCustomisationFacialHairIndex + 1, 
+			facialHairInventory.Count);
+
+		RefreshPlayerCustomisationScreen ();
+	}
+
+	public void PlayerShoesCustomisationPrevButtonPressed() {
+		playerCustomisationShoesIndex = GetRolledOverIndex(playerCustomisationShoesIndex - 1, 
+			shoesInventory.Count);
+		RefreshPlayerCustomisationScreen ();
+	}
+
+	public void PlayerShoesCustomisationNextButtonPressed() {
+		playerCustomisationShoesIndex = GetRolledOverIndex(playerCustomisationShoesIndex + 1, 
+			shoesInventory.Count);
+		RefreshPlayerCustomisationScreen ();
+	}
+
 	public void WatchVideoForMoreCoins() {
 		if (Advertisement.IsReady ("rewardedVideo")) {
 			AnalyticsManager.SendAdWatchEvent ("TitleScreen", "PlayerCustomiseScreenAd", 0, 0);
 			var options = new ShowOptions { resultCallback = GetMoreCoins };
 			Advertisement.Show ("rewardedVideo", options);
 		} else {
-			titleScreen.ShowErrorPanel();
+			// TODO - handle error case here
 		}
 	}
 
@@ -297,7 +175,7 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 			stats.totalNumberOfCoins += 300;
 			stats.SaveToDisk ();
 
-			textFieldAnimator.AddToNumber (300);
+			coinCountTextFieldAnimator.AddToNumber (300);
 
 			RefreshPlayerCustomisationScreen ();
 			break;
@@ -310,50 +188,94 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 		}
 	}
 
-	public void ReskinPlayer() {
-		SelectedPlayerCustomisations.selectedHat = Settings.selectedHat;
-		SelectedPlayerCustomisations.selectedFacialHair = Settings.selectedFacialHair;
-		SelectedPlayerCustomisations.selectedShoes = Settings.selectedShoes;
+	private void RefreshPlayerCustomisationScreen() {
+		PlayerCustomisation highlightedHat = hatInventory [playerCustomisationHatIndex];
+		PlayerCustomisation highlightedFacialHair = facialHairInventory [playerCustomisationFacialHairIndex];
+		PlayerCustomisation highlightedShoes = shoesInventory [playerCustomisationShoesIndex];
 
-		playerAvatar.CustomisePlayer (SelectedPlayerCustomisations.selectedHat,
-			SelectedPlayerCustomisations.selectedFacialHair,
-			SelectedPlayerCustomisations.selectedShoes
+		UpdatePurchaseButton (playerCustomisationHatIndex, hatButton, PlayerCustomisationType.HAT_OR_HAIR);
+		UpdatePurchaseButton (playerCustomisationFacialHairIndex, facialHairButton, PlayerCustomisationType.FACIAL_HAIR);
+		UpdatePurchaseButton (playerCustomisationShoesIndex, shoesButton, PlayerCustomisationType.SHOES);
+
+		GreyOutPlayerSprite (highlightedShoes.locked, "Shoe");
+		GreyOutPlayerSprite (highlightedHat.locked, "Hat");
+		GreyOutPlayerSprite (highlightedFacialHair.locked, "FacialHair");
+
+		player.CustomisePlayer (hatInventory [playerCustomisationHatIndex].name,
+			facialHairInventory [playerCustomisationFacialHairIndex].name,
+			shoesInventory [playerCustomisationShoesIndex].name
 		);
 
-		//this is needed so the counter will be correctly set when the game is returned to the title screen
-		//and a customisation is selected. If there was something previously selected, the index should be updated to 
-		//the correct one. This should be in its own method but meh...
-		if (SelectedPlayerCustomisations.selectedHat != null) {
-			List<PlayerCustomisation> hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
-			int index = 0;
-			foreach (PlayerCustomisation customisation in hatInventory) {
-				if (SelectedPlayerCustomisations.selectedHat == hatInventory [index].name) {
-					playerCustomisationHatIndex = index;
-				}
-				index++;
+		if (!highlightedHat.locked && !highlightedFacialHair.locked && !highlightedShoes.locked) {
+			selectButton.interactable = true;
+		} else {
+			selectButton.interactable = false;
+		}
+	}
+
+	/***
+	 * Update a purchase button in the store based on the status of item in the store 
+	 * and on if the player can afford the item or not.
+	 */
+	private void UpdatePurchaseButton(int index, PlayerCustomiseBuyButton playerCustomiseBuyButton, PlayerCustomisationType playerCustomisationType) {
+		List<PlayerCustomisation> inventory = Store.GetPlayerCustomisationItemsOfType (playerCustomisationType);
+
+		PlayerCustomisation highlightedItem = inventory [index];
+
+		if (highlightedItem.locked) {
+			playerCustomiseBuyButton.SetInteractable (Store.CanAfford (highlightedItem));
+			playerCustomiseBuyButton.EnableCoinImage (true);
+			playerCustomiseBuyButton.SetText ("" + highlightedItem.cost);
+		} else {
+			playerCustomiseBuyButton.SetInteractable (false);
+			playerCustomiseBuyButton.EnableCoinImage (false);
+			playerCustomiseBuyButton.SetText (Strings.UI_PURCHASED);
+		}
+	}
+
+	private void PurchaseItem(PlayerCustomisation itemBeingPurchased) {
+		if (itemBeingPurchased.locked) {
+			if (Store.Purchase (itemBeingPurchased)) {
+				coinCountTextFieldAnimator.AddToNumber (itemBeingPurchased.cost * -1);
+				AnalyticsManager.SendPlayerCustomisationPurchasedEvent (itemBeingPurchased.name, itemBeingPurchased.cost, GameStats.GetInstance ().totalNumberOfCoins);
 			}
+		} 
+
+		RefreshPlayerCustomisationScreen ();
+	}
+
+	/***
+	 * Grey out a sprite on the player or set to the original colour. 
+	 */
+	private void GreyOutPlayerSprite(bool greyOut, string spriteToGreyOutName) {
+		SpriteRenderer[] playerSprites = player.GetComponentsInChildren<SpriteRenderer> ();
+
+		foreach(SpriteRenderer sprite in playerSprites) {
+			if (sprite.name == spriteToGreyOutName) {
+				if (greyOut) {
+					sprite.color = DISABLED_COLOUR;
+				} else {
+					sprite.color = ENABLED_COLOUR;
+				}
+			}
+		}
+	}
+
+	/***
+	 * This method is to get the new index within the bounds of 0 - limit. 
+	 * If it falls outside of these values, it is rolled over.
+	 * If the current index is less than 0, it is set to the limit - 1.
+	 * If the current index is greater or equal to the limit, it is set to 0.
+	 */
+	private int GetRolledOverIndex(int currentIndex, int limit) {
+		int newIndex = currentIndex;
+		if (currentIndex < 0) {
+			newIndex = limit - 1;
+		}
+		if (currentIndex >= limit) {
+			newIndex = 0;
 		}
 
-		if (SelectedPlayerCustomisations.selectedFacialHair != null) {
-			List<PlayerCustomisation> facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
-			int index = 0;
-			foreach (PlayerCustomisation customisation in facialHairInventory) {
-				if (SelectedPlayerCustomisations.selectedFacialHair == facialHairInventory [index].name) {
-					playerCustomisationFacialHairIndex = index;
-				}
-				index++;
-			}
-		}
-
-		if (SelectedPlayerCustomisations.selectedShoes != null) {
-			List<PlayerCustomisation> shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
-			int index = 0;
-			foreach (PlayerCustomisation customisation in shoesInventory) {
-				if (SelectedPlayerCustomisations.selectedShoes == shoesInventory [index].name) {
-					playerCustomisationShoesIndex = index;
-				}
-				index++;
-			}
-		}
+		return newIndex;
 	}
 }

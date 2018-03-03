@@ -16,12 +16,24 @@ public class Store {
 		StoreInventory.Init ();		
 	}
 
+	public static bool CanAfford(StoreItem item) {
+		int balance = GetWalletBalance ();
+		if (item.cost < balance) {
+			return true;
+		}
+		return false;
+	}
+
+	public static int GetWalletBalance() {
+		return GameStats.GetInstance ().totalNumberOfCoins;
+	}
+
 	/***
 	 * Purchase an item from the store.
 	 * Returns true if the transaction completed successfully. 
 	 */
 	public static bool Purchase(StoreItem item) {
-		if (GameStats.GetInstance().totalNumberOfCoins < item.cost) {
+		if (GetWalletBalance () < item.cost) {
 			return false;
 		}
 

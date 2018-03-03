@@ -42,20 +42,20 @@ public class StoreInventory {
 		shieldStoreItem.quantity = 1;
 		inventory.Add (shieldStoreItem);
 
-		AddPlayerCustomisation (null, 0, false, PlayerCustomisationType.HAT_OR_HAIR);
+		AddPlayerCustomisation ("normal", 0, false, PlayerCustomisationType.HAT_OR_HAIR);
 		AddPlayerCustomisation (Strings.LEPRECHAUN_HAT, 300, true, PlayerCustomisationType.HAT_OR_HAIR);
 		AddPlayerCustomisation (Strings.VIKING_HAT, 400, true, PlayerCustomisationType.HAT_OR_HAIR);
 		AddPlayerCustomisation (Strings.PIRATE_HAT, 350, true, PlayerCustomisationType.HAT_OR_HAIR);
 		AddPlayerCustomisation (Strings.ELF_HAT, 250, true, PlayerCustomisationType.HAT_OR_HAIR);
 		AddPlayerCustomisation (Strings.SANTA_HAT, 200, true, PlayerCustomisationType.HAT_OR_HAIR);
 
-		AddPlayerCustomisation (null, 0, false, PlayerCustomisationType.FACIAL_HAIR);
+		AddPlayerCustomisation ("normal", 0, false, PlayerCustomisationType.FACIAL_HAIR);
 		AddPlayerCustomisation (Strings.LEPRECHAUN_BEARD, 200, true, PlayerCustomisationType.FACIAL_HAIR);
 		AddPlayerCustomisation (Strings.VIKING_BEARD, 350, true, PlayerCustomisationType.FACIAL_HAIR);
 		AddPlayerCustomisation (Strings.PIRATE_BEARD, 300, true, PlayerCustomisationType.FACIAL_HAIR);
 		AddPlayerCustomisation (Strings.SANTA_BEARD, 250, true, PlayerCustomisationType.FACIAL_HAIR);
 
-		AddPlayerCustomisation (null, 0, false, PlayerCustomisationType.SHOES);
+		AddPlayerCustomisation ("normal", 0, false, PlayerCustomisationType.SHOES);
 		AddPlayerCustomisation (Strings.LEPRECHAUN_SHOE, 100, true, PlayerCustomisationType.SHOES);
 		AddPlayerCustomisation (Strings.VIKING_SHOE, 250, true, PlayerCustomisationType.SHOES);
 		AddPlayerCustomisation (Strings.PIRATE_SHOE, 300, true, PlayerCustomisationType.SHOES);

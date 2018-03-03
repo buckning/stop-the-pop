@@ -92,7 +92,7 @@ public class Strings : MonoBehaviour {
 	public const string NEW_LINE = "\n";
 
 	public static string UI_SELECT_LEVEL;
-	public static string UI_PURCHASED;
+	public static string UI_PURCHASED = new EnglishStrings().UI_PURCHASED;	//this is for initialisation for standalone UI testing
 	public static string UI_GAME_BY;
 	public static string UI_THANKS_TO;
 	public static string UI_THEME_BY;

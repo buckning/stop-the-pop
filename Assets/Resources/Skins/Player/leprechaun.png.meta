@@ -1,17 +1,13 @@
 fileFormatVersion: 2
-guid: b9b36dc81e7f44f5ea73317d599a7379
-timeCreated: 1502748910
+guid: 8a734d03505ec484498833691126d931
+timeCreated: 1520033212
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PunkMohawk
-    21300002: LeprechaunHat
-    21300004: SantaHat
-    21300006: LeprechaunHat
-    21300008: PirateHat
-    21300010: ElfHat
-    21300012: VikingHat
-    21300014: ClownHair
+    21300000: Hat
+    21300002: FacialHair
+    21300004: Shoe
+  externalObjects: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -20,6 +16,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -32,13 +30,16 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -48,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 1150
+  spritePixelsToUnits: 2500
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -60,126 +61,101 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: iPhone
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: Android
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: WebGL
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SantaHat
+      name: Hat
       rect:
         serializedVersion: 2
-        x: 15
-        y: 5473
-        width: 3197
-        height: 2590
+        x: 128
+        y: 5886
+        width: 3632
+        height: 2184
       alignment: 9
-      pivot: {x: 0.71321106, y: 0.6514069}
+      pivot: {x: 0.607486, y: 0.37299412}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: LeprechaunHat
-      rect:
-        serializedVersion: 2
-        x: 3302
-        y: 5928
-        width: 3620
-        height: 2193
-      alignment: 9
-      pivot: {x: 0.6172379, y: 0.3705594}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: PirateHat
-      rect:
-        serializedVersion: 2
-        x: 155
-        y: 760
-        width: 2787
-        height: 1817
-      alignment: 9
-      pivot: {x: 0.63034356, y: 0.40749073}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: ElfHat
-      rect:
-        serializedVersion: 2
-        x: 119
-        y: 2894
-        width: 3035
-        height: 2448
-      alignment: 9
-      pivot: {x: 0.72817296, y: 0.66476625}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: -1
-    - serializedVersion: 2
-      name: VikingHat
-      rect:
-        serializedVersion: 2
-        x: 3472
-        y: 3754
-        width: 3862
-        height: 1968
-      alignment: 9
-      pivot: {x: 0.69237596, y: 0.41875884}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
+      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ClownHair
+      name: FacialHair
       rect:
         serializedVersion: 2
-        x: 3964
-        y: 879
-        width: 3827
-        height: 1695
+        x: 281
+        y: 3535
+        width: 1651
+        height: 2257
       alignment: 9
-      pivot: {x: 0.6131409, y: 0.77652496}
+      pivot: {x: 0.82979405, y: 0.5591735}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Shoe
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 3438
+        width: 1604
+        height: 915
+      alignment: 9
+      pivot: {x: 0.45516595, y: 0.7133274}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
     outline: []
+    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

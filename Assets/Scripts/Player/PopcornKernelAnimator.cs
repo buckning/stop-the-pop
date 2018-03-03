@@ -282,7 +282,7 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	/***
 	 * Reskins the player with the required hat, facial hair and shoes.
 	 */
-	public void ReskinKernel(Sprite[] selectedHatSprites, Sprite[] selectedFacialHairSprites, Sprite[] selectedShoesSprites) {
+	private void ReskinKernel(Sprite[] selectedHatSprites, Sprite[] selectedFacialHairSprites, Sprite[] selectedShoesSprites) {
 		Reskin (selectedHatSprites, "Hat");
 		Reskin (selectedFacialHairSprites, "FacialHair");
 		Reskin (selectedShoesSprites, "Shoe");

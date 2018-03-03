@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class SelectedPlayerCustomisations {
-	public static string selectedGlasses = null;
-	public static string selectedHat = null;
-	public static string selectedShoes = null;
-	public static string selectedFacialHair = null;
+	public static string selectedGlasses = "normal";
+	public static string selectedHat = "normal";
+	public static string selectedShoes = "normal";
+	public static string selectedFacialHair = "normal";
 }

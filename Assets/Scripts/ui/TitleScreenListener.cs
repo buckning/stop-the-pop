@@ -94,7 +94,6 @@ public class TitleScreenListener : MonoBehaviour {
 		}
 
 		Store.LoadStore ();
-		playerCustomiseScreen.ReskinPlayer ();
 		if(Settings.launchTimeOfGame == null) {
 			Settings.launchTimeOfGame = new TimeDiff ().TimeNow ();
 		}
@@ -157,7 +156,6 @@ public class TitleScreenListener : MonoBehaviour {
 	public void PlayerCustomisationButtonPressed() {
 		PlayButtonClickSound();
 		playerCustomiseScreen.SetActive (true);
-		playerCustomiseScreen.titleScreen = this;
 		currentScreen = playerCustomiseScreen.gameObject;
 		titleScreenPlayerCustomisationButtonPressedListeners();
 		titleScreenCamera.target = titleScreenCamera.titleScreenPlayerCustomisationCameraPosition;
