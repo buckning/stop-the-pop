@@ -103,6 +103,8 @@ public class TitleScreenListener : MonoBehaviour {
 			SocialServiceManager.GetInstance ().Authenticate ();
 			socialSignInAttempted = true;
 		}
+
+		playerCustomiseScreen.backButtonListeners += PlayerCustomiseBackButtonPressed;
 	}
 
 	void Update() {
@@ -156,9 +158,26 @@ public class TitleScreenListener : MonoBehaviour {
 	public void PlayerCustomisationButtonPressed() {
 		PlayButtonClickSound();
 		playerCustomiseScreen.SetActive (true);
+
+		Component[] buttons = playerCustomiseScreen.transform.GetComponentsInChildren(typeof(GAui), true);
+
+		foreach(GAui button in buttons) {
+			button.gameObject.SetActive (true);
+			button.MoveIn (GSui.eGUIMove.SelfAndChildren);
+		}
+
 		currentScreen = playerCustomiseScreen.gameObject;
 		titleScreenPlayerCustomisationButtonPressedListeners();
 		titleScreenCamera.target = titleScreenCamera.titleScreenPlayerCustomisationCameraPosition;
+	}
+
+	public void PlayerCustomiseBackButtonPressed() {
+		Component[] buttons = playerCustomiseScreen.transform.GetComponentsInChildren(typeof(GAui), true);
+
+		foreach(GAui button in buttons) {
+			button.MoveOut (GSui.eGUIMove.SelfAndChildren);
+		}
+		EnableTitleScreen ();
 	}
 
 	public void BackButtonPressed() {

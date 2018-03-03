@@ -14,6 +14,9 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 	public Text customisationScreenCoinCountText;
 	public PopcornKernelAnimator player;
 
+	public event Event backButtonListeners;
+	public delegate void Event ();
+
 	private int playerCustomisationHatIndex = 0;
 	private int playerCustomisationFacialHairIndex = 0;
 	private int playerCustomisationShoesIndex = 0;
@@ -43,9 +46,8 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 
 		Store.LoadStore ();
 
-		facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
-		hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
-		shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
+		SetActive (true);
+
 		RefreshPlayerCustomisationScreen ();
 	}
 
@@ -67,10 +69,9 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 			SelectedPlayerCustomisations.selectedFacialHair,
 			SelectedPlayerCustomisations.selectedShoes
 		);
-
-		gameObject.SetActive (false);
-
-		// TODO - call back listeners here
+		if (backButtonListeners != null) {
+			backButtonListeners ();
+		}
 	}
 
 	public void SetActive(bool active) {
@@ -79,6 +80,10 @@ public class PlayerCustomiseScreen : MonoBehaviour {
 		playerCustomisationHatIndex = 0;
 		playerCustomisationFacialHairIndex = 0;
 		playerCustomisationShoesIndex = 0;
+
+		facialHairInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.FACIAL_HAIR);
+		hatInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.HAT_OR_HAIR);
+		shoesInventory = Store.GetPlayerCustomisationItemsOfType (PlayerCustomisationType.SHOES);
 
 		RefreshPlayerCustomisationScreen ();
 	}

@@ -106,6 +106,11 @@ public class PlayerController : MonoBehaviour {
 		foreach (int coinId in coins) {
 			collectedCoins.Add (coinId);
 		}
+
+		popcornKernelAnimator.CustomisePlayer (SelectedPlayerCustomisations.selectedHat,
+			SelectedPlayerCustomisations.selectedFacialHair,
+			SelectedPlayerCustomisations.selectedShoes
+		);
 	}
 
 	private void PopLeftLeg() {
