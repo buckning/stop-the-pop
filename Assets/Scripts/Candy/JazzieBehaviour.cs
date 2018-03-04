@@ -23,10 +23,10 @@ public class JazzieBehaviour : MonoBehaviour {
 		if (myRenderer.isVisible) {
 			if (otherObject.gameObject.tag == Strings.PLAYER) {
 				PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-				AnalyticsManager.SendDeathEvent (player.inputManager.levelName, player.transform.position, gameObject.name);
+				AnalyticsManager.SendDeathEvent (player.hud.levelName, player.transform.position, gameObject.name);
 				AudioManager.PlaySound ("Jazzie-Hit");
 				player.AddLifeLost ();
-				player.inputManager.RetryLevel ();
+				player.hud.RetryLevel ();
 			}
 
 			hud.ShakeForDuration (0.2f);

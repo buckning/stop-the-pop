@@ -11,9 +11,9 @@ public class TutorialPopUpTrigger : MonoBehaviour {
 		if (other.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
 
-			player.inputManager.tutorialPanel.gameObject.SetActive (true);
+			player.hud.tutorialPanel.gameObject.SetActive (true);
 
-			player.inputManager.tutorialPanel.ShowTutorialImage(tutorialImage, showAfterDelay);
+			player.hud.tutorialPanel.ShowTutorialImage(tutorialImage, showAfterDelay);
 			Destroy (gameObject);
 		}
 	}

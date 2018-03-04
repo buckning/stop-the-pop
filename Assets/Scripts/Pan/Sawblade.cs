@@ -13,14 +13,14 @@ public class Sawblade : MonoBehaviour {
 			!camera.gameOver) {	//this check of gameOver stops two objects from triggering the death animation again
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 			AudioManager.PlaySound ("saw");
-			AnalyticsManager.SendDeathEvent (player.inputManager.levelName, player.transform.position, gameObject.name);
+			AnalyticsManager.SendDeathEvent (player.hud.levelName, player.transform.position, gameObject.name);
 			player.AddLifeLost ();
 
 			if (spawnedParticles == null) {
 				spawnedParticles = (GameObject)Instantiate (particles);
 				spawnedParticles.transform.position = otherObject.contacts [0].point;
 				camera.gameOver = true;	//this is used to start zooming in on the player
-				player.inputManager.GameOver(false);	//don't show the retry button for this death animation
+				player.hud.GameOver(false);	//don't show the retry button for this death animation
 				player.playerMovementEnabled = false;
 
 				float shakeDuration = .2f;
@@ -37,7 +37,7 @@ public class Sawblade : MonoBehaviour {
 					player.PlayMovingSawBladeDeathAnimation ();
 				}
 
-				player.inputManager.ShakeForDuration (shakeDuration);
+				player.hud.ShakeForDuration (shakeDuration);
 				StartCoroutine (RestartAfterDelay (player, shakeDuration));	
 			}
 		}
@@ -45,7 +45,7 @@ public class Sawblade : MonoBehaviour {
 
 	IEnumerator RestartAfterDelay(PlayerController player, float delay) {
 		yield return new WaitForSeconds (delay);
-		player.inputManager.RetryLevel ();
+		player.hud.RetryLevel ();
 	}
 
 	public void Reset() {

@@ -22,7 +22,7 @@ public class MagnetPowerup : MonoBehaviour {
 			player.EnableMagnet (true);
 			AudioManager.PlaySound ("magnet-new");
 			animator.SetTrigger ("Pickup");
-			player.inputManager.ShowWhiteFlash ();
+			player.hud.ShowWhiteFlash ();
 
 			#if UNITY_IOS
 			SocialServiceManager.GetInstance ().UnlockAchievement ("lawofattraction");

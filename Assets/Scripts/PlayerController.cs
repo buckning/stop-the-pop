@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour {
 	private float attackRadius = 0.8f;					//defines the size of the collider used to check if there is an object to attack
 
 	bool gliding = false;								//this is set internally when the player should be gliding
-	public HudListener inputManager;					//reference to the HUD, so we can check what buttons are being pressed
-
+	public HudListener hud;					//reference to the HUD, so we can check what buttons are being pressed
+	public InputManager inputManager;
 	public bool glidingEnabled = false;					//if this is set to false, the player cannot glide regardless if the player is trying to
 	public const float defaultGlideSpeed = -2f;
 	[HideInInspector]
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		WallCollisionCheck wallCollisionChecker = new WallCollisionCheck (wallCollider);
 		CeilingCollisionCheck ceilingCollisionCheck = new CeilingCollisionCheck (ceilingCheck, whatIsCeilingMask);
 
-		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
+		popcornKernel = new PopcornKernel (hud, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
 		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour {
 	 */
 	void Crush() {
 		AddLifeLost();
-		inputManager.RetryLevel();
+		hud.RetryLevel();
 	}
 
 	// Update is called at a fixed rate - this is better when interacting with physics objects (time.delta time is not needed here)
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-		playerInput = new Vector2 (inputManager.getXAxis(), inputManager.getYAxis());
+		playerInput = new Vector2 (hud.getXAxis(), hud.getYAxis());
 		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
 		} 
@@ -208,9 +208,9 @@ public class PlayerController : MonoBehaviour {
 			return;
 		}
 
-		if (inputManager.getXAxis() > 0 && !facingRight) {
+		if (hud.getXAxis() > 0 && !facingRight) {
 			Flip ();
-		} else if (inputManager.getXAxis() < 0 && facingRight) {
+		} else if (hud.getXAxis() < 0 && facingRight) {
 			Flip();
 		}
 	}
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour {
 	 * Should only be used by animator
 	 */
 	public void RetryLevelAfterPopAnimation() {
-		inputManager.TriggerFadeOut ();
+		hud.TriggerFadeOut ();
 	}
 
 	void UpdateAnimations() {
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour {
 		EnableMagnet (false);
 		AddLifeLost ();
 		popcornKernelAnimator.StartPopping();
-		AnalyticsManager.SendDeathEvent (inputManager.levelName, transform.position, lastCollisionName);
+		AnalyticsManager.SendDeathEvent (hud.levelName, transform.position, lastCollisionName);
 		lastCollisionName = "";
 	}
 
@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void ShakeScreen() {
-		inputManager.ShakeForDuration (0.2f);
+		hud.ShakeForDuration (0.2f);
 	}
 
 	/***
@@ -312,8 +312,8 @@ public class PlayerController : MonoBehaviour {
 	public void CollisionWithHazardousEnvironment(string hazardousEnvName) {
 		lastCollisionName = hazardousEnvName;
 		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
-			inputManager.ShakeForDuration (0.2f);
-			inputManager.ShowDamageIndicator ();
+			hud.ShakeForDuration (0.2f);
+			hud.ShowDamageIndicator ();
 			AudioManager.PlaySound ("sizzle");
 			popcornKernel.increaseTemperature (HAZARD_COLLISION_TEMPERATURE_INCREASE);
 			popcornKernel.MakeInvincibleForTime (MAX_INVINCIBILITY_TIME);
@@ -346,8 +346,8 @@ public class PlayerController : MonoBehaviour {
 	public void CollisionWithEnemy(string enemyName, float suggestedTemperatureIncrease, bool disablePlayerMovement) {
 		lastCollisionName = enemyName;
 		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
-			inputManager.ShowDamageIndicator ();
-			inputManager.ShakeForDuration (0.2f);
+			hud.ShowDamageIndicator ();
+			hud.ShakeForDuration (0.2f);
 			AudioManager.PlaySound ("sizzle");
 
 			popcornKernel.increaseTemperature (suggestedTemperatureIncrease);
@@ -384,8 +384,8 @@ public class PlayerController : MonoBehaviour {
 
 	public void IncrementCoinCount(int coinId) {
 		collectedCoins.Add (coinId);
-		inputManager.StartCoinCollectedAnimation ();
-		inputManager.coinCountText.text = collectedCoins.Count.ToString ();
+		hud.StartCoinCollectedAnimation ();
+		hud.coinCountText.text = collectedCoins.Count.ToString ();
 	}
 
 	public bool IsGliding() {

@@ -125,6 +125,8 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	private SwipeDirection swipeDirection;
 
+	private InputManager inputManager;
+
 	private enum SwipeDirection {
 		UP, DOWN, LEFT, RIGHT, NONE
 	};
@@ -169,7 +171,7 @@ public class HudListener : MonoBehaviour, InputManager {
 			player.setPosition (playerPosition);
 		}
 			
-		player.inputManager = this;
+		player.hud = this;
 
 		jumpKeyPressed = false;
 		jumpKeyReleased = false;
@@ -182,6 +184,18 @@ public class HudListener : MonoBehaviour, InputManager {
 		thermometer.gameObject.SetActive (true);
 		levelName = SceneManager.GetActiveScene ().name;
 		AnalyticsManager.SendLevelStartEvent(levelName);
+
+
+		if (isMobile ()) {
+			// TODO - set input manager as the soft key input manager
+			player.hud = this;
+//			player.inputManager = 
+		} else {
+			// TODO - set input manager as the keyboard input manager
+			player.hud = this;
+			inputManager = gameObject.AddComponent<KeyboardInputManager> ();
+			player.inputManager = inputManager;
+		}
 
 		if (isMobile () && !Settings.touchInputEnabled) {
 			playerControlPanel.SetActive (true);
@@ -312,78 +326,6 @@ public class HudListener : MonoBehaviour, InputManager {
 			if (infoPanel.gameObject.activeInHierarchy) {
 				infoPanel.QuitButtonPressed ();
 			}
-		}
-
-		//allow key interaction if the platform is not mobile
-		if (!isMobile()) {
-			if(Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1)) {
-				jumpKeyPressed = true;
-			}
-			if (Input.GetKeyUp (KeyCode.Space) || Input.GetKeyUp(KeyCode.Joystick1Button1)) {
-				jumpKeyReleased = true;
-			}
-
-			if(Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button0)) {
-				attackKeyPressed = true;
-			}
-			if(Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button0)) {
-				attackKeyReleased = true;
-			}
-
-			directionalInput.x = Input.GetAxisRaw ("Horizontal");
-			directionalInput.y = Input.GetAxisRaw ("Vertical");
-		}
-
-		if (Settings.touchInputEnabled) {
-
-			if (Input.touchCount > 0) {
-				Touch touch = Input.touches[0];
-
-				switch (touch.phase) {
-
-				case TouchPhase.Began:
-					startPos = touch.position;
-					break;
-				case TouchPhase.Ended:
-
-					float swipeDistVertical = (new Vector3 (0, touch.position.y, 0) - new Vector3 (0, startPos.y, 0)).magnitude;
-
-					if (swipeDistVertical > minSwipeDistY) {
-
-						float swipeValue = Mathf.Sign (touch.position.y - startPos.y);
-
-						if (swipeValue < 0) {
-							swipeDirection = SwipeDirection.DOWN;
-						}
-					}
-					float swipeDistHorizontal = (new Vector3 (touch.position.x, 0, 0) - new Vector3 (startPos.x, 0, 0)).magnitude;
-
-					if (swipeDistHorizontal > minSwipeDistX) {
-						float swipeValue = Mathf.Sign (touch.position.x - startPos.x);
-
-						if (swipeValue > 0) {
-							swipeDirection = SwipeDirection.RIGHT;
-						} else if (swipeValue < 0) {
-							swipeDirection = SwipeDirection.LEFT;
-						}
-					}
-
-					if (swipeDirection == SwipeDirection.LEFT) {
-						directionalInput.x = -1.0f;
-					} else if (swipeDirection == SwipeDirection.RIGHT) {
-						directionalInput.x = 1.0f;
-					} else if (swipeDirection == SwipeDirection.DOWN) {
-						directionalInput.x = 0.0f;
-					} else if (swipeDirection == SwipeDirection.NONE) {
-						//tap was performed, trigger jump
-						jumpKeyPressed = true;
-					}
-
-					break;
-				}
-			}
-				
-
 		}
 
 		if (jumpSoftKeyNew && !jumpSoftKeyOld) {
@@ -625,7 +567,7 @@ public class HudListener : MonoBehaviour, InputManager {
 		CameraFollow camera = GameObject.Find ("Main Camera").GetComponent<CameraFollow>();
 		camera.isLocked = false;
 		camera.target = player;
-		player.inputManager = this;
+		player.hud = this;
 
 		thermometer.Reset ();
 
@@ -868,7 +810,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	}
 
 	public float getXAxis() {
-		return directionalInput.x;
+		return inputManager.getXAxis ();
 	}
 
 	public void NextLevel() {
@@ -892,19 +834,15 @@ public class HudListener : MonoBehaviour, InputManager {
 	}
 
 	public bool JumpKeyDown() {
-		return jumpKeyPressed;
+		return inputManager.JumpKeyDown ();
 	}
 
 	public bool JumpKeyUp() {
-		return jumpKeyReleased;
+		return inputManager.JumpKeyUp ();
 	}
 
 	public bool AttackKeyPressed() {
-		return attackKeyPressed;
-	}
-
-	public bool AttackKeyReleased() {
-		return attackKeyReleased;
+		return inputManager.AttackKeyPressed ();
 	}
 
 	private bool isMobile() {

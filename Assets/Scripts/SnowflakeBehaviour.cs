@@ -22,7 +22,7 @@ public class SnowflakeBehaviour : MonoBehaviour {
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 
 			player.ResetTemperature();
-			player.inputManager.ShowWhiteFlash ();
+			player.hud.ShowWhiteFlash ();
 
 			snowflakeAnimator.SetTrigger("PickedUp");
 			AudioManager.PlaySound ("snowflake-new");

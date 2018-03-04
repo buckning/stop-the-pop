@@ -95,7 +95,7 @@ public class ButterBlobBehaviour : Breakable {
 				animator.SetTrigger ("die");
 				dying = true;
 				AudioManager.PlaySound ("squash", Random.Range (1.25f, 1.5f));
-				player.inputManager.ShakeForDuration (0.2f);
+				player.hud.ShakeForDuration (0.2f);
 			}
 		}
 	}

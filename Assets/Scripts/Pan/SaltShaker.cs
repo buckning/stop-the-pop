@@ -112,7 +112,7 @@ public class SaltShaker : Breakable  {
 		player.SetVelocity (new Vector2 (player.GetVelocity ().x, reboundVector.y));
 		dying = true;
 		AudioManager.PlaySound ("salt-shaker-explode");
-		player.inputManager.ShakeForDuration (0.2f);
+		player.hud.ShakeForDuration (0.2f);
 		anim.SetTrigger ("Die");
 		Instantiate (destroyAnimation, transform.position, Quaternion.identity);
 	}

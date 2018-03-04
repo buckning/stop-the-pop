@@ -21,8 +21,8 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 			//cache if the player should increase temperature
 			updateTemperature = player.GetUpdateTemperature();
 
-			player.inputManager.ShowDamageIndicator ();
-			player.inputManager.ShakeForDuration (0.3f);
+			player.hud.ShowDamageIndicator ();
+			player.hud.ShakeForDuration (0.3f);
 			AudioManager.PlaySound ("sizzle");
 			
 			//make the player increase the temperature
