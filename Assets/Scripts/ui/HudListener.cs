@@ -61,7 +61,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	public Button sfxButton;
 	public Button musicButton;
 
-	public Image screenFader;
+	public ScreenFader screenFader;
 
 	public Image dialogBoxBackgroundFader;
 
@@ -100,10 +100,7 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	private bool attackSoftKeyNew;
 	private bool attackSoftKeyOld;
-	
-	private bool isFadingIn = false;
-	private bool isFadingOut = false;
-	private float fadeSpeed = 3.0f;
+
 	private bool dedicatedAchievementUnlocked = false;
 
 	private bool gameOverTriggered = false;
@@ -198,7 +195,10 @@ public class HudListener : MonoBehaviour, InputManager {
 			spawner.Spawn ();
 		}
 
-		isFadingIn = true;
+		screenFader.fadeOutCompleteListeners += FadeOutCompleted;
+		screenFader.fadeInCompleteListeners += FadeInCompleted;
+
+		FadeIn ();
 
 		string nextLevelName = GameObject.Find("LevelCompleteTrigger").GetComponent<LevelCompleteTrigger>().nextLevelName;
 		if (nextLevelName == "GameComplete") {
@@ -212,27 +212,9 @@ public class HudListener : MonoBehaviour, InputManager {
 	void FadeIn() {
 		pauseButton.SetActive (false);
 		playerControlPanel.SetActive (false);
-		Color color = new Color(screenFader.color.r, screenFader.color.g, screenFader.color.b, screenFader.color.a);
-		color.a = Mathf.MoveTowards (screenFader.color.a, 0.0f, Time.deltaTime * fadeSpeed);
-		screenFader.color = color;
-		screenFader.gameObject.SetActive (true);
-
-		if (color.a <= 0.05f) {
-			isFadingIn = false;
-			screenFader.gameObject.SetActive(false);
-			pauseButton.SetActive(true);
-			if (isMobile () && !Settings.touchInputEnabled) {
-				playerControlPanel.SetActive (true);
-			} else {
-				playerControlPanel.SetActive (false);
-			}
-			coinCountPanel.SetActive (true);
-			coinCountText.text = player.GetCollectedCoins ().Count.ToString();
-		}
-
 		DirectionalButtonUp ();	//fix the autopilot bug
-
 		gameOverTriggered = false;
+		screenFader.StartFadingIn ();
 	}
 
 
@@ -240,29 +222,27 @@ public class HudListener : MonoBehaviour, InputManager {
 		coinCountPanel.SetActive (false);
 		pauseButton.SetActive (false);
 		playerControlPanel.SetActive (false);
-		Color color = new Color(screenFader.color.r, screenFader.color.g, screenFader.color.b, screenFader.color.a);
-		color.a = Mathf.MoveTowards (screenFader.color.a, 1.0f, Time.deltaTime * fadeSpeed);
-		screenFader.color = color;
-		screenFader.gameObject.SetActive (true);
+		screenFader.StartFadingOut ();
+	}
 
-		if (color.a >= 0.95f) {
-			isFadingOut = false;
-			Retry();
+	void FadeOutCompleted() {
+		Retry();
+	}
+
+	void FadeInCompleted() {
+		pauseButton.SetActive(true);
+		if (isMobile () && !Settings.touchInputEnabled) {
+			playerControlPanel.SetActive (true);
+		} else {
+			playerControlPanel.SetActive (false);
 		}
+		coinCountPanel.SetActive (true);
+		coinCountText.text = player.GetCollectedCoins ().Count.ToString();
 	}
 
 
 	void Update() {
 		swipeDirection = SwipeDirection.NONE;
-
-		if (isFadingIn) {
-			FadeIn ();
-			return;
-		}
-		if (isFadingOut) {
-			FadeOut();
-			return;
-		}
 
 		if(Time.time > 1800 && !dedicatedAchievementUnlocked) {
 			#if UNITY_IOS
@@ -567,7 +547,7 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	public void RetryButtonPressed() {
 		reloadButton.SetActive (false);
-		isFadingOut = true;	
+		FadeOut ();
 		Time.timeScale = 1.0f;
 		levelCompletePanel.Reset ();
 	}
@@ -630,7 +610,7 @@ public class HudListener : MonoBehaviour, InputManager {
 		Resume ();
 		reloadButton.SetActive (false);
 
-		isFadingIn = true;
+		FadeIn ();
 
 		if(initialPlayerPosition == null) {
 			initialPlayerPosition = GameObject.Find ("PlayerDropPoint").GetComponent<Transform>();
@@ -822,7 +802,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	 * SHOULD ONLY BE USED BY THE ANIMATOR AT THE END OF A POP SEQUENCE
 	 */
 	public void TriggerFadeOut() {
-		isFadingOut = true;	
+		FadeOut ();
 	}
 	
 	public void Pause() {
@@ -865,7 +845,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	 * Retry the level without doing the pop animation
 	 */
 	public void RetryLevel() {
-		isFadingOut = true;
+		FadeOut ();
 	}
 
 	public void levelComplete(string nextLevel) {
