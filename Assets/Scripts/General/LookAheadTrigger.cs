@@ -18,7 +18,6 @@ public class LookAheadTrigger : MonoBehaviour {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 			player.hud.EnableControlPanel (false);
-			player.hud.DirectionalButtonUp ();
 			player.playerMovementEnabled = false;
 			target.SetActive (true);
 
@@ -36,7 +35,6 @@ public class LookAheadTrigger : MonoBehaviour {
 		myCamera.temporaryTarget = previousTransform;
 		yield return new WaitForSeconds (1.5f);
 		PlayerController player = GameObject.Find ("LevelHUD").GetComponent<HudListener>().player;
-		player.hud.DirectionalButtonUp ();
 		player.hud.EnableControlPanel (true);
 		player.playerMovementEnabled = true;
 		myCamera.temporaryTarget = Vector3.zero;

@@ -93,18 +93,6 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	private Vector2 directionalInput;
 
-	private bool jumpKeyPressed;
-	private bool jumpKeyReleased;
-
-	private bool attackKeyPressed;
-	private bool attackKeyReleased;
-
-	private bool jumpSoftKeyNew;	//the current status of the jump soft key
-	private bool jumpSoftKeyOld;	//the status of the jump soft key last frame
-
-	private bool attackSoftKeyNew;
-	private bool attackSoftKeyOld;
-
 	private bool dedicatedAchievementUnlocked = false;
 
 	private bool gameOverTriggered = false;
@@ -127,13 +115,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	public Text timeText;
 	public Text loadingText;
 
-	private SwipeDirection swipeDirection;
-
 	private InputManager inputManager;
-
-	private enum SwipeDirection {
-		UP, DOWN, LEFT, RIGHT, NONE
-	};
 
 	public void debug(string message) {
 		if (debugText != null && Debug.isDebugBuild) {
@@ -176,9 +158,6 @@ public class HudListener : MonoBehaviour, InputManager {
 		}
 			
 		player.hud = this;
-
-		jumpKeyPressed = false;
-		jumpKeyReleased = false;
 
 		reloadButton.SetActive (false);	//this button should only be shown during the pop sequence so the player can skip it
 
@@ -232,7 +211,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	void FadeIn() {
 		pauseButton.SetActive (false);
 		playerControlPanel.SetActive (false);
-		DirectionalButtonUp ();	//fix the autopilot bug
+		//TODO see if the fix for the autopilot bug is still required with new input managers
 		gameOverTriggered = false;
 		screenFader.StartFadingIn ();
 	}
@@ -262,8 +241,6 @@ public class HudListener : MonoBehaviour, InputManager {
 
 
 	void Update() {
-		swipeDirection = SwipeDirection.NONE;
-
 		if(Time.time > 1800 && !dedicatedAchievementUnlocked) {
 			#if UNITY_IOS
 			SocialServiceManager.GetInstance ().UnlockAchievement ("dedicated");
@@ -283,12 +260,6 @@ public class HudListener : MonoBehaviour, InputManager {
 			coinCountText.gameObject.transform.localScale = Vector3.Lerp (coinCountText.gameObject.transform.localScale, Vector3.one, Time.deltaTime * 5f);	//animate the coin collected text
 		}
 		coinCountText.text = player.GetCollectedCoins().Count.ToString();
-
-		jumpKeyPressed = false;
-		jumpKeyReleased = false;
-
-		attackKeyPressed = false;
-		attackKeyReleased = false;
 
 		//skip button is only active when a cutscene is running
 		//so only add to the length of time in the level when the skip button isn't active
@@ -333,25 +304,6 @@ public class HudListener : MonoBehaviour, InputManager {
 				infoPanel.QuitButtonPressed ();
 			}
 		}
-
-		if (jumpSoftKeyNew && !jumpSoftKeyOld) {
-			jumpKeyPressed = true;
-		}
-
-		if (!jumpSoftKeyNew && jumpSoftKeyOld) {
-			jumpKeyReleased = true;
-		}
-
-		if (attackSoftKeyNew && !attackSoftKeyOld) {
-			attackKeyPressed = true;
-		}
-		
-		if (!attackSoftKeyNew && attackSoftKeyOld) {
-			attackKeyReleased = true;
-		}
-
-		jumpSoftKeyOld = jumpSoftKeyNew;
-		attackSoftKeyOld = attackSoftKeyNew;
 	}
 
 	public void ShowErrorPanel() {
@@ -369,68 +321,8 @@ public class HudListener : MonoBehaviour, InputManager {
 		damageIndicator.color = color;
 	}
 
-	/***
-	 * Get the value that the player is to be moved in
-	 */
-	public float getMoveInput() {
-		return playerSpeed;
-	}
-
-	public void DirectionalButtonUp() {
-		leftButtonImage.color = new Color (0.706f, 0.706f, 0.706f, 0.314f);
-		rightButtonImage.color = new Color (0.706f, 0.706f, 0.706f, 0.314f);
-		LeftSoftKeyUp ();
-		RightSoftKeyUp ();
-	}
-
-	public void DirectionalButtonPressed(BaseEventData data) {
-		PointerEventData pointerData = data as PointerEventData;
-
-		if (RectTransformUtility.RectangleContainsScreenPoint (leftButton.GetComponent<RectTransform> (), pointerData.position, Camera.main)) {
-			leftButtonImage.color = new Color (1f, 1f, 1f, 0.549f);
-			rightButtonImage.color = new Color (0.706f, 0.706f, 0.706f, 0.314f);
-			LeftSoftKeyDown ();
-		} else if (RectTransformUtility.RectangleContainsScreenPoint (rightButton.GetComponent<RectTransform> (), pointerData.position, Camera.main)) {
-			rightButtonImage.color = new Color (1f, 1f, 1f, 0.549f);
-			leftButtonImage.color = new Color (0.705f, 0.705f, 0.705f, 0.314f);
-			RightSoftKeyDown ();
-		}
-	}
-
 	public void StartCoinCollectedAnimation() {
 		coinCountText.gameObject.transform.localScale = Vector3.one * coinCountTextScaleMax;
-	}
-
-	public void LeftSoftKeyDown() {
-		directionalInput.x = -1f;
-	}
-
-	public void LeftSoftKeyUp() {
-		directionalInput.x = 0f;
-	}
-
-	public void RightSoftKeyDown() {
-		directionalInput.x = 1f;
-	}
-	
-	public void RightSoftKeyUp() {
-		directionalInput.x = 0f;
-	}
-
-	public void JumpSoftKeyDown() {
-		jumpSoftKeyNew = true;
-	}
-	
-	public void JumpSoftKeyUp() {
-		jumpSoftKeyNew = false;
-	}
-
-	public void AttackSoftKeyDown() {
-		attackSoftKeyNew = true;
-	}
-	
-	public void AttackSoftKeyUp() {
-		attackSoftKeyNew = false;
 	}
 
 	public void PauseButtonPressed() {
@@ -674,8 +566,7 @@ public class HudListener : MonoBehaviour, InputManager {
 		Destroy (oldPlayer);
 
 		//resetting the state of the player input. Without this, there can be some strange behaviour like where the player would move when the player is not touching the screen
-		jumpSoftKeyOld = false;
-		jumpSoftKeyNew = false;
+		// TODO - need to implement a similar solution with new input managers
 		directionalInput.x = 0.0f;
 		directionalInput.y = 0.0f;
 		camera.gameOver = false;
