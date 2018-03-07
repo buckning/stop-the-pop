@@ -9,7 +9,6 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 	public Image attackButton;
 	public Image rightDirectionButton;
 	public Image leftDirectionButton;
-
 	private bool jumpKeyPressed;
 	private bool jumpKeyReleased;
 
@@ -28,7 +27,9 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 		directionalInput = new Vector2 ();
 		jumpKeyPressed = false;
 		jumpKeyReleased = false;
+	}
 
+	public void SetUp() {
 		SetUpEventListenerOnImage (jumpButton, EventTriggerType.PointerDown, JumpSoftKeyDown);
 		SetUpEventListenerOnImage (jumpButton, EventTriggerType.PointerUp, JumpSoftKeyUp);
 		SetUpEventListenerOnImage (attackButton, EventTriggerType.PointerDown, AttackSoftKeyDown);
@@ -122,25 +123,4 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 	private void AttackSoftKeyUp(BaseEventData eventData) {
 		attackSoftKeyNew = false;
 	}
-
-//	public void DirectionalButtonUp() {
-//		leftButtonImage.color = new Color (0.706f, 0.706f, 0.706f, 0.314f);
-//		rightButtonImage.color = new Color (0.706f, 0.706f, 0.706f, 0.314f);
-//		LeftSoftKeyUp ();
-//		RightSoftKeyUp ();
-//	}
-//
-//	public void DirectionalButtonPressed(BaseEventData data) {
-//		PointerEventData pointerData = data as PointerEventData;
-//
-//		if (RectTransformUtility.RectangleContainsScreenPoint (leftButton.GetComponent<RectTransform> (), pointerData.position, Camera.main)) {
-//			leftButtonImage.color = new Color (1f, 1f, 1f, 0.549f);
-//			rightButtonImage.color = new Color (0.706f, 0.706f, 0.706f, 0.314f);
-//			LeftSoftKeyDown ();
-//		} else if (RectTransformUtility.RectangleContainsScreenPoint (rightButton.GetComponent<RectTransform> (), pointerData.position, Camera.main)) {
-//			rightButtonImage.color = new Color (1f, 1f, 1f, 0.549f);
-//			leftButtonImage.color = new Color (0.705f, 0.705f, 0.705f, 0.314f);
-//			RightSoftKeyDown ();
-//		}
-//	}
 }

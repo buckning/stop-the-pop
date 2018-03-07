@@ -28,6 +28,10 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	//the control panel that contains the forward, backward, and jump buttons
 	public GameObject playerControlPanel;
+	public Image jumpButton;
+	public Image attackButton;
+	public Image leftDirectionButton;
+	public Image rightDirectionButton;
 
 	public GameObject pauseButton;
 
@@ -187,21 +191,13 @@ public class HudListener : MonoBehaviour, InputManager {
 
 
 		if (isMobile ()) {
-			// TODO - set input manager as the soft key input manager
-			player.hud = this;
-//			player.inputManager = 
+			inputManager = InitialiseSoftKeyInputManager ();
 		} else {
-			// TODO - set input manager as the keyboard input manager
-			player.hud = this;
 			inputManager = gameObject.AddComponent<KeyboardInputManager> ();
-			player.inputManager = inputManager;
 		}
 
-		if (isMobile () && !Settings.touchInputEnabled) {
-			playerControlPanel.SetActive (true);
-		} else {
-			playerControlPanel.SetActive (false);
-		}
+		player.inputManager = inputManager;
+		playerControlPanel.SetActive (isMobile ());
 
 		SimpleSpawner[] spawners = Resources.FindObjectsOfTypeAll (typeof(SimpleSpawner)) as SimpleSpawner[];
 		foreach (SimpleSpawner spawner in spawners) {
@@ -221,6 +217,16 @@ public class HudListener : MonoBehaviour, InputManager {
 			skipLevelButton.gameObject.SetActive (false);
 			skipLevelText.gameObject.SetActive (false);
 		}
+	}
+
+	private SoftKeyInputManager InitialiseSoftKeyInputManager() {
+		SoftKeyInputManager softKeyInputManager = gameObject.AddComponent<SoftKeyInputManager> ();
+		softKeyInputManager.jumpButton = jumpButton;
+		softKeyInputManager.leftDirectionButton = leftDirectionButton;
+		softKeyInputManager.rightDirectionButton = rightDirectionButton;
+		softKeyInputManager.attackButton = attackButton;
+		softKeyInputManager.SetUp ();
+		return softKeyInputManager;
 	}
 
 	void FadeIn() {
@@ -245,7 +251,7 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	void FadeInCompleted() {
 		pauseButton.SetActive(true);
-		if (isMobile () && !Settings.touchInputEnabled) {
+		if (isMobile ()) {
 			playerControlPanel.SetActive (true);
 		} else {
 			playerControlPanel.SetActive (false);
@@ -769,7 +775,7 @@ public class HudListener : MonoBehaviour, InputManager {
 		storePanel.gameObject.SetActive (false);
 		infoPanel.gameObject.SetActive (false);
 		watchVideoAdPanel.gameObject.SetActive (false);
-		if (isMobile() && !Settings.touchInputEnabled) {
+		if (isMobile()) {
 			playerControlPanel.SetActive (true);
 		}
 
@@ -778,7 +784,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	}
 
 	public void EnableControlPanel(bool enable) {
-		if (isMobile() && !Settings.touchInputEnabled) {
+		if (isMobile()) {
 			playerControlPanel.SetActive (enable);
 		}
 	}
