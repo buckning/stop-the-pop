@@ -58,8 +58,7 @@ public class HudListener : MonoBehaviour {
 	//this button is used to skip the death animation. It is only shown during the pop sequence. 
 	public GameObject reloadButton;
 
-	public Button sfxButton;
-	public Button musicButton;
+	public CoinCountPanel coinCountPanel;
 
 	public ScreenFader screenFader;
 	public ScreenFader damageIndicator;
@@ -67,10 +66,6 @@ public class HudListener : MonoBehaviour {
 	public Image dialogBoxBackgroundFader;
 
 	public Image levelLoadingBar;
-
-	public GameObject coinCountPanel;
-	public Text coinCountText;	//updated by the the player script when it is collected and by this script when restarting the level
-	public float coinCountTextScaleMax = 2f;
 
 	//the actual player in the game
 	public PlayerController player;
@@ -211,9 +206,8 @@ public class HudListener : MonoBehaviour {
 		screenFader.StartFadingIn ();
 	}
 
-
 	void FadeOut() {
-		coinCountPanel.SetActive (false);
+		coinCountPanel.gameObject.SetActive (false);
 		pauseButton.SetActive (false);
 		playerControlPanel.SetActive (false);
 		screenFader.StartFadingOut ();
@@ -230,18 +224,12 @@ public class HudListener : MonoBehaviour {
 		} else {
 			playerControlPanel.SetActive (false);
 		}
-		coinCountPanel.SetActive (true);
-		coinCountText.text = player.GetCollectedCoins ().Count.ToString();
+		coinCountPanel.gameObject.SetActive (true);
+		coinCountPanel.coinCount = player.GetCollectedCoins ().Count;
 	}
 
 
 	void Update() {
-		if (coinCountText.gameObject.transform.localScale.x > 1.1f) {
-			//don't want to run the lerp on every frame for performance reasons, so adding this if statement for protection
-			coinCountText.gameObject.transform.localScale = Vector3.Lerp (coinCountText.gameObject.transform.localScale, Vector3.one, Time.deltaTime * 5f);	//animate the coin collected text
-		}
-		coinCountText.text = player.GetCollectedCoins().Count.ToString();
-
 		//skip button is only active when a cutscene is running
 		//so only add to the length of time in the level when the skip button isn't active
 		if (!skipCutSceneButton.gameObject.activeInHierarchy) {
@@ -309,8 +297,8 @@ public class HudListener : MonoBehaviour {
 		damageIndicator.StartFadingIn ();
 	}
 
-	public void StartCoinCollectedAnimation() {
-		coinCountText.gameObject.transform.localScale = Vector3.one * coinCountTextScaleMax;
+	public void SetCoinCount(int coinCount) {
+		coinCountPanel.SetCoinCount (coinCount);
 	}
 
 	public void PauseButtonPressed() {
@@ -337,7 +325,7 @@ public class HudListener : MonoBehaviour {
 		} else {
 			AudioManager.PlaySound ("Click", 0.9f);
 			ResumeGame ();
-			coinCountPanel.SetActive (true);
+			coinCountPanel.gameObject.SetActive (true);
 		}
 	}
 
@@ -411,7 +399,7 @@ public class HudListener : MonoBehaviour {
 	public void ResumeButtonPressed() {
 		AudioManager.PlaySound ("ButtonClick");
 		ResumeGame ();
-		coinCountPanel.SetActive (true);
+		coinCountPanel.gameObject.SetActive (true);
 	}
 	
 	public void QuitButtonPressed() {
@@ -558,23 +546,6 @@ public class HudListener : MonoBehaviour {
 		directionalInput.x = 0.0f;
 		directionalInput.y = 0.0f;
 		camera.gameOver = false;
-
-		if (CurrentLevel.GetLivesLost () == 10) {
-			#if UNITY_IOS
-			SocialServiceManager.GetInstance ().UnlockAchievement ("popcornaddict");
-			#endif
-			#if UNITY_ANDROID
-			SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_popcorn_addict);
-			#endif
-		}
-		if (CurrentLevel.GetLivesLost () == 25) {
-			#if UNITY_IOS
-			SocialServiceManager.GetInstance ().UnlockAchievement ("nevergiveup");
-			#endif
-			#if UNITY_ANDROID
-			SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_never_give_up);
-			#endif
-		}
 	}
 	
 	public void QuitGame() {
@@ -639,7 +610,7 @@ public class HudListener : MonoBehaviour {
 		storePanel.gameObject.SetActive (false);
 		thermometer.gameObject.SetActive (false);
 		infoPanel.gameObject.SetActive (false);
-		coinCountPanel.SetActive (false);
+		coinCountPanel.gameObject.SetActive (false);
 		watchVideoAdPanel.gameObject.SetActive (false);
 		if (isMobile()) {
 			playerControlPanel.SetActive (false);
@@ -680,7 +651,7 @@ public class HudListener : MonoBehaviour {
 		Pause ();
 		pauseMenu.SetActive(false);
 		thermometer.gameObject.SetActive (false);
-		coinCountPanel.SetActive (false);
+		coinCountPanel.gameObject.SetActive (false);
 		levelCompletePanel.gameObject.SetActive (true);
 		levelCompletePanel.ShowLevelCompletePanel (levelName);
 
@@ -807,15 +778,6 @@ public class HudListener : MonoBehaviour {
 		Camera.main.gameObject.GetComponent<CameraShaker> ().StopShaking();
 	}
 
-	public void ToggleMusic() {
-
-	}
-
-
-	public void ToggleSfx() {
-
-	}
-
 	public PlayerController GetPlayer() {
 		return player;
 	}
@@ -824,7 +786,6 @@ public class HudListener : MonoBehaviour {
 		AnalyticsManager.SendAdWatchEvent (levelName, "EndOfLevelRewardAd", CurrentLevel.GetLivesLost(), (int) CurrentLevel.GetLengthOfTimeInLevel());
 		levelCompletePanel.PlayAdForReward ();
 	}
-
 
 	void SkipToNextLevel() {
 		string nextLevelName = GameObject.Find("LevelCompleteTrigger").GetComponent<LevelCompleteTrigger>().nextLevelName;

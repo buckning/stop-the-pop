@@ -384,8 +384,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void IncrementCoinCount(int coinId) {
 		collectedCoins.Add (coinId);
-		hud.StartCoinCollectedAnimation ();
-		hud.coinCountText.text = collectedCoins.Count.ToString ();
+		hud.SetCoinCount (collectedCoins.Count);
 	}
 
 	public bool IsGliding() {
