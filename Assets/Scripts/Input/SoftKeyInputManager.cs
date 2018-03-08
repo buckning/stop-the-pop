@@ -21,6 +21,8 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 	private bool attackSoftKeyNew;
 	private bool attackSoftKeyOld;
 
+	private bool backButtonPressed;
+
 	private Vector2 directionalInput;
 
 	void Start () {
@@ -56,6 +58,8 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 		attackKeyPressed = false;
 		attackKeyReleased = false;
 
+		backButtonPressed = false;
+
 		if (jumpSoftKeyNew && !jumpSoftKeyOld) {
 			jumpKeyPressed = true;
 		}
@@ -74,6 +78,14 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 
 		jumpSoftKeyOld = jumpSoftKeyNew;
 		attackSoftKeyOld = attackSoftKeyNew;
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			backButtonPressed = true;
+		}
+	}
+
+	public bool BackButtonPressed () {
+		return backButtonPressed;
 	}
 
 	public bool JumpKeyDown () {
@@ -88,7 +100,7 @@ public class SoftKeyInputManager : MonoBehaviour, InputManager {
 		return attackKeyPressed;
 	}
 
-	public float getXAxis () {
+	public float GetXAxis () {
 		return directionalInput.x;
 	}
 

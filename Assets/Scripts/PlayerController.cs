@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		WallCollisionCheck wallCollisionChecker = new WallCollisionCheck (wallCollider);
 		CeilingCollisionCheck ceilingCollisionCheck = new CeilingCollisionCheck (ceilingCheck, whatIsCeilingMask);
 
-		popcornKernel = new PopcornKernel (hud, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
+		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
 		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-		playerInput = new Vector2 (hud.getXAxis(), hud.getYAxis());
+		playerInput = new Vector2 (inputManager.GetXAxis(), 0.0f);
 		if (popcornKernel.IsAtMaxTemperature() || !playerMovementEnabled) {
 			playerInput = Vector2.zero;
 		} 
@@ -208,9 +208,9 @@ public class PlayerController : MonoBehaviour {
 			return;
 		}
 
-		if (hud.getXAxis() > 0 && !facingRight) {
+		if (inputManager.GetXAxis() > 0 && !facingRight) {
 			Flip ();
-		} else if (hud.getXAxis() < 0 && facingRight) {
+		} else if (inputManager.GetXAxis() < 0 && facingRight) {
 			Flip();
 		}
 	}

@@ -292,6 +292,7 @@ public class PopcornKernelTest {
 		private bool keyDown = false;
 		private bool keyUp = false;
 		private bool attackKeyPressed = false;
+		private bool backKeyPressed = false;
 		private float xAxisInput = 0.0f;
 
 		public void SetXAxisInput(float xAxisInput) {
@@ -318,11 +319,15 @@ public class PopcornKernelTest {
 			return this.keyUp;
 		}
 
+		public bool BackButtonPressed() {
+			return backKeyPressed;
+		}
+
 		public bool AttackKeyPressed() {
 			return attackKeyPressed;
 		}
 
-		public float getXAxis() {
+		public float GetXAxis() {
 			return xAxisInput;
 		}
 	}

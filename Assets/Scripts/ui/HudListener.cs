@@ -10,11 +10,7 @@ using UnityEngine.UI;
 /***
  * This class acts like an input manager.
  */
-public class HudListener : MonoBehaviour, InputManager {
-
-	public float minSwipeDistY;
-
-	public float minSwipeDistX;
+public class HudListener : MonoBehaviour {
 
 	private Vector2 startPos;
 
@@ -240,16 +236,6 @@ public class HudListener : MonoBehaviour, InputManager {
 
 
 	void Update() {
-		if(Time.time > 1800 && !dedicatedAchievementUnlocked) {
-			#if UNITY_IOS
-			SocialServiceManager.GetInstance ().UnlockAchievement ("dedicated");
-			#endif
-			#if UNITY_ANDROID
-			SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_dedicated);
-			#endif
-			dedicatedAchievementUnlocked = true;
-		}
-
 		if (coinCountText.gameObject.transform.localScale.x > 1.1f) {
 			//don't want to run the lerp on every frame for performance reasons, so adding this if statement for protection
 			coinCountText.gameObject.transform.localScale = Vector3.Lerp (coinCountText.gameObject.transform.localScale, Vector3.one, Time.deltaTime * 5f);	//animate the coin collected text
@@ -272,32 +258,40 @@ public class HudListener : MonoBehaviour, InputManager {
 			return;
 		}
 
-		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button9)) {
-			//only allow to unpause if the level complete panel is not shown
-			if(!levelCompletePanel.gameObject.activeInHierarchy && !dialogBox.gameObject.activeInHierarchy && !storePanel.gameObject.activeInHierarchy) {
-				PauseButtonPressed ();
-			} 
+		if (inputManager.BackButtonPressed ()) {
+			BackButtonPressed ();
+		}
+	}
 
-			if (levelCompletePanel.gameObject.activeInHierarchy && errorPanel.activeInHierarchy) {
+	public void BackButtonPressed() {
+		//only allow to unpause if the level complete panel is not shown
+		if(!levelCompletePanel.gameObject.activeInHierarchy 
+			&& !dialogBox.gameObject.activeInHierarchy 
+			&& !storePanel.gameObject.activeInHierarchy) {
+
+			PauseButtonPressed ();
+		} 
+
+		if (levelCompletePanel.gameObject.activeInHierarchy && errorPanel.activeInHierarchy) {
+			HideErrorPanel ();
+		}
+
+		if (storePanel.gameObject.activeInHierarchy) {
+			if (errorPanel.activeInHierarchy) {
 				HideErrorPanel ();
+			} else {
+				storePanel.BackButtonPressed ();
 			}
-			if (storePanel.gameObject.activeInHierarchy) {
-				if (errorPanel.activeInHierarchy) {
-					HideErrorPanel ();
-				} else {
-					storePanel.BackButtonPressed ();
-				}
-			}
+		}
 
-			if (dialogBox.gameObject.activeInHierarchy) {
-				dialogBoxBackgroundFader.GetComponent<GAui> ().MoveOut();
-				dialogBox.gameObject.GetComponent<GAui> ().MoveOut ();
-				AudioManager.PlaySound ("InfoPanelSlideIn", 0.9f);
-				Pause();
-			}
-			if (infoPanel.gameObject.activeInHierarchy) {
-				infoPanel.QuitButtonPressed ();
-			}
+		if (dialogBox.gameObject.activeInHierarchy) {
+			dialogBoxBackgroundFader.GetComponent<GAui> ().MoveOut();
+			dialogBox.gameObject.GetComponent<GAui> ().MoveOut ();
+			AudioManager.PlaySound ("InfoPanelSlideIn", 0.9f);
+			Pause();
+		}
+		if (infoPanel.gameObject.activeInHierarchy) {
+			infoPanel.QuitButtonPressed ();
 		}
 	}
 
@@ -696,14 +690,6 @@ public class HudListener : MonoBehaviour, InputManager {
 		pauseButton.SetActive (false);
 	}
 
-	public float getYAxis() {
-		return directionalInput.y;
-	}
-
-	public float getXAxis() {
-		return inputManager.getXAxis ();
-	}
-
 	public void NextLevel() {
 		LoadNextLevelAsync();
 	}
@@ -722,18 +708,6 @@ public class HudListener : MonoBehaviour, InputManager {
 			yield return null;
 		}
 		levelLoadJob.allowSceneActivation = true;
-	}
-
-	public bool JumpKeyDown() {
-		return inputManager.JumpKeyDown ();
-	}
-
-	public bool JumpKeyUp() {
-		return inputManager.JumpKeyUp ();
-	}
-
-	public bool AttackKeyPressed() {
-		return inputManager.AttackKeyPressed ();
 	}
 
 	private bool isMobile() {

@@ -1,3 +1,6 @@
+Next to implement: Localised text field
+
+
 Latest builds of Stop the Pop can be downloaded on [Google Play](https://play.google.com/store/apps/details?id=com.stopthepopgame.stopthepop)
 and on the [App Store](https://itunes.apple.com/us/app/stop-the-pop/id1166315634?ls=1&mt=8).
 

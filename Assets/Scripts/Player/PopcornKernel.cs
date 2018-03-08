@@ -68,7 +68,7 @@ public class PopcornKernel {
 	}
 
 	public void UpdateVelocity(float deltaTime) {
-		float xInput = inputManager.getXAxis();
+		float xInput = inputManager.GetXAxis();
 
 		velocity.y += gravity * deltaTime;
 

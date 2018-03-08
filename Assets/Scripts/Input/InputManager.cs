@@ -6,5 +6,6 @@ public interface InputManager {
 	bool JumpKeyDown ();
 	bool JumpKeyUp ();
 	bool AttackKeyPressed();
-	float getXAxis ();
+	bool BackButtonPressed();
+	float GetXAxis ();
 }
