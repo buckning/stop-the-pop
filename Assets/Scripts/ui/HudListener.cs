@@ -53,7 +53,7 @@ public class HudListener : MonoBehaviour, InputManager {
 
 	public GameObject leftButton;
 
-	public GAui whiteFlashPanel;
+	public ScreenFader whiteFlashPanel;
 
 	public GameObject rightButton;
 
@@ -66,10 +66,9 @@ public class HudListener : MonoBehaviour, InputManager {
 	public Button musicButton;
 
 	public ScreenFader screenFader;
+	public ScreenFader damageIndicator;
 
 	public Image dialogBoxBackgroundFader;
-
-	public Image damageIndicator;
 
 	public Image levelLoadingBar;
 
@@ -251,10 +250,6 @@ public class HudListener : MonoBehaviour, InputManager {
 			dedicatedAchievementUnlocked = true;
 		}
 
-		Color color = new Color(damageIndicator.color.r, damageIndicator.color.g, damageIndicator.color.b, damageIndicator.color.a);
-		color.a = Mathf.Lerp (damageIndicator.color.a, 0.0f, Time.deltaTime * 5f);
-		damageIndicator.color = color;
-
 		if (coinCountText.gameObject.transform.localScale.x > 1.1f) {
 			//don't want to run the lerp on every frame for performance reasons, so adding this if statement for protection
 			coinCountText.gameObject.transform.localScale = Vector3.Lerp (coinCountText.gameObject.transform.localScale, Vector3.one, Time.deltaTime * 5f);	//animate the coin collected text
@@ -317,8 +312,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	}
 
 	public void ShowDamageIndicator() {
-		Color color = new Color(damageIndicator.color.r, damageIndicator.color.g, damageIndicator.color.b, 0.2f);
-		damageIndicator.color = color;
+		damageIndicator.StartFadingIn ();
 	}
 
 	public void StartCoinCollectedAnimation() {
@@ -890,8 +884,7 @@ public class HudListener : MonoBehaviour, InputManager {
 	}
 
 	public void ShowWhiteFlash() {
-		whiteFlashPanel.gameObject.SetActive (true);
-		whiteFlashPanel.gameObject.GetComponent<GAui> ().MoveOut(GSui.eGUIMove.SelfAndChildren);
+		whiteFlashPanel.StartFadingIn ();
 	}
 
 	private void HandleSkipLevel(ShowResult result)
