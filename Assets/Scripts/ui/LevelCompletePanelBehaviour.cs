@@ -114,10 +114,6 @@ public class LevelCompletePanelBehaviour : MonoBehaviour {
 		}
 	}
 
-	void PlayStarBurstSound() {
-
-	}
-
 	public void ShowLevelCompletePanel(string levelName) {
 
 		#if UNITY_IOS

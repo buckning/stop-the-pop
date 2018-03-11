@@ -1,31 +1,51 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Sparkle : MonoBehaviour {
 
 	public float delayBetweenSparkles = 1.0f;
 	public float initialDelay = 0.0f;
+	public float fadeSpeed = 10.0f;
+	private float timeBetweenSparkles = 0.0f;
 
-	GAui animator;
-
-	float timeBetweenSparkles = 0.0f;
+	private bool fadingIn = true;
+	private Image sparkleImage;
+	private Color zeroAlphaColor;
 
 	void Start () {
-		animator = GetComponent<GAui> ();
+		sparkleImage = GetComponent<Image> ();
+		zeroAlphaColor = Color.white;
+		zeroAlphaColor.a = 0.0f;
 		timeBetweenSparkles = delayBetweenSparkles - initialDelay;
+		sparkleImage.color = zeroAlphaColor;
 	}
 
 	void Update () {
 		timeBetweenSparkles += Time.unscaledDeltaTime;
 
 		if (timeBetweenSparkles > delayBetweenSparkles) {
-			//trigger sparkle effect
-			animator.MoveIn(GSui.eGUIMove.SelfAndChildren);
-			timeBetweenSparkles = 0.0f;
+			if (fadingIn) {
+				FadeIn ();
+			} else {
+				FadeOut ();
+			}
 		}
 	}
-		
-	public void FadeOut() {
-		animator.MoveOut(GSui.eGUIMove.SelfAndChildren);
+
+	private void FadeIn() {
+		fadingIn = true;
+		sparkleImage.color = Color.Lerp(sparkleImage.color, Color.white, Time.fixedUnscaledDeltaTime * fadeSpeed);
+		if (sparkleImage.color.a > 0.99f) {
+			fadingIn = false;
+		}
+	}
+
+	private void FadeOut() {
+		sparkleImage.color = Color.Lerp (sparkleImage.color, zeroAlphaColor, Time.fixedUnscaledDeltaTime * fadeSpeed);
+		if (sparkleImage.color.a < 0.01f) {
+			timeBetweenSparkles = 0.0f;
+			fadingIn = true;
+		}
 	}
 }
