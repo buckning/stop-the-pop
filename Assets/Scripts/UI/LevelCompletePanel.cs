@@ -61,25 +61,17 @@ public class LevelCompletePanel : MonoBehaviour {
 		this.numberOfLivesLost = numberOfLivesLost;
 		this.timeTaken = timeTaken;
 
-		livesLostTextAnimator.initialNumber = 999;
-		livesLostTextAnimator.currentNumber = 999;
-		livesLostTextAnimator.SetNumber (numberOfLivesLost);
-		timeTakenTextAnimator.SetNumber (timeTaken);
 		coinsTextAnimator.SetNumber (numberOfCoins);
+
+		coinsTextAnimator.animationCompleteListeners += StartTimeTakeAnimation;
+		timeTakenTextAnimator.animationCompleteListeners += StartLivesLostAnimation;
 	}
 
-	public void StartCoinCollectAnimation(int numberOfCoins) {
-		this.numberOfCoins = numberOfCoins;
-		coinsTextAnimator.SetNumber (numberOfCoins);
-	}
-
-	public void StartTimeTakenAnimation(int timeTaken) {
-		this.timeTaken = timeTaken;
+	private void StartTimeTakeAnimation() {
 		timeTakenTextAnimator.SetNumber (timeTaken);
 	}
 
-	public void StartLivesLostAnimation(int numberOfLivesLost) {
-		this.numberOfLivesLost = numberOfLivesLost;
+	private void StartLivesLostAnimation() {
 		livesLostTextAnimator.initialNumber = 999;
 		livesLostTextAnimator.currentNumber = 999;
 		livesLostTextAnimator.SetNumber (numberOfLivesLost);
