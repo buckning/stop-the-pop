@@ -28,9 +28,19 @@ public class LevelCompletePanel : MonoBehaviour {
 	private const int NUMBER_OF_LIVES_LOST_GOAL = 0;
 	private const int TIME_TAKEN_GOAL = 120;
 
+	private bool initialised = false;
+
 	void Start() {
+		Initialise ();
+	}
+
+	private void Initialise() {
+		if (initialised) {
+			return;
+		}
+
 		if (GameObject.Find ("Canvas").GetComponent<Canvas> ().renderMode 
-				!= RenderMode.ScreenSpaceCamera) {
+			!= RenderMode.ScreenSpaceCamera) {
 			Debug.LogError ("The LevelCompletePanel requires the canvas render mode to be set to " +
 				"Screen Space - Camera. This might not function as expected.");
 		}
@@ -42,6 +52,20 @@ public class LevelCompletePanel : MonoBehaviour {
 		coinsTextAnimator.animationCompleteListeners += AnimateCoinsCollectedStar;
 		livesLostTextAnimator.animationCompleteListeners += AnimateLivesLostStar;
 		timeTakenTextAnimator.animationCompleteListeners += AnimateTimeTakenStar;
+		initialised = true;
+	}
+
+	public void ShowLevelCompleteScreen(int numberOfCoins, int timeTaken, int numberOfLivesLost) {
+		Initialise ();
+		this.numberOfCoins = numberOfCoins;
+		this.numberOfLivesLost = numberOfLivesLost;
+		this.timeTaken = timeTaken;
+
+		livesLostTextAnimator.initialNumber = 999;
+		livesLostTextAnimator.currentNumber = 999;
+		livesLostTextAnimator.SetNumber (numberOfLivesLost);
+		timeTakenTextAnimator.SetNumber (timeTaken);
+		coinsTextAnimator.SetNumber (numberOfCoins);
 	}
 
 	public void StartCoinCollectAnimation(int numberOfCoins) {
@@ -84,7 +108,7 @@ public class LevelCompletePanel : MonoBehaviour {
 			AnimateStar (starLivesLost);
 			AnimateLevelCompleteScreen ();
 		}
-		EnableButtonPanel ();
+		buttonsPanel.SetActive (true);
 	}
 
 	private void AnimateStar(Image starImage) {
@@ -92,10 +116,6 @@ public class LevelCompletePanel : MonoBehaviour {
 		Vector3 positionOfStar = starImage.rectTransform.TransformPoint (Vector3.zero);
 		Instantiate (starBurstParticleSystem, positionOfStar, Quaternion.identity);
 		whiteFlash.StartFadingIn ();
-	}
-
-	private void EnableButtonPanel() {
-		buttonsPanel.SetActive (true);
 	}
 
 	private void AnimateLevelCompleteScreen() {
@@ -106,8 +126,6 @@ public class LevelCompletePanel : MonoBehaviour {
 			spinningLines.gameObject.SetActive (true);
 
 			sparkles.SetActive(true);
-
-			// enable confetti
 		}
 	}
 }

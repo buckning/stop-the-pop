@@ -11,6 +11,9 @@ public class StorePanel : MonoBehaviour {
 	public Text capeCostText;
 	public Text magnetCostText;
 
+	public delegate void NotifyEvent ();
+	public event NotifyEvent backButtonPressedListeners;
+
 	GameStats stats;
 	TextFieldNumberAnimator textFieldAnimator;
 	static float numberOfItemsPurchased = 0;	//this is used purely for the achievement system
@@ -18,14 +21,9 @@ public class StorePanel : MonoBehaviour {
 	float lastSoundPlay = 0.0f;
 
 	public void BackButtonPressed() {
-		AudioManager.PlaySound ("Click", 0.9f);
-		Component[] storeItems = transform.GetComponentsInChildren(typeof(GAui), true);
-
-		foreach(GAui button in storeItems) {
-			button.MoveOut (GSui.eGUIMove.SelfAndChildren);
+		if (backButtonPressedListeners != null) {
+			backButtonPressedListeners ();
 		}
-
-		StartCoroutine (DelayAndGoBackToPauseScreen (0.4f));
 	}
 
 	IEnumerator DelayAndGoBackToPauseScreen(float timeToDelay) {

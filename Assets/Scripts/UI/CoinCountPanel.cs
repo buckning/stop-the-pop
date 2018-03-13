@@ -9,8 +9,10 @@ public class CoinCountPanel : MonoBehaviour {
 	public int coinCount = 0;
 
 	public void SetCoinCount(int coinCount) {
-		this.coinCount = coinCount;
-		coinCountText.gameObject.transform.localScale = Vector3.one * coinCountTextScaleMax;
+		if (this.coinCount != coinCount) {
+			this.coinCount = coinCount;
+			coinCountText.gameObject.transform.localScale = Vector3.one * coinCountTextScaleMax;
+		}
 	}
 
 	void Update () {
