@@ -20,6 +20,15 @@ public class LevelCompletePanel : MonoBehaviour {
 	public GameObject buttonsPanel;
 	public GameObject sparkles;
 
+	public Button nextLevelButton;
+	public Button restartLevelButton;
+	public Button quitButton;
+
+	public delegate void NotifyEvent ();
+	public event NotifyEvent quitButtonListeners;
+	public event NotifyEvent restartButtonListeners;
+	public event NotifyEvent nextLevelButtonListeners;
+
 	private int numberOfCoins = 0;
 	private int numberOfLivesLost = 0;
 	private int timeTaken = 0;
@@ -34,10 +43,17 @@ public class LevelCompletePanel : MonoBehaviour {
 		Initialise ();
 	}
 
+	// this initialisation needs to be in a seperate method to the Start method since the 
+	// ShowLevelCompleteScreen can fire inside the same update loop, resulting in the 
+	// animations not running.
 	private void Initialise() {
 		if (initialised) {
 			return;
 		}
+
+		SetUpButtonListeners (quitButton, quitButtonListeners);
+		SetUpButtonListeners (restartLevelButton, restartButtonListeners);
+		SetUpButtonListeners (nextLevelButton, nextLevelButtonListeners);
 
 		if (GameObject.Find ("Canvas").GetComponent<Canvas> ().renderMode 
 			!= RenderMode.ScreenSpaceCamera) {
@@ -119,5 +135,13 @@ public class LevelCompletePanel : MonoBehaviour {
 
 			sparkles.SetActive(true);
 		}
+	}
+
+	private void SetUpButtonListeners(Button button, NotifyEvent listener) {
+		button.onClick.AddListener (() => {
+			if (listener != null) {
+				listener ();
+			}
+		});
 	}
 }
