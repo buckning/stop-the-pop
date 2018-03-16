@@ -19,10 +19,9 @@ public class SnowflakeBehaviour : MonoBehaviour {
 		}
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			collected = true;
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 
 			player.ResetTemperature();
-			player.hud.ShowWhiteFlash ();
 
 			snowflakeAnimator.SetTrigger("PickedUp");
 			AudioManager.PlaySound ("snowflake-new");

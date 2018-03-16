@@ -31,6 +31,7 @@ public class PopcornKernelController : MonoBehaviour {
 
 	public delegate void NotifyEvent ();
 	public event NotifyEvent popcornKernelHurtListeners;
+	public event NotifyEvent popcornKernelHealListeners;
 
 	public void Init() {
 
@@ -64,6 +65,13 @@ public class PopcornKernelController : MonoBehaviour {
 
 	void Pop() {
 		popcornKernelAnimator.StartPopping();
+	}
+
+	public void ResetTemperature() {
+		popcornKernel.ResetTemperature ();
+		if (popcornKernelHealListeners != null) {
+			popcornKernelHealListeners ();
+		}
 	}
 
 	public void CollisionWithEnemy(float suggestedTemperatureIncrease) {

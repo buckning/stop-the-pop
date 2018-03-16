@@ -19,12 +19,8 @@ public class GameManager : MonoBehaviour {
 		popcornKernel.inputManager = inputManager;
 		popcornKernel.Init ();
 
-		popcornKernel.popcornKernelHurtListeners += PlayerHurt;
-	}
-
-	void PlayerHurt() {
-		uiManager.hud.TriggerDamageIndicator ();
-//		hud.ShakeForDuration (0.2f);
+		popcornKernel.popcornKernelHurtListeners += uiManager.hud.TriggerDamageIndicator;
+		popcornKernel.popcornKernelHealListeners += uiManager.hud.TriggerFlash;
 	}
 	
 	// Update is called once per frame
