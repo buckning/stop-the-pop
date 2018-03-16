@@ -17,8 +17,8 @@ public class SimpleEnemyCollider : MonoBehaviour {
 	 */
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.CollisionWithEnemy(gameObject.name, damageToPlayer, false);	
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			player.CollisionWithEnemy(damageToPlayer);	
 			if (destroyAfterCollision) {
 				Destroy (gameObject);
 			}

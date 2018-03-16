@@ -75,28 +75,28 @@ public class PopcornKernelTest {
 	[Test]
 	public void PopcornKernelTestConstructorSetsTemperatureAsZero() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
-		Assert.Zero (popcornKernel.getTemperature ());
+		Assert.Zero (popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestIncreaseTemperatureSetsTheTemperatureWithinTheClampBounds() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (10);
-		Assert.AreEqual (10, popcornKernel.getTemperature ());
+		Assert.AreEqual (10, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestIncreaseTemperatureOverTheMaxSetsTheTemperatureToTheMax() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (110);
-		Assert.AreEqual (100, popcornKernel.getTemperature ());
+		Assert.AreEqual (100, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestIncreaseTemperatureUnderTheMinSetsTheTemperatureToTheMin() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (-110);
-		Assert.AreEqual (0, popcornKernel.getTemperature ());
+		Assert.AreEqual (0, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
@@ -227,37 +227,37 @@ public class PopcornKernelTest {
 	public void PopcornKernelTestDieSetsTheTemperatureTo100() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.Die ();
-		Assert.AreEqual(100, popcornKernel.getTemperature ());
+		Assert.AreEqual(100, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestResetTemperatureChangesTheTemperatureToZero() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (100);
-		Assert.AreEqual(100, popcornKernel.getTemperature ());
+		Assert.AreEqual(100, popcornKernel.GetTemperature ());
 		popcornKernel.ResetTemperature ();
-		Assert.AreEqual(0, popcornKernel.getTemperature ());
+		Assert.AreEqual(0, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestIncreaseTemperatureChangesTemperatureWhenItIsInAValidRange() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (50);
-		Assert.AreEqual(50, popcornKernel.getTemperature ());
+		Assert.AreEqual(50, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestIncreaseTemperatureOverMaxSetsTemperatureToMax() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (500);
-		Assert.AreEqual(100, popcornKernel.getTemperature ());
+		Assert.AreEqual(100, popcornKernel.GetTemperature ());
 	}
 
 	[Test]
 	public void PopcornKernelTestIncreaseTemperatureUnderMinSetsTemperatureToMin() {
 		PopcornKernel popcornKernel = NewTestPopcornKernel ();
 		popcornKernel.increaseTemperature (-500);
-		Assert.AreEqual(0, popcornKernel.getTemperature ());
+		Assert.AreEqual(0, popcornKernel.GetTemperature ());
 	}
 
 	float GetGravity(float maxJumpHeight, float timeToJumpApex) {

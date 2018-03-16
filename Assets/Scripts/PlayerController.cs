@@ -370,7 +370,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public float GetTemperature() {
-		return popcornKernel.getTemperature ();
+		return popcornKernel.GetTemperature ();
 	}
 
 	void OnDrawGizmos() {

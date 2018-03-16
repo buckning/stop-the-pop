@@ -40,6 +40,10 @@ public class UiManager : MonoBehaviour {
 			restartLevelButtonPressedListeners);
 	}
 
+	public void SetTemperature(int temperature) {
+		hud.UpdateTemperature (temperature);
+	}
+
 	void SkipLevel() {
 		SetUpDialogBox ("Do you want to watch a video to skip to the next level?\n" +
 		"You will not be able to skip another level for 24 hours", 

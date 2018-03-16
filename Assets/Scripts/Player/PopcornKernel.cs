@@ -239,7 +239,7 @@ public class PopcornKernel {
 		temperature = 0.0f;
 	}
 
-	public float getTemperature() {
+	public float GetTemperature() {
 		return temperature;
 	}
 

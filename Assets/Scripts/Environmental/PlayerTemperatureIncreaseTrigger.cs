@@ -8,7 +8,7 @@ using System.Collections;
 public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	private bool updateTemperature;					//a cache of the player.updateTemperature flag, so we can reset after we stop colliding with him
 	private bool isCollidingWithPlayer = false;		//flag to see if we're currently colliding with the player
-	private PlayerController player;				//reference to the player object
+	private PopcornKernelController player;				//reference to the player object
 
 	public float speedOfTemperatureIncrease = 10;
 
@@ -17,17 +17,17 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	 */
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			player = otherObject.gameObject.GetComponent<PlayerController> ();
+			player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 			//cache if the player should increase temperature
 			updateTemperature = player.GetUpdateTemperature();
 
-			player.hud.ShowDamageIndicator ();
-			player.hud.ShakeForDuration (0.3f);
+//			player.hud.ShowDamageIndicator ();
+//			player.hud.ShakeForDuration (0.3f);
 			AudioManager.PlaySound ("sizzle");
 			
 			//make the player increase the temperature
 			player.SetUpdateTemperature(true);
-			player.SetTemperatureUpdateRate (gameObject.name, speedOfTemperatureIncrease);
+			player.SetTemperatureUpdateRate (speedOfTemperatureIncrease);
 			isCollidingWithPlayer = true;
 		}
 	}
@@ -37,9 +37,9 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	 */
 	void OnTriggerExit2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			player = otherObject.gameObject.GetComponent<PlayerController> ();
+			player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 			player.SetUpdateTemperature (updateTemperature);
-			player.SetTemperatureUpdateRate("none", player.regularTemperatureUpdateRate);
+			player.SetTemperatureUpdateRate(player.regularTemperatureUpdateRate);
 			isCollidingWithPlayer = false;
 		}
 	}
@@ -51,7 +51,7 @@ public class PlayerTemperatureIncreaseTrigger : MonoBehaviour {
 	void OnDestroy() {
 		if (isCollidingWithPlayer) {
 			player.SetUpdateTemperature (updateTemperature);
-			player.SetTemperatureUpdateRate("none", player.regularTemperatureUpdateRate);
+			player.SetTemperatureUpdateRate(player.regularTemperatureUpdateRate);
 			isCollidingWithPlayer = false;
 		}
 	}

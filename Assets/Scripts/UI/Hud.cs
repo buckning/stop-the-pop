@@ -7,7 +7,7 @@ public class Hud : MonoBehaviour {
 
 	public CoinCountPanel coinCountPanel;
 	public ThermometerBehaviour thermometer;
-	public GameObject playerControlPanel;
+	public PlayerControlPanel playerControlPanel;
 	public ScreenFader damageIndicator;
 	public ScreenFader screenFader;
 	public ScreenFader flashPanel;
@@ -19,7 +19,7 @@ public class Hud : MonoBehaviour {
 	public event NotifyEvent retryButtonPressedListeners;
 
 	void Start () {
-		playerControlPanel.SetActive (IsMobile ());
+		playerControlPanel.gameObject.SetActive (IsMobile ());
 		retryButton.gameObject.SetActive (false);
 		screenFader.fadeInCompleteListeners += FadeInCompleted;
 
@@ -62,7 +62,7 @@ public class Hud : MonoBehaviour {
 	public void FadeOut() {
 		coinCountPanel.gameObject.SetActive (false);
 		pauseButton.gameObject.SetActive (false);
-		playerControlPanel.SetActive (false);
+		playerControlPanel.gameObject.SetActive (false);
 		retryButton.gameObject.SetActive (false);
 		thermometer.gameObject.SetActive (false);
 		screenFader.StartFadingOut ();
@@ -72,7 +72,7 @@ public class Hud : MonoBehaviour {
 		thermometer.gameObject.SetActive (false);
 		retryButton.gameObject.SetActive (false);
 		pauseButton.gameObject.SetActive (false);
-		playerControlPanel.SetActive (false);
+		playerControlPanel.gameObject.SetActive (false);
 		screenFader.StartFadingIn ();
 	}
 
@@ -80,15 +80,12 @@ public class Hud : MonoBehaviour {
 		thermometer.gameObject.SetActive (true);
 		pauseButton.gameObject.SetActive(true);
 		retryButton.gameObject.SetActive (true);
-		playerControlPanel.SetActive (IsMobile ());
+		playerControlPanel.gameObject.SetActive (IsMobile ());
 		coinCountPanel.gameObject.SetActive (true);
 	}
 
 	private bool IsMobile() {
-		if (Application.platform == RuntimePlatform.Android || 
-			Application.platform == RuntimePlatform.IPhonePlayer) {
-			return true;
-		}
-		return false;
+		return Application.platform == RuntimePlatform.Android
+			|| Application.platform == RuntimePlatform.IPhonePlayer;
 	}
 }
