@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 		uiManager.hud.FadeIn ();
 		Destroy (player.gameObject);
 		InitialisePlayer ();
+		levelManager.ResetLevel ();
 	}
 
 	void Update () {
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour {
 		player.Init ();
 
 		player.popcornKernelHurtListeners += uiManager.hud.TriggerDamageIndicator;
+		player.popcornKernelHurtListeners += uiManager.hud.ShakeScreen;
 		player.popcornKernelHealListeners += uiManager.hud.TriggerFlash;
 		player.popcornKernelRestartListeners += uiManager.hud.FadeOut;
 		player.popcornKernelStartPoppingListeners += uiManager.ShowRetryButton;

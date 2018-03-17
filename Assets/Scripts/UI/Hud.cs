@@ -96,4 +96,14 @@ public class Hud : MonoBehaviour {
 		return Application.platform == RuntimePlatform.Android
 			|| Application.platform == RuntimePlatform.IPhonePlayer;
 	}
+
+	public void ShakeScreen() {
+		Camera.main.gameObject.GetComponent<CameraShaker> ().StartShaking();
+		StartCoroutine (StopShakingAfterTime (0.2f));
+	}
+
+	IEnumerator StopShakingAfterTime(float stopAfterTime) {
+		yield return new WaitForSeconds(stopAfterTime);
+		Camera.main.gameObject.GetComponent<CameraShaker> ().StopShaking();
+	}
 }
