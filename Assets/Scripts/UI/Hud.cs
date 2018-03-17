@@ -87,7 +87,7 @@ public class Hud : MonoBehaviour {
 	private void FadeInCompleted() {
 		thermometer.gameObject.SetActive (true);
 		pauseButton.gameObject.SetActive(true);
-		retryButton.gameObject.SetActive (true);
+		retryButton.gameObject.SetActive (false);
 		playerControlPanel.gameObject.SetActive (IsMobile ());
 		coinCountPanel.gameObject.SetActive (true);
 	}

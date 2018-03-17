@@ -33,6 +33,8 @@ public class PopcornKernelController : MonoBehaviour {
 	public event NotifyEvent popcornKernelHurtListeners;
 	public event NotifyEvent popcornKernelHealListeners;
 	public event NotifyEvent popcornKernelRestartListeners;
+	public event NotifyEvent popcornKernelStartPoppingListeners;
+
 
 	public void Init() {
 		if(popcornKernel == null) {
@@ -44,6 +46,7 @@ public class PopcornKernelController : MonoBehaviour {
 			popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
 			popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
 			popcornKernel.popEventListeners += popcornKernelAnimator.StartPopping;
+			popcornKernel.popEventListeners += StartPopping;
 			popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 			popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 //			popcornKernel.fallEventListeners += FallOff;
@@ -54,6 +57,12 @@ public class PopcornKernelController : MonoBehaviour {
 			popcornKernelAnimator.popRightLegEventListeners += PopRightLeg;
 			popcornKernelAnimator.popCompleteListeners += DisableCollider;
 			popcornKernelAnimator.finishedPoppingListeners += Restart;
+		}
+	}
+
+	private void StartPopping() {
+		if (popcornKernelStartPoppingListeners != null) {
+			popcornKernelStartPoppingListeners ();
 		}
 	}
 

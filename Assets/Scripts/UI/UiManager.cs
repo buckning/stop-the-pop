@@ -30,6 +30,10 @@ public class UiManager : MonoBehaviour {
 		storePanel.backButtonPressedListeners += Pause;
 	}
 
+	public void ShowRetryButton() {
+		hud.retryButton.gameObject.SetActive (true);
+	}
+
 	public void QuitGame() {
 		SetUpDialogBox (Strings.UI_ARE_YOU_SURE_YOU_WANT_TO_EXIT_TO_THE_MAIN_MENU, 
 			quitGameButtonPressedListeners);

@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour {
 		player.popcornKernelHurtListeners += uiManager.hud.TriggerDamageIndicator;
 		player.popcornKernelHealListeners += uiManager.hud.TriggerFlash;
 		player.popcornKernelRestartListeners += uiManager.hud.FadeOut;
+		player.popcornKernelStartPoppingListeners += uiManager.ShowRetryButton;
 	}
 
 	private bool IsMobile() {
