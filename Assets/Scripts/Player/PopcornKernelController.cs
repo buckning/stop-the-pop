@@ -34,10 +34,6 @@ public class PopcornKernelController : MonoBehaviour {
 	public event NotifyEvent popcornKernelHealListeners;
 
 	public void Init() {
-
-
-
-
 		if(popcornKernel == null) {
 			rigidbody2d = GetComponent<Rigidbody2D> ();
 			GroundCheck groundCollisionChecker = new GroundCheck (groundCheck, groundRadius * transform.localScale.x, whatIsGround);
@@ -46,7 +42,7 @@ public class PopcornKernelController : MonoBehaviour {
 
 			popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
 			popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
-			popcornKernel.popEventListeners += Pop;
+			popcornKernel.popEventListeners += popcornKernelAnimator.StartPopping;
 			popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 			popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 //			popcornKernel.fallEventListeners += FallOff;
@@ -56,15 +52,27 @@ public class PopcornKernelController : MonoBehaviour {
 					
 
 //					popcornKernelAnimator.popEventListeners += ShakeScreen;
-//					popcornKernelAnimator.popLeftLegEventListeners += PopLeftLeg;
-//					popcornKernelAnimator.popRightLegEventListeners += PopRightLeg;
-//					popcornKernelAnimator.popCompleteListeners += DisableCollider;
+			popcornKernelAnimator.popLeftLegEventListeners += PopLeftLeg;
+			popcornKernelAnimator.popRightLegEventListeners += PopRightLeg;
+			popcornKernelAnimator.popCompleteListeners += DisableCollider;
 //					popcornKernelAnimator.finishedPoppingListeners += RetryLevelAfterPopAnimation;
 		}
 	}
 
-	void Pop() {
-		popcornKernelAnimator.StartPopping();
+	private void PopLeftLeg() {
+		PopLeg (new Vector2 (300f, 300f), 100f);
+	}
+
+	private void PopRightLeg() {
+		PopLeg (new Vector2 (-300f, 300f), -100f);
+	}
+
+	private void PopLeg(Vector2 force, float maxTorque) {
+		float dir = (Random.Range (0f, 1f) < 0.5f) ? -1f : 1f;
+		force.x = force.x * dir;
+		rigidbody2d.freezeRotation = false;
+		rigidbody2d.AddForce (force);
+		rigidbody2d.AddTorque (Random.Range (0f, maxTorque));
 	}
 
 	public void ResetTemperature() {
@@ -135,5 +143,9 @@ public class PopcornKernelController : MonoBehaviour {
 		facingRight = !facingRight;
 		if(facingRight)transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);  
 		else transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);  
+	}
+
+	private void DisableCollider() {
+		GetComponent<BoxCollider2D> ().enabled = false;
 	}
 }
