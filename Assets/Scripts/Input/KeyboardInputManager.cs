@@ -14,6 +14,8 @@ public class KeyboardInputManager : MonoBehaviour, InputManager {
 
 	private Vector2 directionalInput;
 
+	private bool enabled = true;
+
 	void Start () {
 		directionalInput = new Vector2 ();
 		jumpKeyPressed = false;
@@ -23,10 +25,19 @@ public class KeyboardInputManager : MonoBehaviour, InputManager {
 	}
 
 	void Update () {
+		directionalInput = new Vector2 ();
 		jumpKeyPressed = false;
 		jumpKeyReleased = false;
 		attackKeyPressed = false;
 		escKeyPressed = false;
+
+		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button9)) {
+			escKeyPressed = true;
+		}
+
+		if (!enabled) {
+			return;
+		}
 
 		if(Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1)) {
 			jumpKeyPressed = true;
@@ -44,10 +55,14 @@ public class KeyboardInputManager : MonoBehaviour, InputManager {
 
 		directionalInput.x = Input.GetAxisRaw ("Horizontal");
 		directionalInput.y = Input.GetAxisRaw ("Vertical");
+	}
 
-		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button9)) {
-			escKeyPressed = true;
-		}
+	public void Enable() {
+		enabled = true;
+	}
+
+	public void Disable() {
+		enabled = false;
 	}
 
 	public bool BackButtonPressed() {

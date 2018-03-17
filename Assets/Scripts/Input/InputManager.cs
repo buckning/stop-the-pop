@@ -8,4 +8,6 @@ public interface InputManager {
 	bool AttackKeyPressed();
 	bool BackButtonPressed();
 	float GetXAxis ();
+	void Disable();
+	void Enable();
 }

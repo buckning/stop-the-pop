@@ -330,6 +330,9 @@ public class PopcornKernelTest {
 		public float GetXAxis() {
 			return xAxisInput;
 		}
+
+		public void Enable() {}
+		public void Disable() {}
 	}
 
 	class TestEventReceiver {

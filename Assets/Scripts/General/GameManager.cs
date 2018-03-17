@@ -55,12 +55,17 @@ public class GameManager : MonoBehaviour {
 
 		player.inputManager = inputManager;
 		player.Init ();
-
+		inputManager.Enable ();
 		player.popcornKernelHurtListeners += uiManager.hud.TriggerDamageIndicator;
 		player.popcornKernelHurtListeners += uiManager.hud.ShakeScreen;
 		player.popcornKernelHealListeners += uiManager.hud.TriggerFlash;
 		player.popcornKernelRestartListeners += uiManager.hud.FadeOut;
 		player.popcornKernelStartPoppingListeners += uiManager.ShowRetryButton;
+		player.popcornKernelStartPoppingListeners += DisablePlayerInput;
+	}
+
+	private void DisablePlayerInput() {
+		player.inputManager.Disable ();
 	}
 
 	private bool IsMobile() {
