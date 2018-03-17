@@ -18,22 +18,24 @@ public class PopcornKernelController : MonoBehaviour {
 
 	public PlayerWallTrigger wallCollider;
 
-	private PopcornKernel popcornKernel;
 	public PopcornKernelAnimator popcornKernelAnimator;
 
-	private Rigidbody2D rigidbody2d;
-
-	private bool facingRight = true;
-	private bool grounded = true;
-	private float MAX_INVINCIBILITY_TIME = 1.5f;
-
 	public float regularTemperatureUpdateRate = 0.02f;	//the regular temperature update of the player
+
+	public Magnet magnet;
 
 	public delegate void NotifyEvent ();
 	public event NotifyEvent popcornKernelHurtListeners;
 	public event NotifyEvent popcornKernelHealListeners;
 	public event NotifyEvent popcornKernelRestartListeners;
 	public event NotifyEvent popcornKernelStartPoppingListeners;
+
+	private PopcornKernel popcornKernel;
+	private Rigidbody2D rigidbody2d;
+
+	private bool facingRight = true;
+	private bool grounded = true;
+	private float MAX_INVINCIBILITY_TIME = 1.5f;
 
 	public void Init() {
 		if(popcornKernel == null) {
@@ -126,6 +128,10 @@ public class PopcornKernelController : MonoBehaviour {
 
 	public int GetTemperature() {
 		return (int) popcornKernel.GetTemperature ();
+	}
+
+	public void EnableMagnet(bool enabled) {
+		magnet.gameObject.SetActive (enabled);
 	}
 
 	public void FixedUpdate () {

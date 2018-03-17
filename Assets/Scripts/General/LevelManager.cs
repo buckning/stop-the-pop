@@ -39,6 +39,12 @@ public class LevelManager : MonoBehaviour {
 			coin.gameObject.SetActive(true);
 		}
 
+		MagnetPowerup[] magnets = Resources.FindObjectsOfTypeAll(typeof(MagnetPowerup)) as MagnetPowerup[];
+		foreach(MagnetPowerup magnet in magnets) {
+			magnet.Reset ();
+			magnet.gameObject.SetActive(true);
+		}
+
 		collectedCoins.Clear ();
 	}
 }

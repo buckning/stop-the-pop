@@ -18,11 +18,10 @@ public class MagnetPowerup : MonoBehaviour {
 		}
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			collected = true;
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 			player.EnableMagnet (true);
 			AudioManager.PlaySound ("magnet-new");
 			animator.SetTrigger ("Pickup");
-			player.hud.ShowWhiteFlash ();
 
 			#if UNITY_IOS
 			SocialServiceManager.GetInstance ().UnlockAchievement ("lawofattraction");
