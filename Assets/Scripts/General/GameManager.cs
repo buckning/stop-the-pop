@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour {
 		GameObject loadedPopcornKernel = (GameObject) Resources.Load ("Prefabs/PopcornKernelController", typeof(GameObject));
 		GameObject instance = Instantiate(loadedPopcornKernel, levelManager.playerDropPoint) as GameObject;
 		player = (PopcornKernelController) instance.GetComponent<PopcornKernelController> ();
+		player.transform.parent = null;
 
 		player.inputManager = inputManager;
 		player.Init ();

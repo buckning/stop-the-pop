@@ -5,11 +5,18 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 	public Transform playerDropPoint;
 
-	private List<int> collectedCoins = new List<int>();
+	private List<int> collectedCoinsSinceCheckpoint = new List<int> ();
+	private List<int> collectedCoins = new List<int> ();
 
-	// checkpoints
+	private Checkpoint lastCheckpoint;
+	private Checkpoint[] checkpoints;
 
 	void Start() {
+		checkpoints = Resources.FindObjectsOfTypeAll (typeof(Checkpoint)) as Checkpoint[];
+		foreach (Checkpoint checkpoint in checkpoints) {
+			checkpoint.SetLevelManager (this);
+		}
+
 		CoinBehaviour[] coins = Resources.FindObjectsOfTypeAll(typeof(CoinBehaviour)) as CoinBehaviour[];
 		for (int i = 0; i < coins.Length; i++) {
 			coins [i].id = i;
@@ -17,12 +24,21 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	public void SetCheckpoint(Checkpoint checkpoint) {
+		this.lastCheckpoint = checkpoint;
+		foreach (int coinId in collectedCoinsSinceCheckpoint) {
+			collectedCoins.Add (coinId);
+		}
+		collectedCoinsSinceCheckpoint.Clear ();
+		playerDropPoint = checkpoint.transform;
+	}
+
 	public void AddCollectedCoin(int id) {
-		collectedCoins.Add (id);
+		collectedCoinsSinceCheckpoint.Add (id);
 	}
 
 	public int GetCoinCount() {
-		return collectedCoins.Count;
+		return collectedCoinsSinceCheckpoint.Count + collectedCoins.Count;
 	}
 
 	public void ResetLevel() {
@@ -34,9 +50,12 @@ public class LevelManager : MonoBehaviour {
 
 		CoinBehaviour[] coins = Resources.FindObjectsOfTypeAll(typeof(CoinBehaviour)) as CoinBehaviour[];
 		foreach(CoinBehaviour coin in coins) {
-			coin.Reset ();
-			coin.gameObject.transform.localScale = Vector3.one;
-			coin.gameObject.SetActive(true);
+			// don't want to re-enable coins that were already saved off in a checkpoint
+			if (!collectedCoins.Contains(coin.id)) {
+				coin.Reset ();
+				coin.gameObject.transform.localScale = Vector3.one;
+				coin.gameObject.SetActive (true);
+			}
 		}
 
 		MagnetPowerup[] magnets = Resources.FindObjectsOfTypeAll(typeof(MagnetPowerup)) as MagnetPowerup[];
@@ -45,6 +64,6 @@ public class LevelManager : MonoBehaviour {
 			magnet.gameObject.SetActive(true);
 		}
 
-		collectedCoins.Clear ();
+		collectedCoinsSinceCheckpoint.Clear ();
 	}
 }
