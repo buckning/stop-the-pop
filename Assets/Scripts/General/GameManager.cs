@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 		InitialisePlayer ();
 
 		uiManager.hud.fadeOutCompletedListeners += RestartLevel;
+		uiManager.restartLevelButtonPressedListeners += RestartLevel;
 	}
 
 	void RestartLevel() {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
 	void Update () {
 		uiManager.SetTemperature ((int) player.GetTemperature ());
+		uiManager.hud.UpdateCoinCount (levelManager.GetCoinCount ());
 	}
 
 	private SoftKeyInputManager InitialiseSoftKeyInputManager() {

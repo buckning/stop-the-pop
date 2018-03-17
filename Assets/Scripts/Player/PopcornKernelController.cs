@@ -35,7 +35,6 @@ public class PopcornKernelController : MonoBehaviour {
 	public event NotifyEvent popcornKernelRestartListeners;
 	public event NotifyEvent popcornKernelStartPoppingListeners;
 
-
 	public void Init() {
 		if(popcornKernel == null) {
 			rigidbody2d = GetComponent<Rigidbody2D> ();

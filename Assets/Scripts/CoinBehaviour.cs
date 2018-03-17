@@ -16,12 +16,18 @@ public class CoinBehaviour : MonoBehaviour {
 
 	Vector2 initialPosition;
 
+	private LevelManager levelManager;
+
 	public void Start() {
 		ResourceCache.LoadAudioClip (coinAudioClipPath);
 		coinAnimator = GetComponent<Animator> ();
 		lastSoundPlay = Time.time;
 		pitch = 1.0f;
 		initialPosition = transform.position;
+	}
+
+	public void SetLevelManager(LevelManager levelManager) {
+		this.levelManager = levelManager;
 	}
 
 	/***
@@ -35,13 +41,15 @@ public class CoinBehaviour : MonoBehaviour {
 
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			collected = true;
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.IncrementCoinCount(id);
+//			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
+//			player.IncrementCoinCount(id);
+
+			levelManager.AddCollectedCoin (id);
 			coinAnimator.SetTrigger("PickedUp");
 
-			PlaySound (0.05f);
+//			PlaySound (0.05f);
 
-			StartCoroutine(DestroyAfterDelay());
+			StartCoroutine(DisableAfterDelay());
 			//this is wrapped in a container object, delete the container, including this
 		}
 	}
@@ -66,7 +74,7 @@ public class CoinBehaviour : MonoBehaviour {
 		transform.position = initialPosition;
 	}
 
-	IEnumerator DestroyAfterDelay() {
+	IEnumerator DisableAfterDelay() {
 		yield return new WaitForSeconds(0.2f);
 		coinAnimator.SetTrigger ("Reset");
 		gameObject.SetActive (false);
