@@ -17,14 +17,22 @@ public class Hud : MonoBehaviour {
 	public delegate void NotifyEvent ();
 	public event NotifyEvent pauseButtonPressedListeners;
 	public event NotifyEvent retryButtonPressedListeners;
+	public event NotifyEvent fadeOutCompletedListeners;
 
 	void Start () {
 		playerControlPanel.gameObject.SetActive (IsMobile ());
 		retryButton.gameObject.SetActive (false);
 		screenFader.fadeInCompleteListeners += FadeInCompleted;
+		screenFader.fadeOutCompleteListeners += FadeOutCompleted;
 
 		SetUpRetryButtonListener ();
 		SetUpPauseButtonListener ();
+	}
+
+	private void FadeOutCompleted() {
+		if (fadeOutCompletedListeners != null) {
+			fadeOutCompletedListeners ();
+		}
 	}
 
 	private void SetUpRetryButtonListener() {

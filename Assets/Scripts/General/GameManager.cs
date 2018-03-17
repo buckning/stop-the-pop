@@ -5,29 +5,37 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public UiManager uiManager;
-	public PopcornKernelController popcornKernel;
+	private PopcornKernelController player;
 
 	private InputManager inputManager;
+	private LevelManager levelManager;
 
-	// Use this for initialization
 	void Start () {
+		levelManager = GameObject.FindObjectOfType<LevelManager> ();
+
+		if (levelManager == null || levelManager.playerDropPoint == null) {
+			Debug.LogError ("Level manager or player drop point is null");
+		}
+
 		if (IsMobile ()) {
 			inputManager = InitialiseSoftKeyInputManager ();
 		} else {
 			inputManager = gameObject.AddComponent<KeyboardInputManager> ();
 		}
-		popcornKernel.inputManager = inputManager;
-		popcornKernel.Init ();
+		InitialisePlayer ();
 
-		popcornKernel.popcornKernelHurtListeners += uiManager.hud.TriggerDamageIndicator;
-		popcornKernel.popcornKernelHealListeners += uiManager.hud.TriggerFlash;
+		uiManager.hud.fadeOutCompletedListeners += RestartLevel;
 	}
-	
-	// Update is called once per frame
+
+	void RestartLevel() {
+		uiManager.hud.FadeIn ();
+		Destroy (player.gameObject);
+		InitialisePlayer ();
+	}
+
 	void Update () {
-		uiManager.SetTemperature ((int) popcornKernel.GetTemperature ());
+		uiManager.SetTemperature ((int) player.GetTemperature ());
 	}
-
 
 	private SoftKeyInputManager InitialiseSoftKeyInputManager() {
 		SoftKeyInputManager softKeyInputManager = gameObject.AddComponent<SoftKeyInputManager> ();
@@ -37,6 +45,19 @@ public class GameManager : MonoBehaviour {
 		softKeyInputManager.attackButton = uiManager.hud.playerControlPanel.attackButton;
 		softKeyInputManager.SetUp ();
 		return softKeyInputManager;
+	}
+
+	private void InitialisePlayer() {
+		GameObject loadedPopcornKernel = (GameObject) Resources.Load ("Prefabs/PopcornKernelController", typeof(GameObject));
+		GameObject instance = Instantiate(loadedPopcornKernel, levelManager.playerDropPoint) as GameObject;
+		player = (PopcornKernelController) instance.GetComponent<PopcornKernelController> ();
+
+		player.inputManager = inputManager;
+		player.Init ();
+
+		player.popcornKernelHurtListeners += uiManager.hud.TriggerDamageIndicator;
+		player.popcornKernelHealListeners += uiManager.hud.TriggerFlash;
+		player.popcornKernelRestartListeners += uiManager.hud.FadeOut;
 	}
 
 	private bool IsMobile() {
