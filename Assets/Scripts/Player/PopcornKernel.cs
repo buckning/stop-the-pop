@@ -164,7 +164,7 @@ public class PopcornKernel {
 
 			gliding = false;
 			// if we were not grounded last frame and are grounded this frame, we have just landed
-			if (!oldGrounded) {
+			if (!oldGrounded && velocity.y < 0.0f) {
 				if (landEventListeners != null) {
 					landEventListeners ();
 				}
