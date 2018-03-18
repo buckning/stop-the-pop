@@ -72,3 +72,12 @@ Click on the Sparkle(Mobile) prefab, in the inspector click on the Particle Syst
 
 ## Running unit tests
 /Applications/Unity/Unity.app/Contents/MacOS/Unity -runTests -projectPath ~/stop-the-pop -testResults ~/stop-the-pop/results.xml
+
+## Design
+PopcornKernelController is the controller for the player. It contains the visual component and the class that stores the logic. It glues these two components together.
+GameManager maps the UI and Player components together.
+UIManager is the main UI in the game. It is made up of different UI screens, like the HUD, pause screen, etc.
+LevelManager stores the coins that were collected for the current level and all the checkpoints.
+Coins are collected and saved in the LevelManager. The LevelManager decides whether or not to re-enable the coins when restarting levels.
+InputManagers are used to control the player in the game. There are keyboard input managers for playing the game on PC or soft key input managers for controlling the player on mobile devices.
+

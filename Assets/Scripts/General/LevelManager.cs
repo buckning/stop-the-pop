@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour {
 	private Checkpoint lastCheckpoint;
 	private Checkpoint[] checkpoints;
 
+	private int livesLost = 0;
+
 	void Start() {
 		checkpoints = Resources.FindObjectsOfTypeAll (typeof(Checkpoint)) as Checkpoint[];
 		foreach (Checkpoint checkpoint in checkpoints) {
@@ -22,6 +24,10 @@ public class LevelManager : MonoBehaviour {
 			coins [i].id = i;
 			coins [i].SetLevelManager (this);
 		}
+	}
+
+	public void IncrementLivesLost() {
+		livesLost++;
 	}
 
 	public void SetCheckpoint(Checkpoint checkpoint) {
