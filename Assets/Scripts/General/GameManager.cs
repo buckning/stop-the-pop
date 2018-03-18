@@ -91,6 +91,12 @@ public class GameManager : MonoBehaviour {
 		player.popcornKernelStartPoppingListeners += uiManager.ShowRetryButton;
 		player.popcornKernelStartPoppingListeners += DisablePlayerInput;
 		player.popcornKernelStartPoppingListeners += levelManager.IncrementLivesLost;
+		player.popcornKernelInstantDeathListeners += InstantDeath;
+	}
+
+	private void InstantDeath() {
+		levelManager.IncrementLivesLost();
+		uiManager.hud.FadeOut ();
 	}
 
 	private void DisablePlayerInput() {

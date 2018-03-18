@@ -31,6 +31,7 @@ public class PopcornKernelController : MonoBehaviour {
 	public event NotifyEvent popcornKernelHealListeners;
 	public event NotifyEvent popcornKernelRestartListeners;
 	public event NotifyEvent popcornKernelStartPoppingListeners;
+	public event NotifyEvent popcornKernelInstantDeathListeners;	// this is for other deaths like getting crushed or landing in water
 
 	private PopcornKernel popcornKernel;
 	private Rigidbody2D rigidbody2d;
@@ -61,12 +62,18 @@ public class PopcornKernelController : MonoBehaviour {
 			popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 			popcornKernelAnimator.kickListeners += Kick;
 			popcornKernel.landEventListeners += popcornKernelAnimator.Land;
-//			popcornKernel.crushEventListeners += Crush;
+			popcornKernel.crushEventListeners += Crush;
 //			popcornKernelAnimator.popEventListeners += ShakeScreen;
 			popcornKernelAnimator.popLeftLegEventListeners += PopLeftLeg;
 			popcornKernelAnimator.popRightLegEventListeners += PopRightLeg;
 			popcornKernelAnimator.popCompleteListeners += DisableCollider;
 			popcornKernelAnimator.finishedPoppingListeners += Restart;
+		}
+	}
+
+	private void Crush() {
+		if (popcornKernelInstantDeathListeners != null) {
+			popcornKernelInstantDeathListeners ();
 		}
 	}
 
