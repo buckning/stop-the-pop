@@ -60,7 +60,6 @@ public class PopcornKernelController : MonoBehaviour {
 			popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 			popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
 			popcornKernelAnimator.kickListeners += Kick;
-//			popcornKernel.fallEventListeners += FallOff;
 //			popcornKernel.landEventListeners += popcornKernelAnimator.Land;
 //			popcornKernel.crushEventListeners += Crush;
 //			popcornKernelAnimator.popEventListeners += ShakeScreen;

@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour {
 
 		popcornKernel = new PopcornKernel (inputManager, groundCollisionChecker, wallCollisionChecker, ceilingCollisionCheck, minJumpHeight, maxJumpHeight, timeToJumpApex);
 		popcornKernel.jumpListeners += popcornKernelAnimator.Jump;
-		popcornKernel.fallEventListeners += FallOff;
 		popcornKernel.landEventListeners += popcornKernelAnimator.Land;
 		popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 		popcornKernel.crushEventListeners += Crush;
@@ -127,18 +126,6 @@ public class PlayerController : MonoBehaviour {
 		rigidbody2d.freezeRotation = false;
 		rigidbody2d.AddForce (force);
 		rigidbody2d.AddTorque (Random.Range (0f, maxTorque));
-
-	}
-
-	/***
-	 * Called back from the popcornKernel when it falls off something.
-	 * The purpose of this is that the popcornKernel allows the player
-	 * to jump after falling off something for a short period of time.
-	 * This is purely for better user experience. The length of the
-	 * period where the player can do this is controlled by this method.
-	 */
-	private void FallOff() {
-		StartCoroutine(DisableGroundedOverride());
 	}
 
 	/***
@@ -167,11 +154,6 @@ public class PlayerController : MonoBehaviour {
 		bodyCollider.enabled = true;
 		rigidbody2d.freezeRotation = false;
 		rigidbody2d.AddTorque (Random.Range (-100f, 100f));
-	}
-
-	public IEnumerator DisableGroundedOverride() {
-		yield return new WaitForSeconds(0.1f);
-		popcornKernel.DisableGroundedOverride ();
 	}
 	
 	public void setPosition(Vector2 position) {

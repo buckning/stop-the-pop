@@ -20,7 +20,6 @@ public class PopcornKernel {
 	private bool grounded = false;
 	private bool crushed = false;
 	private bool kicking = false;
-	private bool groundedOverride = false;	// the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
 	private bool gliding = false;	// track the state if the player is gliding
 	private CollisionChecker groundCollisionChecker;
 	private CollisionChecker wallCollisionChecker;
@@ -39,6 +38,8 @@ public class PopcornKernel {
 
 	private Vector2 velocity;
 	private bool glidingEnabled = false;
+
+	private float groundedOverrideTimeLeft = 0.0f; // the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
 
 	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, 
 				CollisionChecker wallCollisionChecker, CollisionChecker ceilingCollisionChecker, 
@@ -63,6 +64,8 @@ public class PopcornKernel {
 		UpdateVelocity (deltaTime);
 		UpdateTemperature(deltaTime);
 		CheckIfCrushed ();
+
+		groundedOverrideTimeLeft = Mathf.Clamp (groundedOverrideTimeLeft - deltaTime, 0.0f, 0.1f);
 	}
 
 	public void EnableGliding(bool enabled) {
@@ -105,7 +108,7 @@ public class PopcornKernel {
 		}
 
 		if (inputManager.JumpKeyDown()) {
-			if (groundedOverride) {
+			if (groundedOverrideTimeLeft > 0.0f) {
 				grounded = true;
 			}
 
@@ -151,16 +154,14 @@ public class PopcornKernel {
 		kicking = false;
 	}
 
-	public void DisableGroundedOverride() {
-		groundedOverride = false;
-	}
-
 	public void FixedUpdate(Vector2 velocity) {
 		bool oldGrounded = grounded;
 		grounded = groundCollisionChecker.isColliding ();
 
 		if (grounded) {
-			groundedOverride = false;
+			groundedOverrideTimeLeft = 0.0f;
+
+
 			gliding = false;
 			// if we were not grounded last frame and are grounded this frame, we have just landed
 			if (!oldGrounded) {
@@ -172,7 +173,7 @@ public class PopcornKernel {
 			// the player has just fallen off a platform, we want to give the player a chance to jump for a short period after falling off the platform
 			if (oldGrounded) {
 				if(velocity.y < 0.0f) {
-					groundedOverride = true;
+					groundedOverrideTimeLeft = 0.1f;
 
 					if (fallEventListeners != null) {
 						fallEventListeners ();
