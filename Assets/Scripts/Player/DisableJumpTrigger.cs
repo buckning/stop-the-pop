@@ -5,15 +5,15 @@ public class DisableJumpTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if (otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.jumpEnabled = false;
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			player.SetJumpEnabled (false);
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D otherObject) {
 		if (otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.jumpEnabled = true;
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			player.SetJumpEnabled (true);
 		}
 	}
 }

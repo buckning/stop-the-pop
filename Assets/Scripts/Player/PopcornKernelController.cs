@@ -71,6 +71,10 @@ public class PopcornKernelController : MonoBehaviour {
 		}
 	}
 
+	public void SetJumpEnabled(bool enabled) {
+		popcornKernel.SetJumpEnabled (enabled);
+	}
+
 	private void Crush() {
 		if (popcornKernelInstantDeathListeners != null) {
 			popcornKernelInstantDeathListeners ();

@@ -58,9 +58,10 @@ public class SaltShaker : Breakable  {
 			return;
 		}
 		if (otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			if (player.GetVelocity ().y <= 0.0f) {
-				DestroyMyself (player);
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			Rigidbody2D rigidbody2d = player.GetComponent<Rigidbody2D> ();
+			if (rigidbody2d.velocity.y <= 0.0f) {
+				DestroyMyself (rigidbody2d);
 			}
 		}
 	}
@@ -71,7 +72,6 @@ public class SaltShaker : Breakable  {
 		AudioManager.PlaySound ("salt-shaker-explode", Random.Range (1.5f, 1.75f));
 		anim.SetTrigger ("Die");
 		Instantiate (destroyAnimation, transform.position, Quaternion.identity);
-
 	}
 
 	void OnCollisionEnter2D(Collision2D otherObject) {
@@ -79,24 +79,26 @@ public class SaltShaker : Breakable  {
 			return;
 		}
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			Rigidbody2D rigidbody2d = player.GetComponent<Rigidbody2D> ();
 			if (ShouldPlayerDestroyMe (player)) {
-				DestroyMyself (player);
+				DestroyMyself (rigidbody2d);
 			} else {
 				int direction = (player.transform.position.x < transform.position.x) ? -1 : 1;
-				player.SetVelocity (new Vector2 (collisionVector.x * direction, collisionVector.y));
+				rigidbody2d.velocity = new Vector2 (collisionVector.x * direction, collisionVector.y);
 
-				player.CollisionWithEnemy (gameObject.name);
+				player.CollisionWithEnemy (50);
 			}
 		}
 	}
 
-	public bool ShouldPlayerDestroyMe(PlayerController player) {
+	public bool ShouldPlayerDestroyMe(PopcornKernelController player) {
+		Rigidbody2D rigidbody2d = player.GetComponent<Rigidbody2D> ();
 		//the purpose of this method is for cases when the player lands on a small area where the collider is larger than the
 		//trigger. Without this, the player would continuously bounce on the one spot since the collision event would jump the player
 		//up and the player would not think that he is grounded so it would jump forever.
 		if (player.groundCheck[0].transform.position.y >= transform.position.y) {
-			if (player.GetVelocity ().y <= 1.0f) {	//this value of 1.0 seems to give the best experience
+			if (rigidbody2d.velocity.y <= 1.0f) {	//this value of 1.0 seems to give the best experience
 				return true;
 			}
 		}
@@ -108,11 +110,10 @@ public class SaltShaker : Breakable  {
 		Destroy (gameObject);
 	}
 
-	void DestroyMyself(PlayerController player) {
-		player.SetVelocity (new Vector2 (player.GetVelocity ().x, reboundVector.y));
+	void DestroyMyself(Rigidbody2D rigidbody2d) {
+		rigidbody2d.velocity = new Vector2 (rigidbody2d.velocity.x, reboundVector.y);
 		dying = true;
 		AudioManager.PlaySound ("salt-shaker-explode");
-		player.hud.ShakeForDuration (0.2f);
 		anim.SetTrigger ("Die");
 		Instantiate (destroyAnimation, transform.position, Quaternion.identity);
 	}

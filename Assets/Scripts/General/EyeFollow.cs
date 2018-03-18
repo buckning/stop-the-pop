@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EyeFollow : MonoBehaviour {
-	PlayerController player;
+	PopcornKernelController player;
 	public float eyeRadius = 1.0f;
 	public GameObject pupil;
 
@@ -19,8 +19,7 @@ public class EyeFollow : MonoBehaviour {
 			return;
 		}
 		if (player == null) {
-			HudListener hud = GameObject.Find ("LevelHUD").GetComponent<HudListener>();
-			player = hud.GetPlayer ();
+			player = GameObject.FindObjectOfType <PopcornKernelController>();
 		}
 
 		// first, find the distance from the center of the eye to the target 

@@ -38,7 +38,7 @@ public class PopcornKernel {
 
 	private Vector2 velocity;
 	private bool glidingEnabled = false;
-
+	private bool jumpEnabled = true;
 	private float groundedOverrideTimeLeft = 0.0f; // the point of this is to check if the player is running and falls off a platform, we want the player to be able to jump for a split second
 
 	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, 
@@ -53,6 +53,10 @@ public class PopcornKernel {
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs(gravity) * minJumpHeight);
 		velocity = Vector2.zero;
+	}
+
+	public void SetJumpEnabled(bool enabled) {
+		jumpEnabled = enabled;
 	}
 
 	public void Update(Vector2 currentVelocity, float deltaTime) {
@@ -103,7 +107,7 @@ public class PopcornKernel {
 	 * the jump key, in which case we change the jump velocity to minVelocity
 	 */
 	public void CheckForJump() {
-		if (temperature >= MAX_TEMPERATURE) {
+		if (temperature >= MAX_TEMPERATURE || !jumpEnabled) {
 			return;
 		}
 

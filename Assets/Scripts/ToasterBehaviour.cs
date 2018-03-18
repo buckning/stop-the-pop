@@ -34,7 +34,7 @@ public class ToasterBehaviour : MonoBehaviour {
 	//even though one collisions still remained
 	int playerCollisionCount = 0;	
 	
-	List<PlayerController> passengers = new List<PlayerController>();
+	List<PopcornKernelController> passengers = new List<PopcornKernelController>();
 	
 	private bool hadCollision = false;
 	
@@ -70,7 +70,7 @@ public class ToasterBehaviour : MonoBehaviour {
 		
 		
 		//update passengers
-		foreach (PlayerController passenger in passengers) {
+		foreach (PopcornKernelController passenger in passengers) {
 			passenger.Translate(velocity);
 		}
 	}
@@ -121,7 +121,7 @@ public class ToasterBehaviour : MonoBehaviour {
 
 	public void PopToastUp() {
 		//apply velocity to player
-		foreach (PlayerController passenger in passengers) {
+		foreach (PopcornKernelController passenger in passengers) {
 			Rigidbody2D rigidbody2d = passenger.GetComponent<Rigidbody2D>();
 			rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, 0.0f);
 			rigidbody2d.AddForce(new Vector2(0f, force));
@@ -160,7 +160,7 @@ public class ToasterBehaviour : MonoBehaviour {
 
 			playerCollisionCount++;
 
-			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = other.gameObject.GetComponent<PopcornKernelController> ();
 			
 			if (!passengers.Contains (player) && player != null) {
 				passengers.Add(player);
@@ -174,7 +174,7 @@ public class ToasterBehaviour : MonoBehaviour {
 	public void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.tag == Strings.PLAYER) {
 			playerCollisionCount--;
-			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = other.gameObject.GetComponent<PopcornKernelController> ();
 			if (passengers.Contains (player)) {
 				//only remove the player when all of its colliders have been removed
 				//there was a situation where two collisions could take place and

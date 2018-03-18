@@ -21,17 +21,8 @@ public class SaltProjectile : MonoBehaviour {
 	 */
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.CollisionWithEnemy(gameObject.name, damageToPlayer, false);	
-			if(player.GetTemperature() >= 100) {
-				
-				#if UNITY_IOS
-				SocialServiceManager.GetInstance ().UnlockAchievement ("sodiumoverload");
-				#endif
-				#if UNITY_ANDROID
-				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_sodium_overload);
-				#endif
-			}
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			player.CollisionWithEnemy(damageToPlayer);
 		}
 		if (otherObject.gameObject.tag == Strings.PLAYER || otherObject.gameObject.tag == Strings.TERRAIN) {
 			if (spriteRenderer.isVisible) {
