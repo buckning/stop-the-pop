@@ -39,6 +39,7 @@ public class PopcornKernelController : MonoBehaviour {
 
 	private bool facingRight = true;
 	private bool grounded = true;
+	private bool glidingEnabled = false;
 	private float MAX_INVINCIBILITY_TIME = 1.5f;
 
 	public void Start() {
@@ -68,6 +69,12 @@ public class PopcornKernelController : MonoBehaviour {
 			popcornKernelAnimator.popCompleteListeners += DisableCollider;
 			popcornKernelAnimator.finishedPoppingListeners += Restart;
 		}
+	}
+
+	public void EnableGliding(bool enabled) {
+		glidingEnabled = enabled;
+		popcornKernelAnimator.EnableCape (enabled);
+		popcornKernel.EnableGliding (enabled);
 	}
 
 	private void StartPopping() {
@@ -188,6 +195,7 @@ public class PopcornKernelController : MonoBehaviour {
 		popcornKernelAnimator.SetVelocityX (Mathf.Abs(popcornKernel.GetVelocity().x));
 		popcornKernelAnimator.SetVelocityY (rigidbody2d.velocity.y);
 		popcornKernelAnimator.SetGrounded (grounded);
+		popcornKernelAnimator.SetGliding (popcornKernel.IsGliding ());
 	}
 
 	/***

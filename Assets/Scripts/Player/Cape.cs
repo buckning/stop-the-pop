@@ -31,10 +31,18 @@ public class Cape : MonoBehaviour {
 	}
 
 	public void SetGliding(bool isGliding) {
-		if (isGliding && !gliding) {
-			AudioManager.PlaySound ("cape-new", Random.Range(0.7f, 1.2f));
-		}
+//		if (isGliding && !gliding) {
+//			AudioManager.PlaySound ("cape-new", Random.Range(0.7f, 1.2f));
+//		}
 		gliding = isGliding;
+	}
+
+	public void SetXVelocity(float xVel) {
+		this.velocity.x = xVel;
+	}
+
+	public void SetYVelocity(float yVel) {
+		this.velocity.y = yVel;
 	}
 
 	public void SetVelocity(Vector2 vel) {

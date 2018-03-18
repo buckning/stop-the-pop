@@ -12,25 +12,15 @@ public class CapePowerup : MonoBehaviour {
 	float lowerYThreshold;
 	float animationSpeed = 0.75f;
 	Vector2 originalPosition;
-	HudListener hud;
 
 	void Start() {
 		ResourceCache.LoadAudioClip (coinAudioClipPath);
 		originalPosition = transform.position;
 		upperYThreshold = originalPosition.y + moveDistance;
 		lowerYThreshold = originalPosition.y - moveDistance;
-
-		if (hud == null) {
-			hud = GameObject.Find (HudListener.gameObjectName).GetComponent<HudListener>();
-		}
 	}
 
 	void Update() {
-		//don't need to enable all the capes if the player already has it enabled
-		if (hud.GetPlayer ().glidingEnabled) {
-			gameObject.SetActive (false);
-		}
-
 		float newYPos = 0.0f;
 		if (movingUp) {
 			newYPos = Mathf.MoveTowards(transform.position.y, 
@@ -66,9 +56,8 @@ public class CapePowerup : MonoBehaviour {
 		}
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			collected = true;
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			player.cape.gameObject.SetActive (true);
-			player.glidingEnabled = true;
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			player.EnableGliding (true);
 			AudioManager.PlaySound ("cape-new");
 			gameObject.SetActive (false);
 		}

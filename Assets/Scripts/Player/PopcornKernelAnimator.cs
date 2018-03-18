@@ -62,11 +62,13 @@ public class PopcornKernelAnimator : MonoBehaviour {
 	}
 	
 	public void SetVelocityX(float speed) {
-		animator.SetFloat("speed", speed);
+		animator.SetFloat ("speed", speed);
+		cape.SetXVelocity (speed);
 	}
 
 	public void SetVelocityY(float yVel) {
 		animator.SetFloat ("yVelocity", yVel);
+		cape.SetYVelocity (yVel);
 	}
 
 	public void SetGrounded(bool grounded) {

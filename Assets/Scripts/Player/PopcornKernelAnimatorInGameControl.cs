@@ -32,7 +32,7 @@ public class PopcornKernelAnimatorInGameControl : Editor {
 		}
 
 		if (GUILayout.Button ("Run")) {
-			kernel.SetVelocityX (1f);
+			kernel.SetVelocityX (2f);
 		}
 
 		if (GUILayout.Button ("Stop")) {
@@ -54,6 +54,14 @@ public class PopcornKernelAnimatorInGameControl : Editor {
 		if (GUILayout.Button ("Fall")) {
 			kernel.SetVelocityY (-10f);
 			kernel.SetGrounded (false);
+		}
+
+		if (GUILayout.Button ("Enable Cape")) {
+			kernel.EnableCape (true);
+		}
+
+		if (GUILayout.Button ("Start Gliding")) {
+			kernel.SetGliding (true);
 		}
 
 		if (GUILayout.Button ("Title Screen Animation")) {

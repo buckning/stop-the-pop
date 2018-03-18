@@ -16,6 +16,7 @@ public class PopcornKernel {
 	private float moveSpeed = 14f;
 	private float accelerationRate = 2.8f;
 	private float accelerationRateAirbourne = 2.8f;
+	private float glideSpeed = -2f;
 	private bool grounded = false;
 	private bool crushed = false;
 	private bool kicking = false;
@@ -37,6 +38,7 @@ public class PopcornKernel {
 	private bool facingRight = false;
 
 	private Vector2 velocity;
+	private bool glidingEnabled = false;
 
 	public PopcornKernel(InputManager inputManager, CollisionChecker groundCollisionChecker, 
 				CollisionChecker wallCollisionChecker, CollisionChecker ceilingCollisionChecker, 
@@ -63,6 +65,10 @@ public class PopcornKernel {
 		CheckIfCrushed ();
 	}
 
+	public void EnableGliding(bool enabled) {
+		this.glidingEnabled = enabled;
+	}
+
 	public Vector2 GetVelocity() {
 		return this.velocity;
 	}
@@ -70,7 +76,11 @@ public class PopcornKernel {
 	public void UpdateVelocity(float deltaTime) {
 		float xInput = inputManager.GetXAxis();
 
-		velocity.y += gravity * deltaTime;
+		if(gliding && glidingEnabled && velocity.y <= 0f) {
+			velocity.y = glideSpeed;
+		} else {
+			velocity.y += gravity * deltaTime;
+		}
 
 		velocity.x = xInput * moveSpeed;
 		velocity.x = Mathf.Clamp (velocity.x, -moveSpeed, moveSpeed); 
@@ -243,7 +253,7 @@ public class PopcornKernel {
 		return temperature;
 	}
 
-	public bool isGliding() {
+	public bool IsGliding() {
 		return gliding;
 	}
 
