@@ -111,6 +111,19 @@ public class PopcornKernelController : MonoBehaviour {
 		}
 	}
 
+	public bool IsGrounded() {
+		return popcornKernel.IsGrounded ();
+	}
+
+	/***
+	 * This is for the platform movement. When the platform moves, this is called by the platform.
+	 */
+	public void Translate(Vector2 translation) {
+		Vector3 translation3 = new Vector3 (translation.x * (facingRight ? 1f : -1f),
+			translation.y);
+		transform.Translate (translation3);
+	}
+
 	public void CollisionWithEnemy(float suggestedTemperatureIncrease) {
 		if (popcornKernel.GetInvincibleTime() <= 0.0f) {
 

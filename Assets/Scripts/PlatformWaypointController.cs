@@ -31,7 +31,7 @@ public class PlatformWaypointController : MonoBehaviour {
 	//even though one collisions still remained
 	int playerCollisionCount = 0;	
 
-	List<PlayerController> passengers = new List<PlayerController>();
+	List<PopcornKernelController> passengers = new List<PopcornKernelController>();
 
 	private bool hadCollision = false;
 	
@@ -66,7 +66,7 @@ public class PlatformWaypointController : MonoBehaviour {
 		transform.Translate (velocity);
 
 		//update passengers
-		foreach (PlayerController passenger in passengers) {
+		foreach (PopcornKernelController passenger in passengers) {
 			passenger.Translate(velocity);
 		}
 	}
@@ -122,13 +122,15 @@ public class PlatformWaypointController : MonoBehaviour {
 		if(other.gameObject.tag == Strings.PLAYER) {
 			playerCollisionCount++;
 
-			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
-			//this if statement is for a bug where the player sometimes lands on a platform 
-			//and the trigger is called but the player controller isn't updated so it seems like the
-			//player isn't on the ground, when it is, so the player isn't moved with the platform
-			if (!player.IsGrounded ()) {
-				player.FixedUpdate ();
-			}
+			PopcornKernelController player = other.gameObject.GetComponent<PopcornKernelController> ();
+
+//			this is commented out to see if this is still exists in the refactor
+//			//this if statement is for a bug where the player sometimes lands on a platform 
+//			//and the trigger is called but the player controller isn't updated so it seems like the
+//			//player isn't on the ground, when it is, so the player isn't moved with the platform
+//			if (!player.IsGrounded ()) {
+//				player.FixedUpdate ();
+//			}
 			if (!passengers.Contains (player) && player != null && player.IsGrounded()) {
 				passengers.Add(player);
 			}
@@ -144,7 +146,7 @@ public class PlatformWaypointController : MonoBehaviour {
 		}
 		if (other.gameObject.tag == Strings.PLAYER) {
 			playerCollisionCount--;
-			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = other.gameObject.GetComponent<PopcornKernelController> ();
 			if (passengers.Contains (player)) {
 				//only remove the player when all of its colliders have been removed
 				//there was a situation where two collisions could take place and
