@@ -5,15 +5,23 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 	public Transform playerDropPoint;
 
+	public delegate void NotifyEvent ();
+	public event NotifyEvent levelCompleteListeners;
+
 	private List<int> collectedCoinsSinceCheckpoint = new List<int> ();
 	private List<int> collectedCoins = new List<int> ();
 
 	private Checkpoint lastCheckpoint;
 	private Checkpoint[] checkpoints;
 
+	private LevelCompleteTrigger levelCompleteTrigger;
+
 	private int livesLost = 0;
 
 	void Start() {
+		levelCompleteTrigger = GameObject.Find("LevelCompleteTrigger").GetComponent<LevelCompleteTrigger>();
+		levelCompleteTrigger.SetLevelManager (this);
+
 		checkpoints = Resources.FindObjectsOfTypeAll (typeof(Checkpoint)) as Checkpoint[];
 		foreach (Checkpoint checkpoint in checkpoints) {
 			checkpoint.SetLevelManager (this);
@@ -24,6 +32,20 @@ public class LevelManager : MonoBehaviour {
 			coins [i].id = i;
 			coins [i].SetLevelManager (this);
 		}
+	}
+
+	public void LevelComplete(string nextLevel) {
+		if (levelCompleteListeners != null) {
+			levelCompleteListeners ();
+		}
+	}
+
+	public int GetLengthOfTimeInLevel() {
+		return 90;
+	}
+
+	public int GetLivesLost() {
+		return livesLost;
 	}
 
 	public void IncrementLivesLost() {

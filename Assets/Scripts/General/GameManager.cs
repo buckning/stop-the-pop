@@ -26,6 +26,13 @@ public class GameManager : MonoBehaviour {
 
 		uiManager.hud.fadeOutCompletedListeners += RestartLevel;
 		uiManager.restartLevelButtonPressedListeners += RestartLevel;
+		levelManager.levelCompleteListeners += LevelComplete;
+	}
+
+	void LevelComplete() {
+		uiManager.LevelComplete (levelManager.GetCoinCount (), 
+			levelManager.GetLengthOfTimeInLevel (), 
+			levelManager.GetLivesLost ());
 	}
 
 	void RestartLevel() {
