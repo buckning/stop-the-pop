@@ -33,16 +33,9 @@ public class Fireball : MonoBehaviour {
 	 */
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 
-			#if UNITY_IOS
-			SocialServiceManager.GetInstance ().UnlockAchievement ("applywatertoburnedarea");
-			#endif
-			#if UNITY_ANDROID
-			SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_apply_water_to_burned_area);
-			#endif
-
-			player.CollisionWithEnemy (gameObject.name, 50, false);
+			player.CollisionWithEnemy (50);
 			Instantiate (explosion, transform.position, Quaternion.identity);
 			AudioManager.PlaySound ("flame-destroy", Random.Range(0.8f, 1.2f));
 

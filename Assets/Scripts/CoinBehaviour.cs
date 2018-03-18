@@ -41,8 +41,6 @@ public class CoinBehaviour : MonoBehaviour {
 
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
 			collected = true;
-//			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-//			player.IncrementCoinCount(id);
 
 			levelManager.AddCollectedCoin (id);
 			coinAnimator.SetTrigger("PickedUp");
