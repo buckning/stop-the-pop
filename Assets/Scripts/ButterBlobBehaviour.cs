@@ -11,7 +11,7 @@ public class ButterBlobBehaviour : Breakable {
 	private Vector2 reboundVector = new Vector2(0f, 12f);	//force applied to the player when he interacts with this object
 	public float temperatureIncreaseRate = 3.0f;	//the new temperature increase rate of the player when they collide with this object
 	private bool updateTemperature;					//a cache of the player.updateTemperature flag, so we can reset after we stop colliding with him
-	private PlayerController player;				//reference to the player object
+	private PopcornKernelController player;				//reference to the player object
 	public float speed = 3f;						//speed of this object when it is moving
 	private Animator animator;
 	public Vector3[] localWaypoints;
@@ -79,23 +79,23 @@ public class ButterBlobBehaviour : Breakable {
 			return;
 		}
 		if (otherObject.gameObject.tag == Strings.PLAYER) {
-			player = otherObject.gameObject.GetComponent<PlayerController> ();
+			player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+			Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D> ();
 
 			if (player.GetTemperature() >= 100.0f) {
 				return;
 			}
 
-			if (player.GetVelocity ().y > 5.0f) {	//if the player is not falling. The 5.0f is a buffer for better feel
+			if (playerRigidbody.velocity.y > 5.0f) {	//if the player is not falling. The 5.0f is a buffer for better feel
 				return;
 			}
 
 			//time check here is for the player getting hit by the enemy, don't let the enemy die from the player jump back force
 			if (player.GetComponent<Rigidbody2D> ().velocity.y < 0.0f && (Time.time - timeSinceLastInteractionWithPlayer) > 0.05f) {
-				player.SetVelocity (new Vector2 (player.GetVelocity ().x, reboundVector.y));
+				playerRigidbody.velocity = new Vector2 (playerRigidbody.velocity.x, reboundVector.y);
 				animator.SetTrigger ("die");
 				dying = true;
 				AudioManager.PlaySound ("squash", Random.Range (1.25f, 1.5f));
-				player.hud.ShakeForDuration (0.2f);
 			}
 		}
 	}
@@ -112,13 +112,13 @@ public class ButterBlobBehaviour : Breakable {
 			return;
 		}
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
-			player = otherObject.gameObject.GetComponent<PlayerController> ();
+			player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 
 			int direction = (player.transform.position.x < transform.position.x) ? -1 : 1;
-			player.SetVelocity(new Vector2(collisionVector.x * direction, collisionVector.y));
+			player.GetComponent<Rigidbody2D>().velocity = new Vector2(collisionVector.x * direction, collisionVector.y);
 
 			//cache if the player should increase temperature
-			player.CollisionWithEnemy(gameObject.name);
+			player.CollisionWithEnemy(50f);
 
 			timeSinceLastInteractionWithPlayer = Time.time;
 		}

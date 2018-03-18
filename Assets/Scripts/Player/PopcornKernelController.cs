@@ -12,8 +12,10 @@ public class PopcornKernelController : MonoBehaviour {
 	public Transform[] groundCheck;
 	public LayerMask whatIsGround;
 	private float groundRadius = 0.3f;
+	private float attackRadius = 0.8f;
 
 	public Transform ceilingCheck;
+	public Transform attackPosition;
 	public LayerMask whatIsCeilingMask;
 
 	public PlayerWallTrigger wallCollider;
@@ -33,9 +35,15 @@ public class PopcornKernelController : MonoBehaviour {
 	private PopcornKernel popcornKernel;
 	private Rigidbody2D rigidbody2d;
 
+	private LayerMask breakableMask;
+
 	private bool facingRight = true;
 	private bool grounded = true;
 	private float MAX_INVINCIBILITY_TIME = 1.5f;
+
+	public void Start() {
+		breakableMask = 1 << LayerMask.NameToLayer ("Breakable");
+	}
 
 	public void Init() {
 		if(popcornKernel == null) {
@@ -50,6 +58,7 @@ public class PopcornKernelController : MonoBehaviour {
 			popcornKernel.popEventListeners += StartPopping;
 			popcornKernel.kickEventListeners += popcornKernelAnimator.Kick;
 			popcornKernelAnimator.kickListeners += popcornKernel.StopKicking;
+			popcornKernelAnimator.kickListeners += Kick;
 //			popcornKernel.fallEventListeners += FallOff;
 //			popcornKernel.landEventListeners += popcornKernelAnimator.Land;
 //			popcornKernel.crushEventListeners += Crush;
@@ -149,6 +158,30 @@ public class PopcornKernelController : MonoBehaviour {
 		} else if (inputManager.GetXAxis() < 0 && facingRight) {
 			Flip();
 		}
+	}
+
+	/***
+	 * Performs a physics detection around the attack position for objects with Breakable layer.
+	 * The break method is then called on the object
+	 */
+	private void Kick() {
+		Collider2D collider = Physics2D.OverlapCircle (attackPosition.position, attackRadius  * transform.localScale.x, breakableMask);
+
+		if (collider == null) {
+			return;
+		}
+
+		Breakable breakableObject = collider.gameObject.GetComponent<Breakable> ();
+		if (breakableObject == null) {
+			return;
+		}
+
+		breakableObject.Break (attackPosition.position);
+
+		//this reset is for the scenario where the player is running into a wall and have stopped.
+		//the wall breaks but the physics event to say the player has stopped colliding with the wall doesn't trigger
+		//so the player is stuck in a situation where they cannot move after a wall is broken
+		wallCollider.Reset ();
 	}
 
 	private void UpdateAnimator() {
