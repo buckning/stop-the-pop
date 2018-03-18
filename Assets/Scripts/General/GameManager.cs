@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -26,23 +27,40 @@ public class GameManager : MonoBehaviour {
 
 		uiManager.hud.fadeOutCompletedListeners += RestartLevel;
 		uiManager.restartLevelButtonPressedListeners += RestartLevel;
+		uiManager.levelCompletePanel.nextLevelButtonListeners += NextLevel;
+		uiManager.hud.pauseButtonPressedListeners += Pause;
 		levelManager.levelCompleteListeners += LevelComplete;
+		uiManager.pausePanel.continueButtonListeners += Unpause;
 	}
 
-	void LevelComplete() {
+	private void Pause() {
+		Time.timeScale = 0.0f;
+	}
+
+	private void Unpause() {
+		Time.timeScale = 1.0f;
+	}
+
+	private void NextLevel() {
+		uiManager.ShowLoadingPanel ();
+		SceneManager.LoadScene (levelManager.GetNextLevel ());
+	}
+
+	private void LevelComplete() {
+		DisablePlayerInput ();
 		uiManager.LevelComplete (levelManager.GetCoinCount (), 
 			levelManager.GetLengthOfTimeInLevel (), 
 			levelManager.GetLivesLost ());
 	}
 
-	void RestartLevel() {
+	private void RestartLevel() {
 		uiManager.hud.FadeIn ();
 		Destroy (player.gameObject);
 		InitialisePlayer ();
 		levelManager.ResetLevel ();
 	}
 
-	void Update () {
+	private void Update () {
 		uiManager.SetTemperature ((int) player.GetTemperature ());
 		uiManager.hud.UpdateCoinCount (levelManager.GetCoinCount ());
 	}

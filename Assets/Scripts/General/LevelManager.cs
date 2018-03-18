@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour {
 	private LevelCompleteTrigger levelCompleteTrigger;
 
 	private int livesLost = 0;
+	private string nextLevelName;
 
 	void Start() {
 		levelCompleteTrigger = GameObject.Find("LevelCompleteTrigger").GetComponent<LevelCompleteTrigger>();
@@ -34,7 +35,12 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
+	public string GetNextLevel() {
+		return nextLevelName;
+	}
+
 	public void LevelComplete(string nextLevel) {
+		this.nextLevelName = nextLevel;
 		if (levelCompleteListeners != null) {
 			levelCompleteListeners ();
 		}

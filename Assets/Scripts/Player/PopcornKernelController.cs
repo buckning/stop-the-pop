@@ -157,6 +157,9 @@ public class PopcornKernelController : MonoBehaviour {
 		popcornKernelAnimator.SetGrounded (grounded);
 	}
 
+	/***
+	 * Flip the popcorn kernel. The flip is performed by a y-axis rotation
+	 */
 	private void Flip() {
 		facingRight = !facingRight;
 		if(facingRight)transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);  

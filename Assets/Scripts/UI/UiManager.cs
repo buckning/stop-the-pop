@@ -106,4 +106,14 @@ public class UiManager : MonoBehaviour {
 		hud.gameObject.SetActive (false);
 		levelCompletePanel.ShowLevelCompleteScreen (numberOfCoins, timeTaken, numberOfLivesLost);
 	}
+
+	public void ShowLoadingPanel() {
+		pausePanel.gameObject.SetActive (false);
+		storePanel.gameObject.SetActive (false);
+		dialogBox.gameObject.SetActive (false);
+		backgroundFader.gameObject.SetActive (false);
+		hud.gameObject.SetActive (false);
+		levelCompletePanel.gameObject.SetActive (false);
+		loadingPanel.gameObject.SetActive (true);
+	}
 }
