@@ -71,14 +71,26 @@ public class PopcornKernelController : MonoBehaviour {
 		}
 	}
 
+	public void PlaySawBladeDeathAnimation() {
+		popcornKernelAnimator.PlaySawBladeDeathAnimation ();
+	}
+
+	public void PlayMovingSawBladeDeathAnimation() {
+		popcornKernelAnimator.PlayMovingSawBladeDeathAnimation ();
+	}
+
 	public void SetJumpEnabled(bool enabled) {
 		popcornKernel.SetJumpEnabled (enabled);
 	}
 
-	private void Crush() {
+	public void InstantDeath() {
 		if (popcornKernelInstantDeathListeners != null) {
 			popcornKernelInstantDeathListeners ();
 		}
+	}
+
+	private void Crush() {
+		InstantDeath ();
 	}
 
 	public void EnableGliding(bool enabled) {
@@ -230,7 +242,7 @@ public class PopcornKernelController : MonoBehaviour {
 		else transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);  
 	}
 
-	private void DisableCollider() {
+	public void DisableCollider() {
 		GetComponent<BoxCollider2D> ().enabled = false;
 	}
 }

@@ -98,6 +98,11 @@ public class LevelManager : MonoBehaviour {
 			magnet.gameObject.SetActive(true);
 		}
 
+		Sawblade[] sawblades = Resources.FindObjectsOfTypeAll (typeof(Sawblade)) as Sawblade[];
+		foreach (Sawblade sawblade in sawblades) {
+			sawblade.Reset ();
+		}
+
 		collectedCoinsSinceCheckpoint.Clear ();
 	}
 }

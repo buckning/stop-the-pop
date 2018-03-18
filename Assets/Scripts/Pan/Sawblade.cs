@@ -8,44 +8,36 @@ public class Sawblade : MonoBehaviour {
 	GameObject spawnedParticles;
 
 	void OnCollisionEnter2D(Collision2D otherObject) {
-		CameraFollow camera = GameObject.Find ("Main Camera").GetComponent<CameraFollow>();
-		if (otherObject.gameObject.tag == Strings.PLAYER && 
-			!camera.gameOver) {	//this check of gameOver stops two objects from triggering the death animation again
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
+		if (otherObject.gameObject.tag == Strings.PLAYER) {
+			PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 			AudioManager.PlaySound ("saw");
-			AnalyticsManager.SendDeathEvent (player.hud.levelName, player.transform.position, gameObject.name);
-			player.AddLifeLost ();
 
 			if (spawnedParticles == null) {
 				spawnedParticles = (GameObject)Instantiate (particles);
 				spawnedParticles.transform.position = otherObject.contacts [0].point;
-				camera.gameOver = true;	//this is used to start zooming in on the player
-				player.hud.GameOver(false);	//don't show the retry button for this death animation
-				player.playerMovementEnabled = false;
 
-				float shakeDuration = .2f;
+
+				player.SetJumpEnabled (false);
+				player.inputManager.Disable ();
+				StartCoroutine(TriggerPlayerDeath(player, 0.3f));
+
 				if (stationary) {
-					shakeDuration = 1.5f;
-//					player.PopLeftLegSprite ();
-//					player.PopRightLegSprite ();
+					PopcornKernelAnimator popcornKernelAnimator = GameObject.FindObjectOfType<PopcornKernelAnimator> ();
+					popcornKernelAnimator.PopLeftLeg ();
+					popcornKernelAnimator.PopRightLeg ();
 					player.DisableCollider ();
-					player.EnableBodyCollider ();
+//					player.EnableBodyCollider ();
 					player.PlaySawBladeDeathAnimation ();
-					player.jumpEnabled = false;
 				} else {
-					player.jumpEnabled = false;
 					player.PlayMovingSawBladeDeathAnimation ();
 				}
-
-				player.hud.ShakeForDuration (shakeDuration);
-				StartCoroutine (RestartAfterDelay (player, shakeDuration));	
 			}
 		}
 	}
 
-	IEnumerator RestartAfterDelay(PlayerController player, float delay) {
+	IEnumerator TriggerPlayerDeath(PopcornKernelController player, float delay) {
 		yield return new WaitForSeconds (delay);
-		player.hud.RetryLevel ();
+		player.InstantDeath ();
 	}
 
 	public void Reset() {
