@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-	public UiManager uiManager;
+	private UiManager uiManager;
 	private PopcornKernelController player;
 
 	private InputManager inputManager;
@@ -13,9 +13,10 @@ public class GameManager : MonoBehaviour {
 
 	void Start () {
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
+		uiManager = GameObject.FindObjectOfType<UiManager> ();
 
-		if (levelManager == null || levelManager.playerDropPoint == null) {
-			Debug.LogError ("Level manager or player drop point is null");
+		if (levelManager == null) {
+			Debug.LogError ("Level manager is null");
 		}
 
 		if (IsMobile ()) {
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour {
 
 	private void InitialisePlayer() {
 		GameObject loadedPopcornKernel = (GameObject) Resources.Load ("Prefabs/PopcornKernelController", typeof(GameObject));
-		GameObject instance = Instantiate(loadedPopcornKernel, levelManager.playerDropPoint) as GameObject;
+		GameObject instance = Instantiate(loadedPopcornKernel, levelManager.GetPlayerDropPoint()) as GameObject;
 		player = (PopcornKernelController) instance.GetComponent<PopcornKernelController> ();
 		player.transform.parent = null;
 

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
-	public Transform playerDropPoint;
-
 	public delegate void NotifyEvent ();
 	public event NotifyEvent levelCompleteListeners;
 
@@ -15,12 +13,13 @@ public class LevelManager : MonoBehaviour {
 	private Checkpoint[] checkpoints;
 
 	private LevelCompleteTrigger levelCompleteTrigger;
+	private Transform playerDropPoint;
 
 	private int livesLost = 0;
 	private string nextLevelName;
 
 	void Start() {
-		levelCompleteTrigger = GameObject.Find("LevelCompleteTrigger").GetComponent<LevelCompleteTrigger>();
+		levelCompleteTrigger = GameObject.Find ("LevelCompleteTrigger").GetComponent<LevelCompleteTrigger> ();
 		levelCompleteTrigger.SetLevelManager (this);
 
 		checkpoints = Resources.FindObjectsOfTypeAll (typeof(Checkpoint)) as Checkpoint[];
@@ -33,6 +32,13 @@ public class LevelManager : MonoBehaviour {
 			coins [i].id = i;
 			coins [i].SetLevelManager (this);
 		}
+	}
+
+	public Transform GetPlayerDropPoint() {
+		if (playerDropPoint == null) {
+			playerDropPoint = GameObject.Find ("PlayerDropPoint").transform;
+		}
+		return playerDropPoint;
 	}
 
 	public string GetNextLevel() {
