@@ -25,7 +25,7 @@ public class TutorialImagePanel : MonoBehaviour {
 
 	IEnumerator ShowTutorialAfterDelay(float showAfterDelay) {
 		yield return new WaitForSeconds(showAfterDelay);
-		GetComponent<GAui> ().MoveIn ();
+		gameObject.SetActive (true);
 	}
 
 	public void Pause() {
@@ -33,7 +33,7 @@ public class TutorialImagePanel : MonoBehaviour {
 	}
 
 	public void Dismiss() {
-		GetComponent<GAui>().MoveOut();
+		gameObject.SetActive (false);
 		EventSystem.current.SetSelectedGameObject(null);
 		Time.timeScale = 1.0f;
 	}

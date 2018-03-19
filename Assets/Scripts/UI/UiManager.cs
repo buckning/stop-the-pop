@@ -13,6 +13,7 @@ public class UiManager : MonoBehaviour {
 	public Image loadingPanel;
 	public InformationPanel infoPanel;
 	public DialogBox dialogBox;
+	public TutorialImagePanel tutorialPanel;
 
 	public delegate void NotifyEvent ();
 	public event NotifyEvent skipLevelButtonPressedListeners;

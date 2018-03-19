@@ -10,10 +10,9 @@ public class TutorialPopUpTrigger : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == Strings.PLAYER) {
 			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
-
-			player.hud.tutorialPanel.gameObject.SetActive (true);
-
-			player.hud.tutorialPanel.ShowTutorialImage(tutorialImage, showAfterDelay);
+			UiManager uiManager = GameObject.FindObjectOfType<UiManager> ();
+			uiManager.tutorialPanel.gameObject.SetActive (true);
+			uiManager.tutorialPanel.ShowTutorialImage(tutorialImage, showAfterDelay);
 			Destroy (gameObject);
 		}
 	}
