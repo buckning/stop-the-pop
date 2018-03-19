@@ -11,8 +11,9 @@ public class CandyCane : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D otherObject) {
 		if ((Time.time - timeOfLastCollision) > 1) {
 			if (otherObject.gameObject.tag == Strings.PLAYER) {
-				PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();	
-				if (player.GetVelocity ().y <= 3.0f && player.IsGrounded()) {
+				PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
+				Rigidbody2D rigidbody2d = otherObject.gameObject.GetComponent<Rigidbody2D> ();
+				if (rigidbody2d.velocity.y <= 3.0f && player.IsGrounded()) {
 					myAnimator.SetTrigger ("Bounce");
 					timeOfLastCollision = Time.time;
 				}

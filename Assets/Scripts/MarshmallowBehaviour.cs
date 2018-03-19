@@ -35,9 +35,9 @@ public class MarshmallowBehaviour : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll) {
 		if(coll.gameObject.tag == "Player") {
-			PlayerController player = coll.gameObject.GetComponent<PlayerController> ();
-			if(player.GetVelocity().y < -3f) {
-				player.SetVelocity(reboundForce);
+			Rigidbody2D rigidbody2d = coll.gameObject.GetComponent<Rigidbody2D> ();
+			if(rigidbody2d.velocity.y < -3f) {
+				rigidbody2d.velocity = reboundForce;
 				animator.SetTrigger("Bounce");
 				AudioManager.PlaySound("boing");
 				AudioManager.PlaySound("marshmallowHit");

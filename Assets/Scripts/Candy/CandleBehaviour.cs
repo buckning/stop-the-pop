@@ -18,15 +18,6 @@ public class CandleBehaviour : Breakable {
 		InvokeRepeating ("ToggleFlames", initialDelay, 1.5f);
 	}
 
-	void OnCollisionEnter2D(Collision2D otherObject) {
-		if (otherObject.gameObject.tag.StartsWith(Strings.PLAYER)) {
-			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-			if (player.IsGliding ()) {
-				Break (otherObject.transform.position);
-			}
-		}
-	}
-
 	public void ToggleFlames() {
 		if(normalFace.activeInHierarchy) {	//this check is to prevent a unwanted flame toggles when the candle is killed
 			if (flame.activeInHierarchy) {
@@ -54,14 +45,6 @@ public class CandleBehaviour : Breakable {
 		myRigidbody2d.AddTorque (directionOfOriginator * -30);
 		myRigidbody2d.gravityScale = 2f;
 		AudioManager.PlaySound ("Candle-Death");
-
-		#if UNITY_IOS
-		SocialServiceManager.GetInstance ().UnlockAchievement ("makeawish");
-		#endif
-		#if UNITY_ANDROID
-		SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_make_a_wish);
-		#endif
-
 		Destroy (gameObject, 3f);
 	}
 }

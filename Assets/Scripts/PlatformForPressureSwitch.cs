@@ -49,8 +49,6 @@ public class PlatformForPressureSwitch : MonoBehaviour {
 					GameObject dust = (GameObject)Instantiate (ResourceCache.Get ("Effects/LandingDustParent"), dustSpawnPosition, Quaternion.identity);
 					dust.transform.localScale = new Vector3 (dustScale, dustScale, dustScale);
 
-					GameObject.Find ("LevelHUD").GetComponent<HudListener>().ShakeForDuration(0.3f);
-
 					AudioManager.PlaySound ("platform-bang", Random.Range(0.9f, 1.1f));
 				}
 			}

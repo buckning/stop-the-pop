@@ -8,10 +8,6 @@ public class JazzieBehaviour : MonoBehaviour {
 	public SpriteRenderer myRenderer;
 	bool wasVisible = false;
 
-	void Start () {
-		hud = GameObject.Find ("LevelHUD").GetComponent<HudListener> ();
-	}
-
 	void Update () {
 		if (myRenderer.isVisible && !wasVisible) {
 			AudioManager.PlaySound("Jazzie-Fall", Random.Range(0.8f, 1.2f));
@@ -22,14 +18,10 @@ public class JazzieBehaviour : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D otherObject) {
 		if (myRenderer.isVisible) {
 			if (otherObject.gameObject.tag == Strings.PLAYER) {
-				PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
-				AnalyticsManager.SendDeathEvent (player.hud.levelName, player.transform.position, gameObject.name);
+				PopcornKernelController player = otherObject.gameObject.GetComponent<PopcornKernelController> ();
 				AudioManager.PlaySound ("Jazzie-Hit");
-				player.AddLifeLost ();
-				player.hud.RetryLevel ();
+				player.InstantDeath ();
 			}
-
-			hud.ShakeForDuration (0.2f);
 		}
 		Destroy (gameObject);
 	}
