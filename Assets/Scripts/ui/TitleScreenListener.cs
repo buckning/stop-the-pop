@@ -152,7 +152,7 @@ public class TitleScreenListener : MonoBehaviour {
 		PlayButtonClickSound();
 		SetActiveScreen (loadingScreen);
 		CurrentLevel.ResetAll ();	//reset the counters and difficulty for the current level 
-		LoadNextLevelAsync("PanLevel1_" + level);
+		LoadNextLevelAsync("Level" + level);
 	}
 
 	public void PlayerCustomisationButtonPressed() {
