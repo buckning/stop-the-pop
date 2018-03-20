@@ -25,7 +25,6 @@ public class SimpleSpawner : MonoBehaviour {
 		} else if (useRotation) {
 			spawnedObject.transform.localEulerAngles = new Vector3 (0, 0, spawnedRotation);
 		}
-		print (spawnedObject.name);
 		spawnedObjects.Add (spawnedObject);
 		spawnedObject.transform.parent = gameObject.transform;
 	}

@@ -57,8 +57,6 @@ public class KernelBehaviour : SpriteColourChanger {
 		}
 		poppedObject.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (xForce, yForce));
 		poppedObject.GetComponent<Rigidbody2D> ().AddTorque (Random.Range (0f, 100f));
-		hud = GameObject.Find ("LevelHUD").GetComponent<HudListener> ();
-		hud.ShakeForDuration (cameraShakeDuration, cameraShakeMagnitude);
 		Destroy (gameObject);
 	}
 }

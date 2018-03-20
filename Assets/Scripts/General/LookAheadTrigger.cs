@@ -16,10 +16,10 @@ public class LookAheadTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D otherObject) {
 		if(otherObject.gameObject.tag == Strings.PLAYER) {
+			target.SetActive (true);
 			PlayerController player = otherObject.gameObject.GetComponent<PlayerController> ();
 			player.hud.EnableControlPanel (false);
 			player.playerMovementEnabled = false;
-			target.SetActive (true);
 
 			if (myCamera.temporaryTarget == Vector3.zero) {
 				previousTransform = new Vector3(myCamera.transform.position.x, myCamera.transform.position.y, myCamera.transform.position.z);
