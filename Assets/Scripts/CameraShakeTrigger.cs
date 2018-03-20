@@ -5,7 +5,6 @@ public class CameraShakeTrigger : MonoBehaviour {
 
 	public bool startShakeTrigger = true;
 	AudioSource audioSource;
-	HudListener hud;
 
 	public AudioClip audioClip;
 	public AudioClip musicClip;	//the clip of music that should be played for this section
@@ -16,10 +15,11 @@ public class CameraShakeTrigger : MonoBehaviour {
 	AudioSource sceneCameraAudio;
 
 	SpriteRenderer spriteRenderer;
+	Hud hud;
 
 	void Start() {
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-		hud = GameObject.Find ("LevelHUD").GetComponent<HudListener> ();
+		hud = GameObject.FindObjectOfType<Hud> ();
 
 		audioSource = gameObject.AddComponent<AudioSource>();
 		audioSource.clip = audioClip;
@@ -41,7 +41,7 @@ public class CameraShakeTrigger : MonoBehaviour {
 	public void OnTriggerEnter2D(Collider2D otherObject) {
 		if (otherObject.gameObject.tag == Strings.PLAYER) {
 			if (startShakeTrigger) {
-				hud.StartShakingScreen ();
+				Camera.main.gameObject.GetComponent<CameraShaker> ().StartShaking();
 
 				if (disableSfxAfterTime) {
 					StartCoroutine (StopSfx ());
@@ -51,7 +51,7 @@ public class CameraShakeTrigger : MonoBehaviour {
 					audioSource.Play ();
 				}
 			} else {
-				hud.StopShakingScreen ();
+				Camera.main.gameObject.GetComponent<CameraShaker> ().StopShaking();
 				audioSource.Stop ();
 			}
 		}

@@ -27,7 +27,7 @@ public class CollapsingPlatform : MonoBehaviour {
 	//even though one collisions still remained
 	int playerCollisionCount = 0;	
 
-	List<PlayerController> passengers = new List<PlayerController>();
+	List<PopcornKernelController> passengers = new List<PopcornKernelController>();
 
 	private bool hadCollision = false;
 
@@ -54,7 +54,7 @@ public class CollapsingPlatform : MonoBehaviour {
 		transform.Translate (velocity);
 
 		//update passengers
-		foreach (PlayerController passenger in passengers) {
+		foreach (PopcornKernelController passenger in passengers) {
 			passenger.Translate(velocity);
 		}
 		if (!Settings.sfxEnabled && audioSource.isPlaying) {
@@ -111,7 +111,7 @@ public class CollapsingPlatform : MonoBehaviour {
 		if(other.gameObject.tag == Strings.PLAYER) {
 			playerCollisionCount++;
 
-			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = other.gameObject.GetComponent<PopcornKernelController> ();
 
 			if (!passengers.Contains (player) && player != null) {
 				passengers.Add(player);
@@ -125,7 +125,7 @@ public class CollapsingPlatform : MonoBehaviour {
 	public void OnTriggerExit2D(Collider2D other) {
 		if (other.gameObject.tag == Strings.PLAYER) {
 			playerCollisionCount--;
-			PlayerController player = other.gameObject.GetComponent<PlayerController> ();
+			PopcornKernelController player = other.gameObject.GetComponent<PopcornKernelController> ();
 			if (passengers.Contains (player)) {
 				//only remove the player when all of its colliders have been removed
 				//there was a situation where two collisions could take place and

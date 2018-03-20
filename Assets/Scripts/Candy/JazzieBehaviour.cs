@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class JazzieBehaviour : MonoBehaviour {
 
-	HudListener hud;
 	public SpriteRenderer myRenderer;
 	bool wasVisible = false;
 

@@ -4,8 +4,6 @@ using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
 public class StorePanel : MonoBehaviour {
-
-	public HudListener mainHud;
 	public Text coinCountText;
 	public Text snowflakeCostText;
 	public Text capeCostText;
@@ -32,11 +30,11 @@ public class StorePanel : MonoBehaviour {
 		while (Time.realtimeSinceStartup < start + timeToDelay) {
 			yield return null;
 		}
-		Component[] pauseItems = mainHud.pauseMenu.gameObject.transform.GetComponentsInChildren(typeof(GAui), true);
-		foreach(GAui button in pauseItems) {
-			button.MoveIn (GSui.eGUIMove.SelfAndChildren);
-		}
-		mainHud.Pause ();	//return back to pause menu
+//		Component[] pauseItems = mainHud.pauseMenu.gameObject.transform.GetComponentsInChildren(typeof(GAui), true);
+//		foreach(GAui button in pauseItems) {
+//			button.MoveIn (GSui.eGUIMove.SelfAndChildren);
+//		}
+//		mainHud.Pause ();	//return back to pause menu
 	}
 
 	public void InitStorePanel() {
@@ -63,109 +61,109 @@ public class StorePanel : MonoBehaviour {
 	}
 
 	public void SnowflakeButtonPressed() {
-		StoreItem snowflake = StoreInventory.GetItemFromInventory (Strings.SNOWFLAKE);
-		if (stats.totalNumberOfCoins >= snowflake.cost) {
-
-			if (mainHud.GetPlayer ().GetTemperature() < 20f) {
-				mainHud.infoPanel.SetText (Strings.UI_YOU_DONT_NEED_TO_COOL_DOWN_RIGHT_NOW);
-				mainHud.infoPanel.gameObject.SetActive (true);
-				return;
-			}
-
-			mainHud.GetPlayer ().ResetTemperature ();
-			stats.totalNumberOfCoins -= snowflake.cost;
-			textFieldAnimator.AddToNumber (-snowflake.cost);
-			stats.SaveToDisk ();
-			AudioManager.PlaySound ("snowflake-new");
-			AnalyticsManager.SendInGameStorePurchase (mainHud.levelName, Strings.SNOWFLAKE, mainHud.player.transform.position);
-			numberOfItemsPurchased++;
-
-			if (numberOfItemsPurchased == 3) {
-				#if UNITY_IOS
-				SocialServiceManager.GetInstance ().UnlockAchievement ("shopaholic");
-				#endif
-				#if UNITY_ANDROID
-				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_shopaholic);
-				#endif
-			}
-		} else {
-			mainHud.infoPanel.SetText (Strings.UI_INSUFFICIENT_FUNDS);
-			mainHud.infoPanel.gameObject.SetActive (true);
-		}
+//		StoreItem snowflake = StoreInventory.GetItemFromInventory (Strings.SNOWFLAKE);
+//		if (stats.totalNumberOfCoins >= snowflake.cost) {
+//
+//			if (mainHud.GetPlayer ().GetTemperature() < 20f) {
+//				mainHud.infoPanel.SetText (Strings.UI_YOU_DONT_NEED_TO_COOL_DOWN_RIGHT_NOW);
+//				mainHud.infoPanel.gameObject.SetActive (true);
+//				return;
+//			}
+//
+//			mainHud.GetPlayer ().ResetTemperature ();
+//			stats.totalNumberOfCoins -= snowflake.cost;
+//			textFieldAnimator.AddToNumber (-snowflake.cost);
+//			stats.SaveToDisk ();
+//			AudioManager.PlaySound ("snowflake-new");
+//			AnalyticsManager.SendInGameStorePurchase (mainHud.levelName, Strings.SNOWFLAKE, mainHud.player.transform.position);
+//			numberOfItemsPurchased++;
+//
+//			if (numberOfItemsPurchased == 3) {
+//				#if UNITY_IOS
+//				SocialServiceManager.GetInstance ().UnlockAchievement ("shopaholic");
+//				#endif
+//				#if UNITY_ANDROID
+//				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_shopaholic);
+//				#endif
+//			}
+//		} else {
+//			mainHud.infoPanel.SetText (Strings.UI_INSUFFICIENT_FUNDS);
+//			mainHud.infoPanel.gameObject.SetActive (true);
+//		}
 	}
 
 	public void CapeButtonPressed() {
-		StoreItem cape = StoreInventory.GetItemFromInventory (Strings.CAPE);
-		if (stats.totalNumberOfCoins >= cape.cost) {
-			if (mainHud.GetPlayer ().glidingEnabled) {
-				mainHud.infoPanel.SetText (Strings.UI_YOU_ALREADY_PURCHASED_THIS_ITEM);
-				mainHud.infoPanel.gameObject.SetActive (true);
-				return;
-			}
-
-			mainHud.GetPlayer ().glidingEnabled = true;
-			mainHud.GetPlayer ().cape.gameObject.SetActive (true);
-			stats.totalNumberOfCoins -= cape.cost;
-			textFieldAnimator.AddToNumber (-cape.cost);
-			stats.SaveToDisk ();
-			AudioManager.PlaySound ("cape-new");
-			AnalyticsManager.SendInGameStorePurchase (mainHud.levelName, Strings.CAPE, mainHud.player.transform.position);
-			numberOfItemsPurchased++;
-
-			if (numberOfItemsPurchased == 3) {
-				#if UNITY_IOS
-				SocialServiceManager.GetInstance ().UnlockAchievement ("shopaholic");
-				#endif
-				#if UNITY_ANDROID
-				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_shopaholic);
-				#endif
-			}
-		} else {
-			mainHud.infoPanel.SetText (Strings.UI_INSUFFICIENT_FUNDS);
-			mainHud.infoPanel.gameObject.SetActive (true);
-		}
+//		StoreItem cape = StoreInventory.GetItemFromInventory (Strings.CAPE);
+//		if (stats.totalNumberOfCoins >= cape.cost) {
+//			if (mainHud.GetPlayer ().glidingEnabled) {
+//				mainHud.infoPanel.SetText (Strings.UI_YOU_ALREADY_PURCHASED_THIS_ITEM);
+//				mainHud.infoPanel.gameObject.SetActive (true);
+//				return;
+//			}
+//
+//			mainHud.GetPlayer ().glidingEnabled = true;
+//			mainHud.GetPlayer ().cape.gameObject.SetActive (true);
+//			stats.totalNumberOfCoins -= cape.cost;
+//			textFieldAnimator.AddToNumber (-cape.cost);
+//			stats.SaveToDisk ();
+//			AudioManager.PlaySound ("cape-new");
+//			AnalyticsManager.SendInGameStorePurchase (mainHud.levelName, Strings.CAPE, mainHud.player.transform.position);
+//			numberOfItemsPurchased++;
+//
+//			if (numberOfItemsPurchased == 3) {
+//				#if UNITY_IOS
+//				SocialServiceManager.GetInstance ().UnlockAchievement ("shopaholic");
+//				#endif
+//				#if UNITY_ANDROID
+//				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_shopaholic);
+//				#endif
+//			}
+//		} else {
+//			mainHud.infoPanel.SetText (Strings.UI_INSUFFICIENT_FUNDS);
+//			mainHud.infoPanel.gameObject.SetActive (true);
+//		}
 	}
 
 	public void MagnetButtonPressed() {
-		StoreItem magnet = StoreInventory.GetItemFromInventory (Strings.MAGNET);
-
-		if (stats.totalNumberOfCoins >= magnet.cost) {
-			if (mainHud.GetPlayer ().IsMagnetEnabled ()) {
-				mainHud.infoPanel.SetText (Strings.UI_YOU_ALREADY_PURCHASED_THIS_ITEM);
-				mainHud.infoPanel.gameObject.SetActive (true);
-				return;
-			}
-
-			mainHud.GetPlayer ().EnableMagnet(true);
-			stats.totalNumberOfCoins -= magnet.cost;
-			textFieldAnimator.AddToNumber (-magnet.cost);
-			stats.SaveToDisk ();
-			AudioManager.PlaySound ("magnet-new");
-			AnalyticsManager.SendInGameStorePurchase (mainHud.levelName, Strings.MAGNET, mainHud.player.transform.position);
-			numberOfItemsPurchased++;
-
-			if (numberOfItemsPurchased == 3) {
-				#if UNITY_IOS
-				SocialServiceManager.GetInstance ().UnlockAchievement ("shopaholic");
-				#endif
-				#if UNITY_ANDROID
-				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_shopaholic);
-				#endif
-			}
-		} else {
-			mainHud.infoPanel.SetText (Strings.UI_INSUFFICIENT_FUNDS);
-			mainHud.infoPanel.gameObject.SetActive (true);
-		}
+//		StoreItem magnet = StoreInventory.GetItemFromInventory (Strings.MAGNET);
+//
+//		if (stats.totalNumberOfCoins >= magnet.cost) {
+//			if (mainHud.GetPlayer ().IsMagnetEnabled ()) {
+//				mainHud.infoPanel.SetText (Strings.UI_YOU_ALREADY_PURCHASED_THIS_ITEM);
+//				mainHud.infoPanel.gameObject.SetActive (true);
+//				return;
+//			}
+//
+//			mainHud.GetPlayer ().EnableMagnet(true);
+//			stats.totalNumberOfCoins -= magnet.cost;
+//			textFieldAnimator.AddToNumber (-magnet.cost);
+//			stats.SaveToDisk ();
+//			AudioManager.PlaySound ("magnet-new");
+//			AnalyticsManager.SendInGameStorePurchase (mainHud.levelName, Strings.MAGNET, mainHud.player.transform.position);
+//			numberOfItemsPurchased++;
+//
+//			if (numberOfItemsPurchased == 3) {
+//				#if UNITY_IOS
+//				SocialServiceManager.GetInstance ().UnlockAchievement ("shopaholic");
+//				#endif
+//				#if UNITY_ANDROID
+//				SocialServiceManager.GetInstance ().UnlockAchievement (GPGSIds.achievement_shopaholic);
+//				#endif
+//			}
+//		} else {
+//			mainHud.infoPanel.SetText (Strings.UI_INSUFFICIENT_FUNDS);
+//			mainHud.infoPanel.gameObject.SetActive (true);
+//		}
 	}
 
 	public void WatchVideoButtonPressed() {
-		if (Advertisement.IsReady ("rewardedVideo")) {
-			AnalyticsManager.SendAdWatchEvent (mainHud.levelName, "InGameStoreAd", CurrentLevel.GetLivesLost (), (int)CurrentLevel.GetLengthOfTimeInLevel ());
-			var options = new ShowOptions { resultCallback = GetCoins };
-			Advertisement.Show ("rewardedVideo", options);
-		} else {
-			mainHud.ShowErrorPanel ();
-		}
+//		if (Advertisement.IsReady ("rewardedVideo")) {
+//			AnalyticsManager.SendAdWatchEvent (mainHud.levelName, "InGameStoreAd", CurrentLevel.GetLivesLost (), (int)CurrentLevel.GetLengthOfTimeInLevel ());
+//			var options = new ShowOptions { resultCallback = GetCoins };
+//			Advertisement.Show ("rewardedVideo", options);
+//		} else {
+//			mainHud.ShowErrorPanel ();
+//		}
 	}		
 
 	private void GetCoins(ShowResult result)

@@ -14,8 +14,6 @@ public class KeyboardInputManager : MonoBehaviour, InputManager {
 
 	private Vector2 directionalInput;
 
-	private bool enabled = true;
-
 	void Start () {
 		directionalInput = new Vector2 ();
 		jumpKeyPressed = false;
