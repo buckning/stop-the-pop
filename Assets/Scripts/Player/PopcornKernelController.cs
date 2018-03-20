@@ -238,8 +238,18 @@ public class PopcornKernelController : MonoBehaviour {
 	 */
 	private void Flip() {
 		facingRight = !facingRight;
-		if(facingRight)transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);  
-		else transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);  
+
+		Camera.main.transform.parent = null;	// this is so the camera doesn't rotate with the player
+		// this is just temporary until a new camera solution is implemented
+		// setting the transform parent below is also temporary
+
+		if (facingRight) {
+			transform.rotation = Quaternion.Euler (transform.rotation.x, 0, transform.rotation.z); 
+		} else {
+			transform.rotation = Quaternion.Euler (transform.rotation.x, 180, transform.rotation.z);  
+		}
+
+		Camera.main.transform.parent = transform;
 	}
 
 	public void DisableCollider() {

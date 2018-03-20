@@ -32,6 +32,12 @@ public class LevelManager : MonoBehaviour {
 			coins [i].id = i;
 			coins [i].SetLevelManager (this);
 		}
+
+		SimpleSpawner[] spawners = Resources.FindObjectsOfTypeAll (typeof(SimpleSpawner)) as SimpleSpawner[];
+		foreach (SimpleSpawner spawner in spawners) {
+			spawner.Reset ();
+			spawner.Spawn ();
+		}
 	}
 
 	public Transform GetPlayerDropPoint() {
@@ -107,6 +113,12 @@ public class LevelManager : MonoBehaviour {
 		Sawblade[] sawblades = Resources.FindObjectsOfTypeAll (typeof(Sawblade)) as Sawblade[];
 		foreach (Sawblade sawblade in sawblades) {
 			sawblade.Reset ();
+		}
+
+		SimpleSpawner[] spawners = Resources.FindObjectsOfTypeAll (typeof(SimpleSpawner)) as SimpleSpawner[];
+		foreach (SimpleSpawner spawner in spawners) {
+			spawner.Reset ();
+			spawner.Spawn ();
 		}
 
 		collectedCoinsSinceCheckpoint.Clear ();

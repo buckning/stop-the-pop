@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour {
 
 	private void RestartLevel() {
 		uiManager.hud.FadeIn ();
+		Camera.main.transform.parent = null;
 		Destroy (player.gameObject);
 		InitialisePlayer ();
 		levelManager.ResetLevel ();
@@ -93,6 +94,11 @@ public class GameManager : MonoBehaviour {
 		player.popcornKernelStartPoppingListeners += DisablePlayerInput;
 		player.popcornKernelStartPoppingListeners += levelManager.IncrementLivesLost;
 		player.popcornKernelInstantDeathListeners += InstantDeath;
+		Camera.main.transform.parent = player.transform;
+		Camera.main.transform.position = new Vector3 (player.transform.position.x, 
+			player.transform.position.y, Camera.main.transform.position.z);
+
+		Camera.main.transform.rotation = Quaternion.identity;
 	}
 
 	private void InstantDeath() {
